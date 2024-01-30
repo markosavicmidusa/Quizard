@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+@layer components {
+  /* main */
+  .main-container {
+    @apply flex border text-slate-300 border-black flex-1 flex-col items-center bg-zinc-950 px-6 pb-10 pt-28 max-md:pb-32 sm:px-10;
+  }
+  .topbar-container{
+     @apply fixed top-0 z-30 flex w-full items-center justify-between px-6 py-3 bg-zinc-900 text-slate-300;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
