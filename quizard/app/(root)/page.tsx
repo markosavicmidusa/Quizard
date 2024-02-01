@@ -3,11 +3,21 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-    hello
-      <div className="h-screen ">
-        <UserButton afterSignOutUrl="/"/>
+    <div className="flex flex-col items-center w-full border 1px white ">
+      <div className="items-center h-96 w-full border 1px white ">
+        BLOK 1
       </div>
-    </main>
+      <div className="items-center h-96 w-full border 1px white ">
+      BLOK 2
+      </div>
+      <div className="items-center h-96 w-full border 1px white ">
+      BLOK 3
+      </div>
+      <div className="items-center h-96 w-full border 1px white ">
+        BLOK 4
+      </div>
+    </div>
+    
+    
   );
 }

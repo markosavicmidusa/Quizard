@@ -1,3 +1,3 @@
 export default function RightSidebar(){
-    return <h1>RightSidebar</h1>
+    return <div >RightSidebar</div>
 }

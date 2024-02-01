@@ -8,10 +8,10 @@
 @layer components {
   /* main */
   .main-container {
-    @apply flex border text-slate-300 border-black flex-1 flex-col items-center bg-zinc-950 px-6 pb-10 pt-28 max-md:pb-32 sm:px-10;
+    @apply  h-screen border-white w-3/5 text-slate-300 flex-col items-center bg-zinc-900;
   }
   .topbar-container{
-     @apply fixed top-0 z-30 flex w-full items-center justify-between px-6 py-3 bg-zinc-900 text-slate-300;
+     @apply  fixed h-16 flex w-full items-center justify-between px-6 py-3 bg-zinc-800 text-slate-300;
   }
 }
 
@@ -21,10 +21,3 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
