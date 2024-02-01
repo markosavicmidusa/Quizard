@@ -26,7 +26,7 @@ export default function RootLayout({
       <html lang="en" className="border border-black p-1">
         <body className={`border border-black p-1 ${inter.className}`}>
           <Topbar/>  
-            <main className={`border border-black p-1 flex`}>
+            <main className={`border border-black flex mt-10`}>
                 <div className="border border-black">
                  <LeftSidebar/>
                 </div>

@@ -1,39 +1,58 @@
-import { SignIn, SignInButton, SignOutButton, SignedIn, SignedOut } from "@clerk/nextjs";
+"use client"
+
+import { useClerk, SignInButton, SignOutButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 
+const categories = [
+    { label: "SPORTS", link: "/sports" },
+    { label: "ENTERTAINMENT", link: "/entertainment" },
+    { label: "JUST FOR FUN", link: "/fun" },
+    { label: "SCIENCE", link: "/science" },
+    { label: "OTHER", link: "/other" }
+  ];
+
 export default function Topbar(){
+    
+    const { signOut } = useClerk()
+    
     return (
         
             <nav className="topbar-container">
-                <Link href="/" className="flex items-center flex-row gap-4">
+                <Link href="/" className="border 1px white flex items-center flex-row gap-4">
                     <Image src="/assets/logoTree.svg" alt="logo" width={28} height={28}/>
                     <p className="text-heading3-bold ">Kvizard</p>
                 </Link>
+                <div className="border 1px white flex items-center flex-wrap hidden lg:flex">
+                    {categories.map((category, index) => (
+                        <Link className="text-white px-4 py-2 cursor-pointer transition-transform transform hover:scale-110" key={index} href={category.link}>
+                          {category.label}
+                        </Link>
+                    ))}
+                </div>
                 <div className="flex items-center gap-1">
-                    <div className="block">
-                    <SignedIn>
-                        <SignOutButton>
-                            <div className='flex cursor-pointer'>
-                                <Image
-                                  src='/assets/logout.png'
-                                  alt='logout'
-                                  width={24}
-                                  height={24}
-                                />
+                    <div className="block flex items-center">
+                        <SignedIn>
+                            <div className="border 1px white flex gap-2 justify-center items-center p-2 pl-4 cursor-pointer transition-transform transform hover:scale-110">
+                                <div className='flex cursor-pointer'>
+                                    <UserButton afterSignOutUrl="/"/>
+                                </div>
+                                <p/>
                             </div>
-                        </SignOutButton>
-                    </SignedIn>
-                    <SignedOut>
-                        <SignInButton>
-                            <Image
-                              src='/assets/login.png'
-                              alt='logout'
-                              width={24}
-                              height={24}
-                            />
-                        </SignInButton>
-                    </SignedOut>
+                        </SignedIn>
+                        <SignedOut>   
+                            <SignInButton>
+                                    <div className="border 1px white flex gap-2 justify-center items-center p-2 cursor-pointer transition-transform transform hover:scale-110">
+                                        <p>Sign in</p>
+                                        <Image
+                                          src='/assets/login.png'
+                                          alt='logout'
+                                          width={28}
+                                          height={28}
+                                        />
+                                    </div>
+                            </SignInButton>
+                        </SignedOut>
                     </div>
                 </div>
             </nav>
