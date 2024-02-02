@@ -4,15 +4,18 @@ import { useClerk, SignInButton, SignOutButton, SignedIn, SignedOut, UserButton 
 import Image from "next/image";
 import Link from "next/link";
 
-const categories = [
-    { label: "SPORTS", link: "/sports" },
-    { label: "ENTERTAINMENT", link: "/entertainment" },
-    { label: "JUST FOR FUN", link: "/fun" },
-    { label: "SCIENCE", link: "/science" },
-    { label: "OTHER", link: "/other" }
-  ];
+interface Category {
+    label:string
+    link:string
+    picturePath:string    
+}
 
-export default function Topbar(){
+interface TopbarProps{
+    categories:Category[]
+}
+
+
+export default function Topbar({categories}:TopbarProps){
     
     const { signOut } = useClerk()
     
