@@ -31,27 +31,25 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en" className="w-full bg-zinc-900 text-slate-300">
+      <html lang="en" className="w-full h-screen bg-zinc-900 text-slate-300">
         
-        <body className={`border 1px white ${inter.className} flex flex-col h-full`}>
+        <body className={`border 1px white ${inter.className} flex flex-col `}>
           <Topbar categories={categories}/>  
-            <main className="flex mb-10">
-                <div className="border 1px white h-100 w-1/5 left-0 mt-16 ">
+            <main className="flex mb-10 ">
+                <div className="border 1px white w-1/5 left-0 mt-16 ">
                    <LeftSidebar/>
                 </div>       
-                <div className="border 1px white w-full sm:w-3/5 bg-zinc-900 m-auto mt-16">
+                <div className="border 1px white h-screen w-full sm:w-3/5 bg-zinc-900 m-auto mt-16">
                     {children}    
                 </div>
-                <div className="border 1px white h-100 w-1/5 right-0 mt-16">
+                <div className="border 1px white w-1/5 right-0 mt-16">
                   <RightSidebar/>
                 </div>    
             </main>
             <div className="border 1px white flex justify-center items-center fixed lg:hidden xl:hidden w-full h-10 bottom-0 bg-zinc-800">
               <Bottombar categories={categories} />
             </div>
-            
-        </body>
-        
+        </body>  
       </html>
       </ClerkProvider>
   );
