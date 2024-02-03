@@ -36,13 +36,13 @@ export default function RootLayout({
         <body className={`border 1px white ${inter.className} flex flex-col `}>
           <Topbar categories={categories}/>  
             <main className="flex mb-10 ">
-                <div className="border 1px white w-1/5 left-0 mt-16 ">
+                <div className="border 1px white w-1/5 left-0 mt-16 hidden xl:flex lg:flex">
                    <LeftSidebar/>
                 </div>       
-                <div className="border 1px white h-screen w-full sm:w-3/5 bg-zinc-900 m-auto mt-16">
+                <div className="border 1px white h-full w-full bg-zinc-900 m-auto mt-16 ">
                     {children}    
                 </div>
-                <div className="border 1px white w-1/5 right-0 mt-16">
+                <div className="border 1px white w-1/5 right-0 mt-16 hidden xl:flex lg:flex">
                   <RightSidebar/>
                 </div>    
             </main>
