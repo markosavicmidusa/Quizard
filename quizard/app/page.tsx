@@ -3,28 +3,21 @@
 import { UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-
-
-const commercialImages = [
-  "/commercial/coca-cola.png",
-  "/commercial/dragon.png",
-  "/commercial/mek.png",
-  "/commercial/pepsi.png",
-  "/commercial/trpkovic.png",
-];
+import { getCommercials } from "@/data/controller";
 
 
 
 export default function Home() {
  
- 
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const commercials = getCommercials()
+
+  const [currentCommercialIndex, setCurrentCommercialIndex] = useState(0);
  
   useEffect(() => {
     console.log("Component Mounted"); // Log when the component is mounted
   
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % commercialImages.length);
+      setCurrentCommercialIndex((prevIndex) => (prevIndex + 1) % commercials.length);
       console.log("Log inside setInterval"); // Log each time the interval function is executed
     }, 10000);
   
@@ -49,7 +42,7 @@ export default function Home() {
        <div className="flex flex-col items-center justify-center w-full p-2 border 1px white lg:hidden xl:hidden">
        <h2>Commercial</h2>
         <Image
-          src={commercialImages[currentImageIndex]}
+          src={`/commercial/${commercials[(currentCommercialIndex+1)%commercials.length].picturePath}`}
           alt="Commercial Image"
           layout="fixed"
           width={150}  // Set your desired fixed width
@@ -69,7 +62,7 @@ export default function Home() {
         <div className="flex flex-col items-center justify-center w-full p-2 border 1px white lg:hidden xl:hidden">
        <h2>Commercial</h2>
         <Image
-          src={commercialImages[(currentImageIndex+3)%commercialImages.length]}
+          src={`/commercial/${commercials[(currentCommercialIndex+2)%commercials.length].picturePath}`}
           alt="Commercial Image"
           layout="fixed"
           width={150}  // Set your desired fixed width
@@ -94,7 +87,7 @@ export default function Home() {
        <div className="flex flex-col items-center justify-center w-full p-2 border 1px white lg:hidden xl:hidden">
        <h2>Commercial</h2>
         <Image
-          src={commercialImages[(currentImageIndex+2)%commercialImages.length]}
+          src={`/commercial/${commercials[(currentCommercialIndex+3)%commercials.length].picturePath}`}
           alt="Commercial Image"
           layout="fixed"
           width={150}  // Set your desired fixed width
@@ -119,7 +112,7 @@ export default function Home() {
        <div className="flex flex-col items-center justify-center w-full p-2 border 1px white lg:hidden xl:hidden">
        <h2>Commercial</h2>
         <Image
-          src={commercialImages[(currentImageIndex+2)%commercialImages.length]}
+          src={`/commercial/${commercials[(currentCommercialIndex+4)%commercials.length].picturePath}`}
           alt="Commercial Image"
           layout="fixed"
           width={150}  // Set your desired fixed width

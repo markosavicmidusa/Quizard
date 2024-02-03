@@ -11,6 +11,11 @@ import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
+import { getCommercials } from "@/data/controller";
+
+
+
+
 const categories = [
   { label: "SPORTS", link: "/sports", picturePath: "sports.svg" },
   { label: "POPULAR", link: "/popular", picturePath: "popular.svg" },
@@ -18,6 +23,7 @@ const categories = [
   { label: "SCIENCE", link: "/science", picturePath: "science.svg" },
   { label: "OTHER", link: "/other", picturePath: "other.svg" }
 ];
+
 
 export const metadata: Metadata = {
   title: "Quizmania",
@@ -29,6 +35,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const commercials = getCommercials()
+
   return (
     <ClerkProvider>
       <html lang="en" className="w-full h-screen bg-zinc-900 text-slate-300">
@@ -37,13 +46,13 @@ export default function RootLayout({
           <Topbar categories={categories}/>  
             <main className="flex mb-10 ">
                 <div className="border 1px white w-1/5 left-0 mt-16 hidden xl:flex lg:flex">
-                   <LeftSidebar/>
+                   <LeftSidebar commercials={commercials}/>
                 </div>       
                 <div className="border 1px white h-full w-full bg-zinc-900 m-auto mt-16 ">
                     {children}    
                 </div>
                 <div className="border 1px white w-1/5 right-0 mt-16 hidden xl:flex lg:flex">
-                  <RightSidebar/>
+                  <RightSidebar commercials={commercials} />
                 </div>    
             </main>
             <div className="border 1px white flex justify-center items-center fixed lg:hidden xl:hidden w-full h-10 bottom-0 bg-zinc-800">
