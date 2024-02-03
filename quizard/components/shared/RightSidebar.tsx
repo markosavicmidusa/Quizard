@@ -1,16 +1,50 @@
-import { Commercial } from "@/data/commercials/commercials"
+"use client"
 
+import { Commercial } from "@/data/commercials/commercials"
+import Image from "next/image";
+import { useState, useEffect } from "react";
+import { getCommercials } from "@/data/controller";
 
 
 export default function RightSidebar({commercials}: {commercials:Commercial[]}){
-    return <div >
-    <div className="h-1/2 w-full p-4 border 1px white">
-    <p className="border 1px white">This is the second section</p>
-      
-    </div>
-    <div className="flex-col h-1/2 w-full p-4 border 1px white">
-      <p className="border 1px white">This is the second section</p>
-      
-    </div>
-</div>
+    const [currentCommercialIndex, setCurrentCommercialIndex] = useState(0);
+    
+    useEffect(() => {
+        const interval = setInterval(() => {
+          setCurrentCommercialIndex((prevIndex) => (prevIndex + 1) % commercials.length);
+        }, 5000); // Adjust the interval duration as needed
+    
+        return () => clearInterval(interval);
+      }, [commercials]);
+
+    return(
+        <div className="flex flex-col inline-center justify-center p-10">
+            <div className="flex-grid h-1/2 w-full p-4 border 1px white">
+            <h2>Commercial</h2>
+                 <Image
+                   src={`/commercial/${commercials[(currentCommercialIndex+0)%commercials.length].picturePath}`}
+                   alt="Commercial Image"
+                   layout="fixed"
+                   width={150}  // Set your desired fixed width
+                   height={150} // Set your desired fixed height
+                   objectFit="contain"
+                   className="object-cover"
+                 />
+            </div>
+            <div className="flex-grid h-1/2 w-full p-4 border 1px white">
+              <h2>Commercial</h2>
+                 <Image
+                   src={`/commercial/${commercials[(currentCommercialIndex+4)%commercials.length].picturePath}`}
+                   alt="Commercial Image"
+                   layout="fixed"
+                   width={150}  // Set your desired fixed width
+                   height={150} // Set your desired fixed height
+                   objectFit="contain"
+                   className="object-cover"
+                 />
+            </div>
+           
+        </div>
+    ) 
+        
 }
