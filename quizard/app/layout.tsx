@@ -40,15 +40,15 @@ export default function RootLayout({
 
   return (
     <ClerkProvider>
-      <html lang="en" className="w-full h-screen bg-zinc-900 text-slate-300">
+      <html lang="en" className="w-full h-screen bg-zinc-900 text-slate-300 h-full">
         
-        <body className={`border 1px white ${inter.className} flex flex-col `}>
+        <body className={`border 1px white ${inter.className} flex flex-col`}>
           <Topbar categories={categories}/>  
-            <main className="flex mb-10 ">
+            <main className="flex mb-10 h-screen">
                 <div className="border 1px white w-1/5 left-0 mt-16 hidden xl:flex lg:flex">
                    <LeftSidebar commercials={commercials}/>
                 </div>       
-                <div className="border 1px white h-full w-full bg-zinc-900 m-auto mt-16 ">
+                <div className="border 1px white w-full bg-zinc-900 mt-16 ">
                     {children}    
                 </div>
                 <div className="border 1px white w-1/5 right-0 mt-16 hidden xl:flex lg:flex">

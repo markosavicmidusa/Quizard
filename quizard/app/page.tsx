@@ -29,7 +29,7 @@ export default function Home() {
  
  
   return (
-    <div className="border 1px white p-2 h-full flex flex-col">
+    <div className="border 1px white  flex flex-col">
        
        {/* Block 1: Most Popular Quizes */}
        <div className="flex flex-wrap w-full p-10 border 1px white ">
@@ -39,7 +39,7 @@ export default function Home() {
        </div>
 
        {/* Block 3: Commercial */}
-       <div className="flex flex-col items-center justify-center w-full p-2 border 1px white lg:hidden xl:hidden">
+       <div className="flex flex-grid items-center justify-center w-full p-2 border 1px white lg:hidden xl:hidden">
        <h2>Commercial</h2>
         <Image
           src={`/commercial/${commercials[(currentCommercialIndex+1)%commercials.length].picturePath}`}
@@ -59,7 +59,7 @@ export default function Home() {
        </div>
 
         {/* Block 3: Commercial */}
-        <div className="flex flex-col items-center justify-center w-full p-2 border 1px white lg:hidden xl:hidden">
+        <div className="flex flex-grid items-center justify-center w-full p-2 border 1px white lg:hidden xl:hidden">
        <h2>Commercial</h2>
         <Image
           src={`/commercial/${commercials[(currentCommercialIndex+2)%commercials.length].picturePath}`}
@@ -84,7 +84,7 @@ export default function Home() {
        </div>
 
        {/* Block 6: Commercial */}
-       <div className="flex flex-col items-center justify-center w-full p-2 border 1px white lg:hidden xl:hidden">
+       <div className="flex flex-grid items-center justify-center w-full p-2 border 1px white lg:hidden xl:hidden">
        <h2>Commercial</h2>
         <Image
           src={`/commercial/${commercials[(currentCommercialIndex+3)%commercials.length].picturePath}`}
@@ -109,7 +109,55 @@ export default function Home() {
        </div>
 
        {/* Block 9: Commercial */}
-       <div className="flex flex-col items-center justify-center w-full p-2 border 1px white lg:hidden xl:hidden">
+       <div className="flex flex-grid items-center justify-center w-full p-2 border 1px white lg:hidden xl:hidden">
+       <h2>Commercial</h2>
+        <Image
+          src={`/commercial/${commercials[(currentCommercialIndex+4)%commercials.length].picturePath}`}
+          alt="Commercial Image"
+          layout="fixed"
+          width={150}  // Set your desired fixed width
+          height={150} // Set your desired fixed height
+          objectFit="contain"
+          className="object-cover"
+        />
+      </div>
+
+      {/* Block 7: Random Quizes */}
+      <div className="flex justify-center w-full p-2 border 1px white h-2/8">
+         <h2>Random Quizes</h2>
+       </div>
+
+       {/* Block 8: Small Game */}
+       <div className="flex justify-center w-full p-2 border 1px white h-2/8">
+         <h2>Small Game</h2>
+       </div>
+
+       {/* Block 9: Commercial */}
+       <div className="flex flex-grid items-center justify-center w-full p-2 border 1px white lg:hidden xl:hidden">
+       <h2>Commercial</h2>
+        <Image
+          src={`/commercial/${commercials[(currentCommercialIndex+4)%commercials.length].picturePath}`}
+          alt="Commercial Image"
+          layout="fixed"
+          width={150}  // Set your desired fixed width
+          height={150} // Set your desired fixed height
+          objectFit="contain"
+          className="object-cover"
+        />
+      </div>
+
+      {/* Block 7: Random Quizes */}
+      <div className="flex justify-center w-full p-2 border 1px white h-2/8">
+         <h2>Random Quizes</h2>
+       </div>
+
+       {/* Block 8: Small Game */}
+       <div className="flex justify-center w-full p-2 border 1px white h-2/8">
+         <h2>Small Game</h2>
+       </div>
+
+       {/* Block 9: Commercial */}
+       <div className="flex flex-grid items-center justify-center w-full p-2 border 1px white lg:hidden xl:hidden">
        <h2>Commercial</h2>
         <Image
           src={`/commercial/${commercials[(currentCommercialIndex+4)%commercials.length].picturePath}`}

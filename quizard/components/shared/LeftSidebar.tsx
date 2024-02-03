@@ -1,6 +1,11 @@
-export default function LeftSidebar(){
+import { Commercial } from "@/data/commercials/commercials"
+
+
+
+
+export default function LeftSidebar({commercials}:{commercials: Commercial[]}){
     return(
-        <div >LEFTSIDEBAR{/*
+        <div >
             <div className="h-1/2 w-full p-4 border 1px white">
             <p className="border 1px white">This is the second section</p>
               
@@ -8,7 +13,7 @@ export default function LeftSidebar(){
             <div className="flex-col h-1/2 w-full p-4 border 1px white">
               <p className="border 1px white">This is the second section</p>
               
-            </div>*/}
+            </div>
         </div>
     ) 
         
