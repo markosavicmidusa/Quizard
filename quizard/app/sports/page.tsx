@@ -1,7 +1,8 @@
+
+import MainContent from "@/components/shared/MainContent";
+
 export default function Sports (){
     return (
-        <div>
-            SPORTS PAGE
-        </div>
+        <MainContent/>
     )
 }

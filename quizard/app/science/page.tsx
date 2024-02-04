@@ -1,7 +1,8 @@
+import MainContent from "@/components/shared/MainContent";
+
 export default function Science (){
     return (
-        <div>
-            SCIENCE PAGE
-        </div>
+            <MainContent/>
+        
     )
 }

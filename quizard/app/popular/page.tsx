@@ -1,7 +1,7 @@
+import MainContent from "@/components/shared/MainContent";
+
 export default function Popular (){
     return (
-        <div>
-            POPULAR PAGE
-        </div>
+        <MainContent/>
     )
 }
