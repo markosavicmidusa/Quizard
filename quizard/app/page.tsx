@@ -29,11 +29,17 @@ export default function Home() {
  
  
   return (
-    <div className="border 1px white  flex flex-col">
+    <div className="border 1px white h-full flex flex-col bg-pink-600 flex grow p-10">
        
        {/* Block 1: Most Popular Quizes */}
-       <div className="flex flex-wrap w-full p-10 border 1px white ">
+       <div className="flex flex-col flex-wrap w-full p-10 border 1px white ">
          
+         <h2>Most Popular Quizes</h2>
+         <h2>Most Popular Quizes</h2>
+         <h2>Most Popular Quizes</h2>
+         <h2>Most Popular Quizes</h2>
+         <h2>Most Popular Quizes</h2>
+         <h2>Most Popular Quizes</h2>
          <h2>Most Popular Quizes</h2>
 
        </div>
@@ -54,8 +60,13 @@ export default function Home() {
        </div>
 
        {/* Block 2: Small Game */}
-       <div className="flex justify-center w-full p-2 border 1px white h-2/8">
-         <h2>Small Game</h2>
+       <div className="flex flex-col justify-center w-full p-2 border 1px white h-2/8">
+         <h1>Small Game</h1>
+         <h1>Small Game</h1>
+         <h1>Small Game</h1>
+         <h1>Small Game</h1>
+         <h1>Small Game</h1>
+         <h1>Small Game</h1>
        </div>
 
         {/* Block 3: Commercial */}
@@ -74,13 +85,24 @@ export default function Home() {
        </div>
       
        {/* Block 4: Random Quizes */}
-       <div className="flex justify-center w-full p-2 border 1px white h-2/8">
-         <h2>Random Quizes</h2>
+       <div className="flex flex-col justify-center w-full p-2 border 1px white h-2/8">
+         <h1>Random Quizes</h1>
+         <h1>Random Quizes</h1>
+         <h1>Random Quizes</h1>
+         <h1>Random Quizes</h1>
+         <h1>Random Quizes</h1>
+         <h1>Random Quizes</h1>
+         <h1>Random Quizes</h1>
        </div>
 
        {/* Block 5: Small Game */}
-       <div className="flex justify-center w-full p-2 border 1px white h-2/8">
-         <h2>Small Game</h2>
+       <div className="flex flex-col justify-center w-full p-2 border 1px white h-2/8">
+       <h1>Small Game</h1>
+         <h1>Small Game</h1>
+         <h1>Small Game</h1>
+         <h1>Small Game</h1>
+         <h1>Small Game</h1>
+         <h1>Small Game</h1>
        </div>
 
        {/* Block 6: Commercial */}
@@ -99,8 +121,14 @@ export default function Home() {
 
 
       {/* Block 7: Random Quizes */}
-      <div className="flex justify-center w-full p-2 border 1px white h-2/8">
-         <h2>Random Quizes</h2>
+      <div className="flex flex-col justify-center w-full p-2 border 1px white h-2/8">
+         <h1>Random Quizes</h1>
+         <h1>Random Quizes</h1>
+         <h1>Random Quizes</h1>
+         <h1>Random Quizes</h1>
+         <h1>Random Quizes</h1>
+         <h1>Random Quizes</h1>
+         <h1>Random Quizes</h1>
        </div>
 
        {/* Block 8: Small Game */}
