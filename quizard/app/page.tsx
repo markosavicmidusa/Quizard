@@ -4,6 +4,7 @@ import { UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { getCommercials } from "@/data/controller";
+import Link from "next/link";
 
 
 
@@ -46,16 +47,18 @@ export default function Home() {
 
        {/* Block 3: Commercial */}
        <div className="flex flex-grid items-center justify-center w-full p-2 border 1px white lg:hidden xl:hidden">
-       <h2>Commercial</h2>
-        <Image
-          src={`/commercial/${commercials[(currentCommercialIndex+1)%commercials.length].picturePath}`}
-          alt="Commercial Image"
-          layout="fixed"
-          width={150}  // Set your desired fixed width
-          height={150} // Set your desired fixed height
-          objectFit="contain"
-          className="object-cover"
-        />
+          <Link href={`${commercials[(currentCommercialIndex+0)%commercials.length].link}`}>
+              <h1>{`${commercials[(currentCommercialIndex+0)%commercials.length].label}`}</h1>
+              <Image
+                src={`/commercial/${commercials[(currentCommercialIndex+0)%commercials.length].picturePath}`}
+                alt="Commercial Image"
+                layout="fixed"
+                width={200}  // Set your desired fixed width
+                height={120} // Set your desired fixed height
+                objectFit="contain"
+                className="object-cover"
+              />
+          </Link>     
          
        </div>
 
@@ -71,18 +74,19 @@ export default function Home() {
 
         {/* Block 3: Commercial */}
         <div className="flex flex-grid items-center justify-center w-full p-2 border 1px white lg:hidden xl:hidden">
-       <h2>Commercial</h2>
-        <Image
-          src={`/commercial/${commercials[(currentCommercialIndex+2)%commercials.length].picturePath}`}
-          alt="Commercial Image"
-          layout="fixed"
-          width={150}  // Set your desired fixed width
-          height={150} // Set your desired fixed height
-          objectFit="contain"
-          className="object-cover"
-        />
-         
-       </div>
+            <Link href={`${commercials[(currentCommercialIndex+2)%commercials.length].link}`}>
+                <h1>{`${commercials[(currentCommercialIndex+2)%commercials.length].label}`}</h1>
+                <Image
+                  src={`/commercial/${commercials[(currentCommercialIndex+2)%commercials.length].picturePath}`}
+                  alt="Commercial Image"
+                  layout="fixed"
+                  width={200}  // Set your desired fixed width
+                  height={120} // Set your desired fixed height
+                  objectFit="contain"
+                  className="object-cover"
+                />
+             </Link>
+          </div>
       
        {/* Block 4: Random Quizes */}
        <div className="flex flex-col justify-center w-full p-2 border 1px white h-2/8">
@@ -107,16 +111,18 @@ export default function Home() {
 
        {/* Block 6: Commercial */}
        <div className="flex flex-grid items-center justify-center w-full p-2 border 1px white lg:hidden xl:hidden">
-       <h2>Commercial</h2>
-        <Image
-          src={`/commercial/${commercials[(currentCommercialIndex+3)%commercials.length].picturePath}`}
-          alt="Commercial Image"
-          layout="fixed"
-          width={150}  // Set your desired fixed width
-          height={150} // Set your desired fixed height
-          objectFit="contain"
-          className="object-cover"
-        />
+          <Link href={`${commercials[(currentCommercialIndex+4)%commercials.length].link}`}>
+               <h1>{`${commercials[(currentCommercialIndex+4)%commercials.length].label}`}</h1>
+               <Image
+                 src={`/commercial/${commercials[(currentCommercialIndex+4)%commercials.length].picturePath}`}
+                 alt="Commercial Image"
+                 layout="fixed"
+                 width={200}  // Set your desired fixed width
+                 height={120} // Set your desired fixed height
+                 objectFit="contain"
+                 className="object-cover"
+               />
+            </Link>     
       </div>
 
 
@@ -138,16 +144,18 @@ export default function Home() {
 
        {/* Block 9: Commercial */}
        <div className="flex flex-grid items-center justify-center w-full p-2 border 1px white lg:hidden xl:hidden">
-       <h2>Commercial</h2>
-        <Image
-          src={`/commercial/${commercials[(currentCommercialIndex+4)%commercials.length].picturePath}`}
-          alt="Commercial Image"
-          layout="fixed"
-          width={150}  // Set your desired fixed width
-          height={150} // Set your desired fixed height
-          objectFit="contain"
-          className="object-cover"
-        />
+       <Link href={`${commercials[(currentCommercialIndex+5)%commercials.length].link}`}>
+          <h1>{`${commercials[(currentCommercialIndex+5)%commercials.length].label}`}</h1>
+          <Image
+            src={`/commercial/${commercials[(currentCommercialIndex+5)%commercials.length].picturePath}`}
+            alt="Commercial Image"
+            layout="fixed"
+            width={200}  // Set your desired fixed width
+            height={120} // Set your desired fixed height
+            objectFit="contain"
+            className="object-cover"
+          />
+        </Link>
       </div>
 
       {/* Block 7: Random Quizes */}
@@ -162,16 +170,18 @@ export default function Home() {
 
        {/* Block 9: Commercial */}
        <div className="flex flex-grid items-center justify-center w-full p-2 border 1px white lg:hidden xl:hidden">
-       <h2>Commercial</h2>
-        <Image
-          src={`/commercial/${commercials[(currentCommercialIndex+4)%commercials.length].picturePath}`}
-          alt="Commercial Image"
-          layout="fixed"
-          width={150}  // Set your desired fixed width
-          height={150} // Set your desired fixed height
-          objectFit="contain"
-          className="object-cover"
-        />
+       <Link href={`${commercials[(currentCommercialIndex+6)%commercials.length].link}`}>
+            <h1>{`${commercials[(currentCommercialIndex+6)%commercials.length].label}`}</h1>
+            <Image
+              src={`/commercial/${commercials[(currentCommercialIndex+6)%commercials.length].picturePath}`}
+              alt="Commercial Image"
+              layout="fixed"
+              width={200}  // Set your desired fixed width
+              height={120} // Set your desired fixed height
+              objectFit="contain"
+              className="object-cover"
+            />
+        </Link>     
       </div>
 
       {/* Block 7: Random Quizes */}
@@ -186,16 +196,18 @@ export default function Home() {
 
        {/* Block 9: Commercial */}
        <div className="flex flex-grid items-center justify-center w-full p-2 border 1px white lg:hidden xl:hidden">
-       <h2>Commercial</h2>
-        <Image
-          src={`/commercial/${commercials[(currentCommercialIndex+4)%commercials.length].picturePath}`}
-          alt="Commercial Image"
-          layout="fixed"
-          width={150}  // Set your desired fixed width
-          height={150} // Set your desired fixed height
-          objectFit="contain"
-          className="object-cover"
-        />
+       <Link href={`${commercials[(currentCommercialIndex+2)%commercials.length].link}`}>
+          <h1>{`${commercials[(currentCommercialIndex+2)%commercials.length].label}`}</h1>
+          <Image
+            src={`/commercial/${commercials[(currentCommercialIndex+2)%commercials.length].picturePath}`}
+            alt="Commercial Image"
+            layout="fixed"
+            width={200}  // Set your desired fixed width
+            height={120} // Set your desired fixed height
+            objectFit="contain"
+            className="object-cover"
+          />
+        </Link>
       </div>
 
 
