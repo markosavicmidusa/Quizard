@@ -48,7 +48,7 @@ export default function RootLayout({
                 <div className="border 1px white fixed w-1/5 left-0 mt-16 hidden xl:flex lg:flex">
                    <LeftSidebar commercials={commercials}/>
                 </div>       
-                <div className="border 1px white w-3/5 bg-zinc-900 ml-auto mr-auto mt-16 flex flex-col">
+                <div className="border-1 border-white bg-zinc-900 mx-auto mt-16 w-full sm:w-full md:w-full lg:w-3/5 xl:w-3/5 flex flex-col">
                     {children}    
                 </div>
                 <div className="border 1px white fixed w-1/5 right-0 mt-16 hidden xl:flex lg:flex">

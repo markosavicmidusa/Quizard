@@ -29,11 +29,11 @@ export default function MainContent() {
       console.log("Component Unmounted"); // Log when the component is unmounted
       clearInterval(interval);
     };
-  }, []);
+  }, [commercials.length]);
  
  
   return (
-    <div className="border 1px white h-100 flex flex-col flex-grow mt-10 ">
+    <div className="h-100 flex flex-col flex-grow w-full">
       
       <p className="p-10">Current pathname: {pathname}</p>
 
@@ -57,11 +57,9 @@ export default function MainContent() {
               <Image
                 src={`/commercial/${commercials[(currentCommercialIndex+0)%commercials.length].picturePath}`}
                 alt="Commercial Image"
-                layout="fixed"
                 width={200}  // Set your desired fixed width
                 height={120} // Set your desired fixed height
-                objectFit="contain"
-                className="object-cover"
+              
               />
           </Link>     
          
@@ -84,11 +82,10 @@ export default function MainContent() {
                 <Image
                   src={`/commercial/${commercials[(currentCommercialIndex+2)%commercials.length].picturePath}`}
                   alt="Commercial Image"
-                  layout="fixed"
+            
                   width={200}  // Set your desired fixed width
                   height={120} // Set your desired fixed height
-                  objectFit="contain"
-                  className="object-cover"
+                 
                 />
              </Link>
           </div>
@@ -121,11 +118,10 @@ export default function MainContent() {
                <Image
                  src={`/commercial/${commercials[(currentCommercialIndex+4)%commercials.length].picturePath}`}
                  alt="Commercial Image"
-                 layout="fixed"
+                
                  width={200}  // Set your desired fixed width
                  height={120} // Set your desired fixed height
-                 objectFit="contain"
-                 className="object-cover"
+                
                />
             </Link>     
       </div>
@@ -154,11 +150,10 @@ export default function MainContent() {
           <Image
             src={`/commercial/${commercials[(currentCommercialIndex+5)%commercials.length].picturePath}`}
             alt="Commercial Image"
-            layout="fixed"
+           
             width={200}  // Set your desired fixed width
             height={120} // Set your desired fixed height
-            objectFit="contain"
-            className="object-cover"
+            
           />
         </Link>
       </div>
@@ -180,11 +175,10 @@ export default function MainContent() {
             <Image
               src={`/commercial/${commercials[(currentCommercialIndex+6)%commercials.length].picturePath}`}
               alt="Commercial Image"
-              layout="fixed"
+            
               width={200}  // Set your desired fixed width
               height={120} // Set your desired fixed height
-              objectFit="contain"
-              className="object-cover"
+              
             />
         </Link>     
       </div>
@@ -206,11 +200,10 @@ export default function MainContent() {
           <Image
             src={`/commercial/${commercials[(currentCommercialIndex+2)%commercials.length].picturePath}`}
             alt="Commercial Image"
-            layout="fixed"
+          
             width={200}  // Set your desired fixed width
             height={120} // Set your desired fixed height
-            objectFit="contain"
-            className="object-cover"
+          
           />
         </Link>
       </div>

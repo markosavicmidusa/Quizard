@@ -28,11 +28,8 @@ export default function LeftSidebar({commercials}:{commercials: Commercial[]}){
                     <Image
                       src={`/commercial/${commercials[(currentCommercialIndex+0)%commercials.length].picturePath}`}
                       alt="Commercial Image"
-                      layout="fixed"
                       width={250}  // Set your desired fixed width
                       height={150} // Set your desired fixed height
-                      objectFit="contain"
-                      className="object-cover"
                     />
                  </Link>     
             </div>
@@ -42,11 +39,9 @@ export default function LeftSidebar({commercials}:{commercials: Commercial[]}){
                     <Image
                       src={`/commercial/${commercials[(currentCommercialIndex+1)%commercials.length].picturePath}`}
                       alt="Commercial Image"
-                      layout="fixed"
                       width={250}  // Set your desired fixed width
                       height={150} // Set your desired fixed height
-                      objectFit="contain"
-                      className="object-cover"
+                     
                     />
                  </Link>     
             </div>
@@ -56,11 +51,9 @@ export default function LeftSidebar({commercials}:{commercials: Commercial[]}){
                     <Image
                       src={`/commercial/${commercials[(currentCommercialIndex+2)%commercials.length].picturePath}`}
                       alt="Commercial Image"
-                      layout="fixed"
                       width={250}  // Set your desired fixed width
                       height={150} // Set your desired fixed height
-                      objectFit="contain"
-                      className="object-cover"
+                    
                     />
                  </Link>     
             </div>
@@ -70,11 +63,8 @@ export default function LeftSidebar({commercials}:{commercials: Commercial[]}){
                     <Image
                       src={`/commercial/${commercials[(currentCommercialIndex+8)%commercials.length].picturePath}`}
                       alt="Commercial Image"
-                      layout="fixed"
                       width={250}  // Set your desired fixed width
                       height={150} // Set your desired fixed height
-                      objectFit="contain"
-                      className="object-cover"
                     />
                  </Link>     
             </div>
