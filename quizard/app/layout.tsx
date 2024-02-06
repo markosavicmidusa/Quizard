@@ -45,13 +45,13 @@ export default function RootLayout({
         <body className={`border 1px white ${inter.className} flex flex-col`}>
           <Topbar categories={categories}/>  
             <main className="flex mb-10 h-full">
-                <div className="border 1px white w-1/5 left-0 mt-16 hidden xl:flex lg:flex">
+                <div className="border 1px white fixed w-1/5 left-0 mt-16 hidden xl:flex lg:flex">
                    <LeftSidebar commercials={commercials}/>
                 </div>       
-                <div className="border 1px white w-full bg-zinc-900 mt-16 flex flex-grow">
+                <div className="border 1px white w-3/5 bg-zinc-900 ml-auto mr-auto mt-16 flex flex-col">
                     {children}    
                 </div>
-                <div className="border 1px white w-1/5 right-0 mt-16 hidden xl:flex lg:flex">
+                <div className="border 1px white fixed w-1/5 right-0 mt-16 hidden xl:flex lg:flex">
                   <RightSidebar commercials={commercials} />
                 </div>    
             </main>

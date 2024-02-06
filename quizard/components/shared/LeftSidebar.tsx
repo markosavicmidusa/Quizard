@@ -20,45 +20,59 @@ export default function LeftSidebar({commercials}:{commercials: Commercial[]}){
       }, [commercials]);
 
     return(
-        <div className="flex flex-col inline-center justify-center w-full p-2">
+        <div className="flex flex-col inline-center justify-center w-full h-100 gap-5">
             
-            <div className="flex flex-col inline-center justify-center h-1/2 w-full p-2 border 1px white">
-                 <Link href={`${commercials[(currentCommercialIndex+0)%commercials.length].link}`}>
-                    <h1>{`${commercials[(currentCommercialIndex+0)%commercials.length].label}`}</h1>
+            <div className="flex flex-col inline-center justify-center h-1/4 w-full p-2 border 1px white">
+                 <Link href={`${commercials[(currentCommercialIndex+0)%commercials.length].link}`} className="flex flex-col items-center">
+                    <h3>{`${commercials[(currentCommercialIndex+0)%commercials.length].label}`}</h3>
                     <Image
                       src={`/commercial/${commercials[(currentCommercialIndex+0)%commercials.length].picturePath}`}
                       alt="Commercial Image"
                       layout="fixed"
-                      width={350}  // Set your desired fixed width
-                      height={200} // Set your desired fixed height
+                      width={250}  // Set your desired fixed width
+                      height={150} // Set your desired fixed height
                       objectFit="contain"
                       className="object-cover"
                     />
                  </Link>     
             </div>
-            <div className="flex flex-col inline-center justify-center h-1/2 w-full p-2 border 1px white">
-                 <Link href={`${commercials[(currentCommercialIndex+1)%commercials.length].link}`}>
+            <div className="flex flex-col inline-center justify-center h-1/4 w-full p-2 border 1px white">
+                 <Link href={`${commercials[(currentCommercialIndex+1)%commercials.length].link}`} className="flex flex-col items-center">
                     <h1>{`${commercials[(currentCommercialIndex+1)%commercials.length].label}`}</h1>
                     <Image
                       src={`/commercial/${commercials[(currentCommercialIndex+1)%commercials.length].picturePath}`}
                       alt="Commercial Image"
                       layout="fixed"
-                      width={350}  // Set your desired fixed width
-                      height={200} // Set your desired fixed height
+                      width={250}  // Set your desired fixed width
+                      height={150} // Set your desired fixed height
                       objectFit="contain"
                       className="object-cover"
                     />
                  </Link>     
             </div>
-            <div className="flex flex-col inline-center justify-center h-1/2 w-full p-2 border 1px white">
-                 <Link href={`${commercials[(currentCommercialIndex+2)%commercials.length].link}`}>
+            <div className="flex flex-col inline-center justify-center h-1/4 w-full p-2 border 1px white">
+                 <Link href={`${commercials[(currentCommercialIndex+2)%commercials.length].link}`} className="flex flex-col items-center">
                     <h1>{`${commercials[(currentCommercialIndex+2)%commercials.length].label}`}</h1>
                     <Image
                       src={`/commercial/${commercials[(currentCommercialIndex+2)%commercials.length].picturePath}`}
                       alt="Commercial Image"
                       layout="fixed"
-                      width={350}  // Set your desired fixed width
-                      height={200} // Set your desired fixed height
+                      width={250}  // Set your desired fixed width
+                      height={150} // Set your desired fixed height
+                      objectFit="contain"
+                      className="object-cover"
+                    />
+                 </Link>     
+            </div>
+            <div className="flex flex-col inline-center justify-center h-1/4 w-full p-2 border 1px white">
+                 <Link href={`${commercials[(currentCommercialIndex+8)%commercials.length].link}`} className="flex flex-col items-center">
+                    <h1>{`${commercials[(currentCommercialIndex+8)%commercials.length].label}`}</h1>
+                    <Image
+                      src={`/commercial/${commercials[(currentCommercialIndex+8)%commercials.length].picturePath}`}
+                      alt="Commercial Image"
+                      layout="fixed"
+                      width={250}  // Set your desired fixed width
+                      height={150} // Set your desired fixed height
                       objectFit="contain"
                       className="object-cover"
                     />
