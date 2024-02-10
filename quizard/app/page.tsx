@@ -31,7 +31,7 @@ export default function Home() {
       console.log("Component Unmounted"); // Log when the component is unmounted
       clearInterval(interval);
     };
-  }, []);
+  }, [commercials.length]);
  
  
   return (

@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import mongoose, { Document } from "mongoose";
 
-// QuizMetadataSchema start
+// Define the schema
 const QuizMetadataSchema = new mongoose.Schema({
     id: { type: String, required: true },
     name: { type: String, required: true },
@@ -10,6 +10,19 @@ const QuizMetadataSchema = new mongoose.Schema({
     timesClicked: { type: Number, required: true },
     timesFinished: { type: Number, required: true }
 });
-const QuizMetadataModel = mongoose.model('QuizMetadata', QuizMetadataSchema)
 
-export default QuizMetadataModel
+// Define the interface for Quiz Metadata
+export interface IQuizMetadata extends Document {
+    id: string;
+    name: string;
+    title: string;
+    category: string;
+    createdBy: string;
+    timesClicked: number;
+    timesFinished: number;
+}
+
+// Define the model
+const QuizMetadataModel = mongoose.models.QuizMetadata || mongoose.model('QuizMetadata', QuizMetadataSchema);
+
+export default QuizMetadataModel;

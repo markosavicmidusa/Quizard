@@ -5,10 +5,11 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { getCommercials } from "@/data/controller";
 import Link from "next/link";
-
 import { usePathname } from 'next/navigation'
+import { Model, Document } from "mongoose";
 
-
+import QuizMetadataModel from "@/lib/models/quiz_metadata.model";
+import MostPopularQuizes from "../forms/MostPopularQuizes";
 
 export default function MainContent() {
  
@@ -17,6 +18,7 @@ export default function MainContent() {
 
   const [currentCommercialIndex, setCurrentCommercialIndex] = useState(0);
  
+
   useEffect(() => {
     console.log("Component Mounted"); // Log when the component is mounted
   
@@ -38,16 +40,11 @@ export default function MainContent() {
       <p className="p-10">Current pathname: {pathname}</p>
 
        {/* Block 1: Most Popular Quizes */}
-       <div className="flex flex-col flex-wrap items-center justify-center w-full p-10 border 1px white p-10">
-         
-         <h2>Most Popular Quizes</h2>
-         <h2>Most Popular Quizes</h2>
-         <h2>Most Popular Quizes</h2>
-         <h2>Most Popular Quizes</h2>
-         <h2>Most Popular Quizes</h2>
-         <h2>Most Popular Quizes</h2>
-         <h2>Most Popular Quizes</h2>
+       <div className="flex flex-col flex-wrap items-center w-full border 1px white p-10">
 
+         <h2 className="text-xl font-bold mb-4">Most Popular Quizzes</h2>
+         <MostPopularQuizes/>
+          
        </div>
 
        {/* Block 3: Commercial */}
