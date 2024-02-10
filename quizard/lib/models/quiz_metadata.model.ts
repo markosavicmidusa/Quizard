@@ -7,7 +7,8 @@ const QuizMetadataSchema = new mongoose.Schema({
     title: { type: String, required: true },
     category: { type: String, required: true },
     createdBy: { type: String, required: true },
-    timesClicked: { type: Number, required: true }
+    timesClicked: { type: Number, required: true },
+    timesFinished: { type: Number, required: true }
 });
 const QuizMetadataModel = mongoose.model('QuizMetadata', QuizMetadataSchema)
 
