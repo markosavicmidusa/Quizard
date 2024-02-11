@@ -40,11 +40,9 @@ export default function MainContent() {
       <p className="p-10">Current pathname: {pathname}</p>
 
        {/* Block 1: Most Popular Quizes */}
-       <div className="flex flex-col flex-wrap items-center w-full border 1px white p-10">
-
-         <h2 className="text-xl font-bold mb-4">Most Popular Quizzes</h2>
-         <MostPopularQuizes/>
-          
+       <div className="flex flex-col items-center justify-center w-full h-full border border-white">
+          <h2 className="text-xl font-bold mb-4">Most Popular Quizzes</h2>
+          <MostPopularQuizes />
        </div>
 
        {/* Block 3: Commercial */}
@@ -88,15 +86,12 @@ export default function MainContent() {
           </div>
       
        {/* Block 4: Random Quizes */}
-       <div className="flex flex-col p-10 items-center justify-center w-full border 1px white h-2/8">
-         <h1>Random Quizes</h1>
-         <h1>Random Quizes</h1>
-         <h1>Random Quizes</h1>
-         <h1>Random Quizes</h1>
-         <h1>Random Quizes</h1>
-         <h1>Random Quizes</h1>
-         <h1>Random Quizes</h1>
-       </div>
+       <div className="flex flex-col flex-wrap items-center w-full border 1px white p-5">
+
+        <h2 className="text-xl font-bold mb-4">Most Popular Quizzes</h2>
+        <MostPopularQuizes/>
+
+        </div>
 
        {/* Block 5: Small Game */}
        <div className="flex flex-col p-10 items-center justify-center w-full border 1px white h-2/8">
@@ -125,14 +120,11 @@ export default function MainContent() {
 
 
       {/* Block 7: Random Quizes */}
-      <div className="flex flex-col items-center justify-center w-full p-10 border 1px white h-2/8">
-         <h1>Random Quizes</h1>
-         <h1>Random Quizes</h1>
-         <h1>Random Quizes</h1>
-         <h1>Random Quizes</h1>
-         <h1>Random Quizes</h1>
-         <h1>Random Quizes</h1>
-         <h1>Random Quizes</h1>
+      <div className="flex flex-col flex-wrap items-center w-full border 1px white p-5">
+
+         <h2 className="text-xl font-bold mb-4">Most Popular Quizzes</h2>
+         <MostPopularQuizes/>
+          
        </div>
 
        {/* Block 8: Small Game */}
@@ -156,8 +148,11 @@ export default function MainContent() {
       </div>
 
       {/* Block 7: Random Quizes */}
-      <div className="flex justify-center p-10 w-full border 1px white h-2/8">
-         <h2>Random Quizes</h2>
+      <div className="flex flex-col flex-wrap items-center w-full border 1px white p-5">
+
+         <h2 className="text-xl font-bold mb-4">Most Popular Quizzes</h2>
+         <MostPopularQuizes/>
+          
        </div>
 
        {/* Block 8: Small Game */}
@@ -181,8 +176,11 @@ export default function MainContent() {
       </div>
 
       {/* Block 7: Random Quizes */}
-      <div className="flex justify-center p-10 w-full border 1px white h-2/8">
-         <h2>Random Quizes</h2>
+      <div className="flex flex-col flex-wrap items-center w-full border 1px white p-5">
+
+         <h2 className="text-xl font-bold mb-4">Most Popular Quizzes</h2>
+         <MostPopularQuizes/>
+          
        </div>
 
        {/* Block 8: Small Game */}
