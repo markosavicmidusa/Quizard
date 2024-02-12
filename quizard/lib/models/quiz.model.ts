@@ -24,6 +24,24 @@ const QuizSchema = new mongoose.Schema({
     results: { type: [ResultsSchema], required: true }
 });
 
+// Define the interface for Quiz document
+export interface IQuiz extends Document {
+    questions: Array<{
+        question: string;
+        answers: Array<{
+            value: string;
+            isCorrect: boolean;
+        }>;
+    }>;
+    results: Array<{
+        range: {
+            from: number;
+            to: number;
+        };
+        result: string;
+    }>;
+}
+
 
 const QuizModel = mongoose.models.Quiz || mongoose.model('Quiz', QuizSchema)
 

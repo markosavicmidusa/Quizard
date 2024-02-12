@@ -6,7 +6,7 @@ import Link from "next/link"
 export default function Quiz({quiz}:{quiz:IQuizMetadata}){
 
     return (
-        <Link href={`/quizzes/${quiz.id}`}>
+        <Link href={`/quizes/${quiz.id}`}>
             <div className="z-10 w-48 border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300 cursor-pointer">
                  <div className="relative h-36">
                    <Image

@@ -1,8 +1,28 @@
 "use server"
+import QuizModel, { IQuiz } from "../models/quiz.model";
 import QuizMetadataModel, { IQuizMetadata } from "../models/quiz_metadata.model";
 import { connectToDB } from "../mongoose";
 
-export async function getMostPopular50Quizzes(): Promise<IQuizMetadata[]>{
+
+export async function getQuizById(id:string): Promise<IQuiz>{
+    try {
+        
+        connectToDB();
+        // Find the quiz by ID
+        const quiz = await QuizModel.findOne({ _id: id });
+     
+        return quiz;
+  
+    } catch (error) {
+        console.error("Error fetching quiz by ID:", error);
+        throw error; // Rethrow the error to be handled by the caller
+        
+    }
+} 
+
+
+
+export async function getMostPopular50Quizzes(): Promise<IQuizMetadata[] | []>{
     try {
         
         connectToDB();
@@ -28,6 +48,7 @@ export async function getMostPopular50Quizzes(): Promise<IQuizMetadata[]>{
         return plainObjects;
     } catch (error) {
         console.error("Error fetching quizzes:", error);
-        throw error; // Rethrow the error to be handled by the caller
+         //throw error; // Rethrow the error to be handled by the caller
+        return []
     }
 }

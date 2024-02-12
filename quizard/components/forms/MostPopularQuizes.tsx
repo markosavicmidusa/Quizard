@@ -9,9 +9,10 @@ export default function MostPopularQuizes() {
     const [quizzes, setQuizzes] = useState<IQuizMetadata[]>([]);
 
     useEffect(() => {
+
         const fetchQuizzes = async () => {
             try {
-                const fetchedQuizzes: IQuizMetadata[]= await getMostPopular50Quizzes();
+                const fetchedQuizzes: IQuizMetadata[] | []= await getMostPopular50Quizzes();
                 setQuizzes(fetchedQuizzes);
             } catch (error) {
                 console.error('Error fetching quizzes:', error);
