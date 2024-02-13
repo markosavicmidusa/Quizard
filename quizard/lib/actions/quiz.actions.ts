@@ -1,24 +1,36 @@
 "use server"
+import { error } from "console";
 import QuizModel, { IQuiz } from "../models/quiz.model";
 import QuizMetadataModel, { IQuizMetadata } from "../models/quiz_metadata.model";
 import { connectToDB } from "../mongoose";
 
 
-export async function getQuizById(id:string): Promise<IQuiz>{
+export async function getQuizById(id: string): Promise<IQuiz | null> {
     try {
-        
         connectToDB();
         // Find the quiz by ID
-        const quiz = await QuizModel.findOne({ _id: id });
-     
-        return quiz;
-  
+        const quiz:IQuiz|null = await QuizModel.findOne({ _id: id }).lean();
+        console.log(quiz)
+        
+        // Manually convert each document to a plain object
+        if (quiz) {
+        
+            const plainObject: IQuiz = {
+                questions: quiz.questions,
+                results: quiz.results
+            } as IQuiz; // Explicit cast to IQuizMetadata[];
+        
+            return plainObject
+        } else{
+           console.log(" Error fetching quiz by ID: ", id)
+           return null
+        }
+        
     } catch (error) {
         console.error("Error fetching quiz by ID:", error);
         throw error; // Rethrow the error to be handled by the caller
-        
     }
-} 
+}
 
 
 

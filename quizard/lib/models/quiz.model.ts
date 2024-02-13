@@ -1,30 +1,5 @@
-import mongoose from "mongoose";
+import mongoose, { Document } from "mongoose";
 
-// QuizSchema start
-const AnswerSchema = new mongoose.Schema({
-    value: { type: String, required: true },
-    isCorrect: { type: Boolean, required: true },
-});
-
-const ResultsSchema = new mongoose.Schema({
-    range: {
-        from: { type: Number, required: true },
-        to: { type: Number, required: true }
-    },
-    result: { type: String, required: true }
-});
-
-const QuestionSchema = new mongoose.Schema({
-    question: { type: String, required: true },
-    answers: { type: [AnswerSchema], required: true }   
-})
-
-const QuizSchema = new mongoose.Schema({
-    questions: { type: [QuestionSchema], required: true },
-    results: { type: [ResultsSchema], required: true }
-});
-
-// Define the interface for Quiz document
 export interface IQuiz extends Document {
     questions: Array<{
         question: string;
@@ -33,16 +8,40 @@ export interface IQuiz extends Document {
             isCorrect: boolean;
         }>;
     }>;
+    questionss: Array<{
+        question: string;
+        answers: Array<{
+            value: string;
+            isCorrect: boolean;
+        }>;
+    }>;
     results: Array<{
-        range: {
-            from: number;
-            to: number;
-        };
+        from: number;
+        to: number;
+        result: string;
+    }>;
+    resultss: Array<{
+        from: number;
+        to: number;
         result: string;
     }>;
 }
 
+const QuizSchema = new mongoose.Schema({
+    questionss: [{
+        questionn: { type: String, required: true },
+        answerss: [{
+            valuee: { type: String, required: true },
+            isCorrectt: { type: Boolean, required: true }
+        }]
+    }],
+    resultss: [{
+        fromm: { type: Number, required: true },
+        too: { type: Number, required: true },
+        resultt: { type: String, required: true }
+    }]
+});
 
-const QuizModel = mongoose.models.Quiz || mongoose.model('Quiz', QuizSchema)
+const QuizModel = mongoose.models.Quiz || mongoose.model<IQuiz>('Quiz', QuizSchema);
 
-export default QuizModel
+export default QuizModel;
