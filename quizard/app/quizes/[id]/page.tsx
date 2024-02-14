@@ -95,23 +95,35 @@ export default function ActiveQuiz({ params }: { params: { id: string }}) {
                 </>
             )}
             {result && (
-            <div className="bg-zinc-800 rounded-lg shadow-md p-6 text-center w-full">
-                <p className="xl:text-2xl lg:text-2xl md:text-lg sm:text-sm font-semibold mb-4">{result}</p>
-                <button 
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 text-sm rounded mr-2 mb-2 sm:mb-0"
-                    onClick={handleRetry}
-                >
-                    Play Again
-                </button>
-                <button 
-                    className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 text-sm rounded"
-                    onClick={handleGoToHome}
-                >
-                    Go Home
-                </button>
-            </div>
-                
+                <div className='flex flex-col items-center '>
+                    <div className="bg-zinc-800 rounded-lg shadow-md p-6 text-center w-full">
+                        <p className="xl:text-2xl lg:text-2xl md:text-lg sm:text-sm font-semibold mb-4">{result}</p>
+                        <button 
+                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 text-sm rounded mr-2 mb-2 sm:mb-0"
+                            onClick={handleRetry}
+                        >
+                            Play Again
+                        </button>
+                        <button 
+                            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 text-sm rounded"
+                            onClick={handleGoToHome}
+                        >
+                            Go Home
+                        </button>
+                    </div>
+                    <button 
+                        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 text-sm rounded mt-4"
+                        onClick={() => {
+                            navigator.clipboard.writeText(window.location.href);
+                            alert("Quiz link copied to clipboard!");
+                        }}
+                    >
+                        Copy Quiz Link
+                    </button>
+
+                </div>
             )}
+            
             <MainContent/>
         </div>
     );
