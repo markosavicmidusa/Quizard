@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { getQuizById } from '@/lib/actions/quiz.actions';
 import { IQuiz } from '@/lib/models/quiz.model';
+import MainContent from '@/components/shared/MainContent';
 
 export default function ActiveQuiz({ params }: { params: { id: string }}) {
     const router = useRouter();
@@ -65,12 +66,15 @@ export default function ActiveQuiz({ params }: { params: { id: string }}) {
         if (!quiz) return null;
         const question = quiz.questions[currentQuestionIndex];
         return (
-            <div>
-                <h2>{question.question}</h2>
+            <div className="bg-zinc-800 text-white rounded-lg shadow-md p-6 w-full ">
+                <h2 className="xl:text-2xl lg:text-2xl md:text-lg sm:text-sm font-semibold mb-4">{question.question}</h2>
                 <ul>
                     {question.answers.map((answer, index) => (
-                        <li key={index}>
-                            <button onClick={() => handleAnswerSelect(answer.value)}>
+                        <li key={index} className="mb-2">
+                            <button 
+                                className="bg-zinc-700 hover:bg-zinc-600 text-white font-bold py-2 px-4 rounded xl:text-lg lg:text-lg md:text-sm "
+                                onClick={() => handleAnswerSelect(answer.value)}
+                            >
                                 {answer.value}
                             </button>
                         </li>
@@ -81,7 +85,7 @@ export default function ActiveQuiz({ params }: { params: { id: string }}) {
     };
 
     return (
-        <div>
+        <div className="flex flex-col items-center justify-center mt-10 mb-10">
             {loading && <p>Loading...</p>}
             {error && <p>{error}</p>}
             {!loading && !error && !quiz && <p>No quiz found.</p>}
@@ -91,12 +95,24 @@ export default function ActiveQuiz({ params }: { params: { id: string }}) {
                 </>
             )}
             {result && (
-                <>
-                    <p>{result}</p>
-                    <button onClick={handleRetry}>Play Again</button>
-                    <button onClick={handleGoToHome}>Go Home</button>
-                </>
+            <div className="bg-zinc-800 rounded-lg shadow-md p-6 text-center w-full">
+                <p className="xl:text-2xl lg:text-2xl md:text-lg sm:text-sm font-semibold mb-4">{result}</p>
+                <button 
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 text-sm rounded mr-2 mb-2 sm:mb-0"
+                    onClick={handleRetry}
+                >
+                    Play Again
+                </button>
+                <button 
+                    className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 text-sm rounded"
+                    onClick={handleGoToHome}
+                >
+                    Go Home
+                </button>
+            </div>
+                
             )}
+            <MainContent/>
         </div>
     );
 }
