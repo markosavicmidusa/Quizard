@@ -35,23 +35,35 @@ export default function CreateQuiz() {
         }
     };
 
-    const handleQuestionChange = (field: string, value: any) => {
-        {/*setQuiz(prevState => {
+    const handleQuestionChange = (field: string, value: any, answerIndex: number) => {
+        setQuiz((prevState: IQuiz) => {
             const newQuestions = [...prevState.questions];
-            newQuestions[currentQuestionIndex] = {
-                ...newQuestions[currentQuestionIndex],
+            newQuestions[currentQuestionIndex].answers[answerIndex] = {
+                ...newQuestions[currentQuestionIndex].answers[answerIndex],
                 [field]: value
             };
-            return { ...prevState, questions: newQuestions };
-        });*/}
+            const question : IQuiz = {
+                ...prevState,
+                questions: newQuestions
+            } as IQuiz
+
+            return question
+        });
     };
+    
 
     const handleResultChange = (index: number, field: string, value: any) => {
-        {/*setQuiz(prevState => {
+        setQuiz((prevState: IQuiz) => {
             const newResults = [...prevState.results];
             newResults[index] = { ...newResults[index], [field]: value };
-            return { ...prevState, results: newResults };
-        });*/}
+            
+            const result = {
+                ...prevState, 
+                results: newResults 
+            } as IQuiz
+            
+            return result;
+        });
     };
     const handleSubmit = () => {
         // Implement submission logic here
@@ -64,19 +76,13 @@ export default function CreateQuiz() {
             <form>
                 <div key={currentQuestionIndex}>
                     <h3>Question {currentQuestionIndex + 1}</h3>
-                    <input
-                        type="text"
-                        placeholder="Question"
-                        value={quiz.questions[currentQuestionIndex].question}
-                        onChange={e => handleQuestionChange('question', e.target.value)}
-                    />
                     {quiz.questions[currentQuestionIndex].answers.map((answer, answerIndex) => (
                         <div key={answerIndex}>
                             <input
                                 type="text"
                                 placeholder={`Answer ${answerIndex + 1}`}
                                 value={answer.value}
-                                onChange={e => handleQuestionChange('value', e.target.value)}
+                                onChange={e => handleQuestionChange('value', e.target.value, answerIndex)}
                             />
                         </div>
                     ))}
