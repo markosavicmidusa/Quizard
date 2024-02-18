@@ -22,7 +22,7 @@ export default function Topbar({categories}:TopbarProps){
     
     return (
         
-            <nav className="topbar-container z-10 bg-zinc-900">
+            <nav className="topbar-container z-10">
                 <Link href="/" className="border 1px white flex items-center flex-row gap-4">
                     <Image src="/assets/logoTree.svg" alt="logo" width={28} height={28}/>
                     <p className="text-heading3-bold ">Kvizard</p>
@@ -40,11 +40,11 @@ export default function Topbar({categories}:TopbarProps){
                 <div className="flex items-center gap-1">
                     <div className="block flex items-center">
                         <SignedIn>
-                            <div className="border 1px white flex gap-2 p-2 pl-4 cursor-pointer transition-transform transform hover:scale-110">
+                            <div className="border 1px white flex gap-2 justify-center items-center p-2 pl-4 cursor-pointer transition-transform transform hover:scale-110">
                                 <div className='flex cursor-pointer'>
-                                    <UserButton afterSignOutUrl="/"/>
+                                    <UserButton/>
+                                    {/* afterSignOutUrl="/" baguje -> proveriti*/}
                                 </div>
-                                <p/>
                             </div>
                         </SignedIn>
                         <SignedOut>   
