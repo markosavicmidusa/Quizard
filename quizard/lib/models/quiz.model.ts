@@ -8,19 +8,7 @@ export interface IQuiz extends Document {
             isCorrect: boolean;
         }>;
     }>;
-    questionss: Array<{
-        question: string;
-        answers: Array<{
-            value: string;
-            isCorrect: boolean;
-        }>;
-    }>;
     results: Array<{
-        from: number;
-        to: number;
-        result: string;
-    }>;
-    resultss: Array<{
         from: number;
         to: number;
         result: string;
