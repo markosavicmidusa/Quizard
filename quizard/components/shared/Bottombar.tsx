@@ -28,8 +28,18 @@ export default function Bottombar({categories}:BottombarProps){
                       }}
                     />
             </Link>
-            
         ))}
+        <Link className="text-white px-4 py-2 cursor-pointer transition-transform transform hover:scale-110" href={'/create-quiz'}>
+                <Image
+                  src={`/google-icons/add.svg`}
+                  alt="logout"
+                  width={27}
+                  height={27}
+                  style={{
+                    filter: 'invert(100%)',
+                  }}
+                />
+        </Link>
     </main>
     
     )

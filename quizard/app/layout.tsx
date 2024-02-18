@@ -8,6 +8,7 @@ import LeftSidebar from "@/components/shared/LeftSidebar";
 import RightSidebar from "@/components/shared/RightSidebar";
 import Bottombar from "@/components/shared/Bottombar";
 import Head from "next/head";
+import {dark} from "@clerk/themes"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -39,23 +40,23 @@ export default function RootLayout({
   const commercials = getCommercials()
 
   return (
-    <ClerkProvider>
-      <html lang="en" className="w-full h-screen bg-zinc-900 text-slate-300 h-full">
+    <ClerkProvider appearance={{baseTheme:dark}}>
+      <html lang="en" className="w-full h-screen bg-zinc-800 text-slate-300 h-full">
         
         <body className={`border 1px white ${inter.className} flex flex-col`}>
-          <Topbar categories={categories}/>  
+          <Topbar categories={categories} />  
             <main className="flex mb-10 h-full">
                 <div className="border 1px white fixed w-1/5 left-0 mt-16 hidden xl:flex lg:flex">
                    <LeftSidebar commercials={commercials}/>
                 </div>       
-                <div className="border-1 border-white bg-zinc-900 mx-auto mt-16 w-full sm:w-full md:w-full lg:w-3/5 xl:w-3/5 flex flex-col">
+                <div className="border-1 border-white bg-zinc-800 mx-auto mt-16 w-full sm:w-full md:w-full lg:w-3/5 xl:w-3/5 flex flex-col">
                     {children}    
                 </div>
                 <div className="border 1px white fixed w-1/5 right-0 mt-16 f-full hidden xl:flex lg:flex">
                   <RightSidebar commercials={commercials} />
                 </div>    
             </main>
-            <div className="border 1px white flex justify-center items-center fixed lg:hidden xl:hidden w-full h-10 bottom-0 bg-zinc-800">
+            <div className="border 1px white flex justify-center items-center fixed lg:hidden xl:hidden w-full h-10 bottom-0 bg-zinc-900">
               <Bottombar categories={categories} />
             </div>
         </body>  
