@@ -1,6 +1,10 @@
+import { RegisterUser } from "@/lib/actions/user/user.actions";
+import { IUser } from "@/lib/models/user/user.model";
 import { SignUp } from "@clerk/nextjs";
 import { useUser } from "@clerk/nextjs";
-import { useEffect } from "react";
+import { ClientSession } from "mongodb";
+import { Document, Model, Types, DocumentSetOptions, QueryOptions, UpdateQuery, AnyObject, PopulateOptions, MergeType, Query, SaveOptions, ToObjectOptions, FlattenMaps, Require_id, UpdateWithAggregationPipeline, pathsToSkip, Error } from "mongoose";
+import { use, useEffect } from "react";
 
 // Define the custom interface for Clerk user attributes
 interface ClerkUserAttributes {
@@ -22,20 +26,20 @@ export default function Registration() {
 
   const handleSignUp = async (user: ClerkUserAttributes) => {
     try {
-      const response = await fetch('/api/registerUser', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          clerkId: user.id, // Clerk's unique identifier for the user
-          email: user.email,
-          name: `${user.firstName} ${user.lastName}`,
-          // Other relevant user data
-        }),
-      });
+        const newUser: IUser = {
+            clerkId: user.id,
+            email: user.email,
+            name: user.firstName,
+            surname: user.lastName,
+            sportsClicked: 0,
+            popularClicked: 0,
+            funClicked: 0,
+            scienceClicked: 0,
+            otherClicked: 0
+        } as IUser
+        const response = await RegisterUser(newUser)
 
-      if (response.ok) {
+      if (response.id) {
         console.log('User registered in database successfully');
       } else {
         console.error('Failed to register user in database');
