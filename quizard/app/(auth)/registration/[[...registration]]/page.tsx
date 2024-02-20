@@ -4,18 +4,8 @@ import { RegisterUser } from "@/lib/actions/user/user.actions";
 import { IUser } from "@/lib/models/user/user.model";
 import { SignUp } from "@clerk/nextjs";
 import { useUser } from "@clerk/nextjs";
-import { ClientSession } from "mongodb";
-import { Document, Model, Types, DocumentSetOptions, QueryOptions, UpdateQuery, AnyObject, PopulateOptions, MergeType, Query, SaveOptions, ToObjectOptions, FlattenMaps, Require_id, UpdateWithAggregationPipeline, pathsToSkip, Error } from "mongoose";
-import { use, useEffect } from "react";
-
-// Define the custom interface for Clerk user attributes
-interface ClerkUserAttributes {
-  id: string;
-  email?: string;
-  firstName: string;
-  lastName: string;
-  // Add other necessary properties
-}
+import { useEffect } from "react";
+import { UserResource } from "@clerk/types";
 
 export default function Registration() {
   
@@ -25,15 +15,15 @@ export default function Registration() {
         console.log("Use effect-Registration:", user);
         if (user && user.id && isSignedIn) {
           // Assuming user object is available and has an ID property
-          handleSignUp(user as ClerkUserAttributes);
+          handleSignUp(user );
         }
       }, [user, isSignedIn]);
 
-  const handleSignUp = async (user: ClerkUserAttributes) => {
+  const handleSignUp = async (user : UserResource) => {
     try {
         const newUser: IUser = {
             clerkId: user.id,
-            email: user.email,
+            email: user.emailAddresses.toString(),
             name: user.firstName,
             surname: user.lastName,
             sportsClicked: 0,
