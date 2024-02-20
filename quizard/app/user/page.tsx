@@ -1,4 +1,5 @@
 "use client";
+import MainContent from "@/components/shared/MainContent";
 import { useUser } from "@clerk/nextjs";
  
 export default function Page() {
@@ -14,5 +15,7 @@ export default function Page() {
     <div>ID {user.id} welcome to Clerk</div>
     <div>createdat  {user.createdAt?.toString()} welcome to Clerk</div>
    <h1>here will go list of quizes with approved or waiting prop</h1>
+   <MainContent/>
     </div>;
+    
 }
