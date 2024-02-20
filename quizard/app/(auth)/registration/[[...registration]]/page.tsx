@@ -1,3 +1,5 @@
+"use client"
+
 import { RegisterUser } from "@/lib/actions/user/user.actions";
 import { IUser } from "@/lib/models/user/user.model";
 import { SignUp } from "@clerk/nextjs";
@@ -16,13 +18,16 @@ interface ClerkUserAttributes {
 }
 
 export default function Registration() {
-  const { user, isSignedIn } = useUser();
+  
+    const { user, isSignedIn } = useUser();
 
-  useEffect(() => {
-    if (isSignedIn && user?.id) {
-      handleSignUp(user as ClerkUserAttributes);
-    }
-  }, [user, isSignedIn]);
+    useEffect(() => {
+        console.log("Use effect-Registration:", user);
+        if (user && user.id && isSignedIn) {
+          // Assuming user object is available and has an ID property
+          handleSignUp(user as ClerkUserAttributes);
+        }
+      }, [user, isSignedIn]);
 
   const handleSignUp = async (user: ClerkUserAttributes) => {
     try {
@@ -37,6 +42,7 @@ export default function Registration() {
             scienceClicked: 0,
             otherClicked: 0
         } as IUser
+
         const response = await RegisterUser(newUser)
 
       if (response.id) {
