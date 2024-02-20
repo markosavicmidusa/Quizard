@@ -1,7 +1,25 @@
 import { SignUp } from "@clerk/nextjs";
-import { ClerkUserAttributes } from "@/lib/models/clerk.user.model";
+import { useUser } from "@clerk/nextjs";
+import { useEffect } from "react";
+
+// Define the custom interface for Clerk user attributes
+interface ClerkUserAttributes {
+  id: string;
+  email?: string;
+  firstName: string;
+  lastName: string;
+  // Add other necessary properties
+}
 
 export default function Registration() {
+  const { user, isSignedIn } = useUser();
+
+  useEffect(() => {
+    if (isSignedIn && user?.id) {
+      handleSignUp(user as ClerkUserAttributes);
+    }
+  }, [user, isSignedIn]);
+
   const handleSignUp = async (user: ClerkUserAttributes) => {
     try {
       const response = await fetch('/api/registerUser', {
@@ -29,7 +47,7 @@ export default function Registration() {
 
   return (
     <div className="p-10 flex flex-col justify-center items-center">
-      <SignUp onComplete={handleSignUp} />
+      <SignUp />
     </div>
   );
 }
