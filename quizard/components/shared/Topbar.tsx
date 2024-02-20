@@ -42,7 +42,7 @@ export default function Topbar({categories}:TopbarProps){
                         <SignedIn>
                             <div className="border 1px white flex gap-2 justify-center items-center p-2 pl-4 cursor-pointer transition-transform transform hover:scale-110">
                                 <div className='flex cursor-pointer'>
-                                    <UserButton/>
+                                    <UserButton afterSignOutUrl="/" />
                                     {/* afterSignOutUrl="/" baguje -> proveriti*/}
                                 </div>
                             </div>
