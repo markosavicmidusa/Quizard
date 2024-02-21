@@ -5,6 +5,20 @@ import QuizMetadataModel, { IQuizMetadata } from "../models/quiz_metadata.model"
 import { connectToDB } from "../mongoose";
 
 
+export default async function GetQuizMetadataListByUserId(dbUserId: string): Promise<IQuizMetadata[]> {
+    connectToDB();
+
+    try {
+        const quizMetadataList = await QuizMetadataModel.find({createdBy: dbUserId});
+        console.log("dbUserId:",dbUserId)
+        console.log("Quizmetadata list successfully retrieved",quizMetadataList);
+        return quizMetadataList || []; // Return quizMetadataList if truthy, otherwise return an empty array
+    } catch (error) {
+        console.error("Quizmetadata retrieve error: ", error);
+        return []; // Return an empty array in case of error
+    }
+}
+
 export async function getQuizById(id: string): Promise<IQuiz | null> {
     try {
         connectToDB();
