@@ -22,7 +22,7 @@ export default function Topbar({categories}:TopbarProps){
     
     return (
         
-            <nav className="topbar-container z-10">
+            <nav className="topbar-container z-10 bg-zinc-900">
                 <Link href="/" className="border 1px white flex items-center flex-row gap-4">
                     <Image src="/assets/logoTree.svg" alt="logo" width={28} height={28}/>
                     <p className="text-heading3-bold ">Kvizard</p>

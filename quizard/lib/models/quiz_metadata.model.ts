@@ -8,7 +8,8 @@ const QuizMetadataSchema = new mongoose.Schema({
     category: { type: String, required: true },
     createdBy: { type: String, required: true },
     timesClicked: { type: Number, required: true },
-    timesFinished: { type: Number, required: true }
+    timesFinished: { type: Number, required: true },
+    active: { type: Number, required: true }
 });
 
 // Define the interface for Quiz Metadata
@@ -20,6 +21,7 @@ export interface IQuizMetadata extends Document {
     createdBy: string;
     timesClicked: number;
     timesFinished: number;
+    active:number;
 }
 
 // Define the model

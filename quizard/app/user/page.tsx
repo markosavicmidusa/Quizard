@@ -49,41 +49,48 @@ export default function Page() {
       return null;
     }
 
-    return <div>
-        Hello, {user.firstName} welcome to Clerk
-    <div>Full name, {user.fullName} welcome to Clerk</div>
-    <div>ID {user.id} welcome to Clerk</div>
-    <div>createdat  {user.createdAt?.toString()} welcome to Clerk</div>
-   <h1>here will go list of quizes with approved or waiting prop</h1>
-   
-   <div>DB User</div>
-   {DbUser ? (
+    return (
+        <section className="max-w-4xl mx-auto px-6 py-8 rounded-lg shadow-lg">
+  <h1 className="text-3xl font-bold text-center mb-8 text-slate-300">
+    Welcome, {user.firstName}!
+  </h1>
+  <div className="flex flex-col gap-8 text-slate-300">
+    <div className="p-6 rounded-lg shadow-md bg-zinc-700">
+      <h2 className="text-xl font-semibold mb-4">Your Account Details</h2>
+      {DbUser ? (
         <div>
-            <p>ID: {DbUser._id}</p>
-            <p>Email: {DbUser.email}</p>
-            <p>Name: {DbUser.name}</p>
-            <p>Surname: {DbUser.surname}</p>
-            {/* Render other properties as needed */}
+          <p><span className="font-semibold">Email:</span> {DbUser.email}</p>
+          <p><span className="font-semibold">Name:</span> {DbUser.name}</p>
+          <p><span className="font-semibold">Surname:</span> {DbUser.surname}</p>
         </div>
-     ) : (
-         <div>User data not available</div>
-     )}
-     <div>
-        <h2> Your quizes list</h2>
-        {QuizMetadataLoaded ? (
-             <div className="overflow-y-scroll max-h-64 w-full">
-             <ul className="flex flex-wrap gap-4 items-center justify-center">
-                 {QuizMetadata?.map((quiz) => (
-                     <Quiz key={quiz.id} quiz={quiz}/>
-                 ))}
-             </ul>
-         </div>
-         ) : (
-             <div>Loading quizzes...</div>
-         )}
-        
-     </div>
-   <MainContent/>
-    </div>;
+      ) : (
+        <div>User data not available</div>
+      )}
+    </div>
+    <div className="bg-zinc-700 p-6 rounded-lg shadow-md">
+      <h2 className="text-xl font-semibold mb-4">Your Quizzes List</h2>
+      {QuizMetadataLoaded ? (
+        <div className="overflow-y-scroll max-h-64 w-full">
+          <ul className="flex flex-wrap gap-4 items-center justify-center">
+            {QuizMetadata?.map((quiz) => (
+              <div key={quiz.id}>
+              <Quiz quiz={quiz} />
+              <p className={`text-sm mt-1 ${quiz.active === 1 ? 'text-green-500' : quiz.active === 0 ? 'text-blue-500' : 'text-red-500'}`}>
+                {quiz.active === 1 ? 'Active' : quiz.active === 0 ? 'Pending' : 'Rejected'}
+              </p>
+            </div>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <div className="text-gray-700">Loading quizzes...</div>
+      )}
+    </div>
+  </div>
+
+  <MainContent />
+</section>
+
+      );
     
 }
