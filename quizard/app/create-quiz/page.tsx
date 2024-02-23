@@ -50,6 +50,19 @@ export default function CreateQuiz() {
             return question
         });
     };
+
+    const handleQuestionContentChange = (value: any) => {
+        setQuiz((prevState: IQuiz) => {
+            const newQuestions = [...prevState.questions];
+            newQuestions[currentQuestionIndex].question = value;
+            const question : IQuiz = {
+                ...prevState,
+                questions: newQuestions
+            } as IQuiz
+
+            return question
+        });
+    };
     
 
     const handleResultChange = (index: number, field: string, value: any) => {
@@ -76,6 +89,15 @@ export default function CreateQuiz() {
     <form>
         <div key={currentQuestionIndex} className="mb-8">
             <h3 className="text-lg font-semibold mb-2">Question {currentQuestionIndex + 1}</h3>
+            <div className="mb-2">
+                <input
+                    type="text"
+                    placeholder={`Question ${currentQuestionIndex + 1} content`}
+                    value={quiz.questions[currentQuestionIndex].question}
+                    onChange={e => handleQuestionContentChange(e.target.value)}
+                    className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
+                />
+            </div>
             {quiz.questions[currentQuestionIndex].answers.map((answer, answerIndex) => (
                 <div key={answerIndex} className="mb-2">
                     <input
