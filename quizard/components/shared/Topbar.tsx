@@ -40,9 +40,12 @@ export default function Topbar({categories}:TopbarProps){
                 <div className="flex items-center gap-1">
                     <div className="block flex items-center">
                         <SignedIn>
-                            <div className="border 1px white flex gap-2 justify-center items-center p-2 pl-4 cursor-pointer transition-transform transform hover:scale-110">
-                                <div className='flex cursor-pointer'>
-                                    <UserButton afterSignOutUrl="/" />
+                            <div className="border 1px white flex gap-2 justify-center items-center p-2 pl-4 gap-5 text-sm">
+                                <Link href="/user" className="text-blue-500 underline hover:text-gray-200 transition-colors">
+                                  Dashboard
+                                </Link>
+                                <div className='flex cursor-pointer transition-transform transform hover:scale-110'>
+                                    <UserButton afterSignOutUrl="/" signInUrl="/user"/>
                                     {/* afterSignOutUrl="/" baguje -> proveriti*/}
                                 </div>
                             </div>
