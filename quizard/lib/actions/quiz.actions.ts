@@ -31,7 +31,8 @@ export async function getQuizById(id: string): Promise<IQuiz | null> {
         
             const plainObject: IQuiz = {
                 questions: quiz.questions,
-                results: quiz.results
+                results: quiz.results,
+                active:quiz.active
             } as IQuiz; // Explicit cast to IQuizMetadata[];
         
             return plainObject

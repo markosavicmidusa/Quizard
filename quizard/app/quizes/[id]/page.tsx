@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { getQuizById } from '@/lib/actions/quiz.actions';
 import { IQuiz } from '@/lib/models/quiz.model';
 import MainContent from '@/components/shared/MainContent';
+import Link from 'next/link';
 
 export default function ActiveQuiz({ params }: { params: { id: string }}) {
     const router = useRouter();
@@ -14,21 +15,28 @@ export default function ActiveQuiz({ params }: { params: { id: string }}) {
     const [result, setResult] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    const [active, setActive] = useState<number>(0);
 
     useEffect(() => {
+        console.log()
+
         const fetchQuiz = async () => {
             try {
-                const fetchedQuiz = await getQuizById('65cbaf90d97f1261ae3028a3');
+                const fetchedQuiz = await getQuizById(params.id);
                 if (fetchedQuiz) {
                     setQuiz(fetchedQuiz);
                     setLoading(false);
+                    setActive(fetchedQuiz.active)
+                    console.log("FETCHEDQUIZ: ",fetchedQuiz)
                 } else {
                     setError('Quiz not found.');
                     setLoading(false);
+                    
                 }
             } catch (error) {
                 setError('Error fetching quiz.');
                 setLoading(false);
+                
             }
         };
 
@@ -84,8 +92,13 @@ export default function ActiveQuiz({ params }: { params: { id: string }}) {
         );
     };
 
-    return (
-        <div className="flex flex-col items-center justify-center mt-10 mb-10">
+    const getQuizActiveStructure = () => {
+       
+        console.log('ACTIVE:', active)
+        
+        return(
+            <div className="flex flex-col items-center justify-center mt-10 mb-10">
+            
             {loading && <p>Loading...</p>}
             {error && <p>{error}</p>}
             {!loading && !error && !quiz && <p>No quiz found.</p>}
@@ -125,6 +138,44 @@ export default function ActiveQuiz({ params }: { params: { id: string }}) {
             )}
             
             <MainContent/>
+        </div>
+        )
+    }
+
+    const getQuizPendingStructure = () => {
+        
+        console.log('ACTIVE:', active)
+        return (
+            <div className='flex flex-col items-center'>
+                <h2 className='m-10'>
+                    Quiz under revision.
+                </h2>
+                <Link href="/" className="text-blue-500 underline">
+                    Go back to home
+                </Link>
+                <MainContent/>
+            </div>
+        );
+    }
+
+    const getQuizRejectStructure = () => {
+        console.log('ACTIVE:', active)
+        return (
+            <div className='flex flex-col items-center '>
+                <h2 className='text-red-500 m-10'>
+                    Quiz rejected.
+                </h2>
+                <Link href="/" className="text-blue-500 underline">
+                    Go back to home
+                </Link>
+                <MainContent/>
+            </div>
+        );
+    }
+
+    return (
+        <div>
+            {loading ? <p>Loading...</p> : active === 1 ? getQuizActiveStructure() : active === 0 ? getQuizPendingStructure() : getQuizRejectStructure()}
         </div>
     );
 }

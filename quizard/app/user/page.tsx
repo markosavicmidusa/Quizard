@@ -67,17 +67,17 @@ export default function Page() {
         <div>User data not available</div>
       )}
     </div>
-    <div className="bg-zinc-700 p-6 rounded-lg shadow-md">
+    <div className="bg-zinc-700 p-6 rounded-lg shadow-md items-center">
       <h2 className="text-xl font-semibold mb-4">Your Quizzes List</h2>
       {QuizMetadataLoaded ? (
         <div className="overflow-y-scroll max-h-64 w-full">
           <ul className="flex flex-wrap gap-4 items-center justify-center">
             {QuizMetadata?.map((quiz) => (
               <div key={quiz.id}>
-              <Quiz quiz={quiz} />
-              <p className={`text-sm mt-1 ${quiz.active === 1 ? 'text-green-500' : quiz.active === 0 ? 'text-blue-500' : 'text-red-500'}`}>
-                {quiz.active === 1 ? 'Active' : quiz.active === 0 ? 'Pending' : 'Rejected'}
-              </p>
+                <Quiz quiz={quiz} />
+                <p className={`text-sm mt-1 ${quiz.active === 1 ? 'text-green-500' : quiz.active === 0 ? 'text-blue-500' : 'text-red-500'}`}>
+                  {quiz.active === 1 ? 'Active' : quiz.active === 0 ? 'Pending' : 'Rejected'}
+                </p>
             </div>
             ))}
           </ul>

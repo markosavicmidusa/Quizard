@@ -13,6 +13,7 @@ export interface IQuiz extends Document {
         to: number;
         result: string;
     }>;
+    active: number
 }
 
 const QuizSchema = new mongoose.Schema({
@@ -27,7 +28,9 @@ const QuizSchema = new mongoose.Schema({
         fromm: { type: Number, required: true },
         too: { type: Number, required: true },
         resultt: { type: String, required: true }
-    }]
+    }],
+    active: {type: Number, required:true
+    }
 });
 
 const QuizModel = mongoose.models.Quiz || mongoose.model<IQuiz>('Quiz', QuizSchema);
