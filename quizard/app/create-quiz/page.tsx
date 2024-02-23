@@ -102,7 +102,7 @@ export default function CreateQuiz() {
                 <div key={answerIndex} className="mb-2">
                     <input
                         type="text"
-                        placeholder={`Answer ${answerIndex + 1}`}
+                        placeholder={`Answer ${answerIndex + 1} ${answerIndex === 0 ? ' (true question)':''}`}
                         value={answer.value}
                         onChange={e => handleQuestionChange('value', e.target.value, answerIndex)}
                         className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
