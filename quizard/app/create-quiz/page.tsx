@@ -78,15 +78,15 @@ export default function CreateQuiz() {
             return result;
         });
     };
-    const handleSubmit = () => {
-        // Implement submission logic here
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault(); // Prevent the default form submission
         console.log('Quiz submitted:', quiz);
     };
 
     return (
         <div className="max-w-md mx-auto mt-8">
     <h1 className="text-3xl font-bold mb-4">Create Quiz</h1>
-    <form>
+    <form onSubmit={handleSubmit}>
         <div key={currentQuestionIndex} className="mb-8">
             <h3 className="text-lg font-semibold mb-2">Question {currentQuestionIndex + 1}</h3>
             <div className="mb-2">
@@ -145,8 +145,7 @@ export default function CreateQuiz() {
                     </div>
                 ))}
                 <button
-                    type="button"
-                    onClick={handleSubmit}
+                    type="submit"
                     className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
                 >
                     Submit

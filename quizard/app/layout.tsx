@@ -12,18 +12,20 @@ import {dark} from "@clerk/themes"
 
 const inter = Inter({ subsets: ["latin"] });
 
-import { getCommercials } from "@/data/controller";
+import { getCategories, getCommercials } from "@/data/controller";
 
 
 
 
-const categories = [
+/*const categories = [
   { label: "SPORTS", link: "/sports", picturePath: "sports.svg" },
   { label: "POPULAR", link: "/popular", picturePath: "popular.svg" },
   { label: "JUST FOR FUN", link: "/fun", picturePath: "fun.svg" },
   { label: "SCIENCE", link: "/science", picturePath: "science.svg" },
   { label: "OTHER", link: "/other", picturePath: "other.svg" }
-];
+];*/
+
+const categories = getCategories();
 
 
 export const metadata: Metadata = {
