@@ -2,6 +2,9 @@
 
 import { useState } from 'react';
 import { IQuiz } from '@/lib/models/quiz.model'; // Import the interface for the quiz
+import QuizMetadataModel, { IQuizMetadata } from '@/lib/models/quiz_metadata.model';
+import { getCategories } from '@/data/controller';
+import { ICategory } from '@/data/categories/categories';
 
 export default function CreateQuiz() {
     const initialQuizState: IQuiz = {
@@ -20,8 +23,23 @@ export default function CreateQuiz() {
         ]
     } as IQuiz;
 
+    const initialQuizMetadataState:IQuizMetadata = {
+        id: '',
+        name: 'Quiz name',
+        title: 'Quiz title',
+        category: 'Quiz category',
+        createdBy: 'CreatedBy Id',
+        timesClicked: 0,
+        timesFinished: 0,
+        active: 0
+    } as IQuizMetadata
+
+
     const [quiz, setQuiz] = useState(initialQuizState);
+    const [quizMetadata, setQuizMetadata] = useState(initialQuizMetadataState);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+
+    const categories: ICategory[] = getCategories()
 
     const handleNextQuestion = () => {
         if (currentQuestionIndex < quiz.questions.length - 1) {
@@ -64,7 +82,6 @@ export default function CreateQuiz() {
         });
     };
     
-
     const handleResultChange = (index: number, field: string, value: any) => {
         setQuiz((prevState: IQuiz) => {
             const newResults = [...prevState.results];
@@ -78,15 +95,87 @@ export default function CreateQuiz() {
             return result;
         });
     };
+
+    const handleNameContentChange = (value:string) => {
+       
+        setQuizMetadata((prevState: IQuizMetadata) => {
+            const currentQuizMetadataState = prevState;
+            currentQuizMetadataState.name = value;
+            
+            return currentQuizMetadataState;
+    });
+    };
+
+    const handleTitleContentChange = (value:string) => {
+        setQuizMetadata((prevState: IQuizMetadata) => {
+            const currentQuizMetadataState = prevState;
+            currentQuizMetadataState.title = value;
+            
+            return currentQuizMetadataState;
+    });
+    };
+
+    const handleCategoryChange = (value: string) => {
+        setQuizMetadata((prevState: IQuizMetadata) => {
+            const currentQuizMetadataState = prevState;
+            currentQuizMetadataState.category = value;
+            
+            return currentQuizMetadataState;
+    });
+    };
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault(); // Prevent the default form submission
+        quiz.active = 0;        // Setting quiz to not-active - pending status 0
+
+        // create QuizMetadata
+
         console.log('Quiz submitted:', quiz);
+        console.log('Quiz metadata:', quizMetadata);
+
     };
+
+    
 
     return (
         <div className="max-w-md mx-auto mt-8">
     <h1 className="text-3xl font-bold mb-4">Create Quiz</h1>
     <form onSubmit={handleSubmit}>
+    
+        <div className="mb-8">
+            <h3 className="text-lg font-semibold mb-2">Question metadata</h3>
+            <div className="mb-2">
+                 <input
+                    type="text"
+                    placeholder="Quiz name"
+                    onChange={e => handleNameContentChange(e.target.value)}
+                    className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
+                 />
+            </div>
+            <div className="mb-2">
+                 <input
+                    type="text"
+                    placeholder="Quiz short-description"
+                    onChange={e => handleTitleContentChange(e.target.value)}
+                    className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
+                 />
+            </div>
+            <div className="mb-2">
+                        <select
+                            value={quizMetadata.category}
+                            onChange={(e) => handleCategoryChange(e.target.value)}
+                            className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
+                        >
+                            <option value="">Select category</option>
+                            {categories.map((category) => (
+                                <option key={category.link} value={category.link}>
+                                    {category.label}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+        </div>
+
         <div key={currentQuestionIndex} className="mb-8">
             <h3 className="text-lg font-semibold mb-2">Question {currentQuestionIndex + 1}</h3>
             <div className="mb-2">
