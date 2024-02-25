@@ -7,6 +7,7 @@ import { getCategories } from '@/data/controller';
 import { ICategory } from '@/data/categories/categories';
 
 export default function CreateQuiz() {
+  
     const initialQuizState: IQuiz = {
         questions: Array.from({ length: 6 }, () => ({
             question: '',
@@ -17,9 +18,9 @@ export default function CreateQuiz() {
             ]
         })),
         results: [
-            { from: 0, to: 50, result: '' },
-            { from: 50, to: 85, result: '' },
-            { from: 85, to: 100, result: '' }
+            { from: 0, to: 2, result: '' },
+            { from: 3, to: 5, result: '' },
+            { from: 6, to: 6, result: '' }
         ]
     } as IQuiz;
 
@@ -38,6 +39,11 @@ export default function CreateQuiz() {
     const [quiz, setQuiz] = useState(initialQuizState);
     const [quizMetadata, setQuizMetadata] = useState(initialQuizMetadataState);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+
+    const [quizMetadataVisibility, setQuizMetadataVisibility] = useState(true)
+    const [questionsVisibility, setquestionsVisibility] = useState(false)
+    const [resultsVisibility, setResultsVisibility] = useState(false)
+
 
     const categories: ICategory[] = getCategories()
 
@@ -124,6 +130,20 @@ export default function CreateQuiz() {
     });
     };
 
+
+    const handleChangeQuizMetadataVisibility = () => {
+        
+        setQuizMetadataVisibility(prevState => !prevState )
+        setquestionsVisibility(prevState => !prevState)
+    
+    }
+
+    const handleResultVisibility = () => {
+        setResultsVisibility(prevState => !prevState)
+        setquestionsVisibility(prevState => !prevState)
+    }
+
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault(); // Prevent the default form submission
         quiz.active = 0;        // Setting quiz to not-active - pending status 0
@@ -135,6 +155,7 @@ export default function CreateQuiz() {
 
     };
 
+
     
 
     return (
@@ -142,105 +163,145 @@ export default function CreateQuiz() {
     <h1 className="text-3xl font-bold mb-4">Create Quiz</h1>
     <form onSubmit={handleSubmit}>
     
-        <div className="mb-8">
-            <h3 className="text-lg font-semibold mb-2">Question metadata</h3>
-            <div className="mb-2">
-                 <input
-                    type="text"
-                    placeholder="Quiz name"
-                    onChange={e => handleNameContentChange(e.target.value)}
-                    className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
-                 />
+        {/** Metadata div */}
+        {quizMetadataVisibility ? <div>
+            <div className="mb-8">
+                <h3 className="text-lg font-semibold mb-2">Question metadata</h3>
+                <div className="mb-2">
+                     <input
+                        type="text"
+                        placeholder="Quiz name"
+                        onChange={e => handleNameContentChange(e.target.value)}
+                        className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
+                     />
+                </div>
+                <div className="mb-2">
+                     <input
+                        type="text"
+                        placeholder="Quiz short-description"
+                        onChange={e => handleTitleContentChange(e.target.value)}
+                        className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
+                     />
+                </div>
+                <div className="mb-2">
+                            <select
+                                value={quizMetadata.category}
+                                onChange={(e) => handleCategoryChange(e.target.value)}
+                                className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
+                            >
+                                <option value="">Select category</option>
+                                {categories.map((category) => (
+                                    <option key={category.link} value={category.link}>
+                                        {category.label}
+                                    </option>
+                                ))}
+                            </select>
+                </div>
+                <button
+                    className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                    onClick={handleChangeQuizMetadataVisibility}
+                >
+                    Next Section 
+                </button>
             </div>
-            <div className="mb-2">
-                 <input
-                    type="text"
-                    placeholder="Quiz short-description"
-                    onChange={e => handleTitleContentChange(e.target.value)}
-                    className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
-                 />
-            </div>
-            <div className="mb-2">
-                        <select
-                            value={quizMetadata.category}
-                            onChange={(e) => handleCategoryChange(e.target.value)}
-                            className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
-                        >
-                            <option value="">Select category</option>
-                            {categories.map((category) => (
-                                <option key={category.link} value={category.link}>
-                                    {category.label}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-        </div>
-
-        <div key={currentQuestionIndex} className="mb-8">
-            <h3 className="text-lg font-semibold mb-2">Question {currentQuestionIndex + 1}</h3>
-            <div className="mb-2">
-                <input
-                    type="text"
-                    placeholder={`Question ${currentQuestionIndex + 1} content`}
-                    value={quiz.questions[currentQuestionIndex].question}
-                    onChange={e => handleQuestionContentChange(e.target.value)}
-                    className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
-                />
-            </div>
-            {quiz.questions[currentQuestionIndex].answers.map((answer, answerIndex) => (
-                <div key={answerIndex} className="mb-2">
+        </div>: <div></div>}
+        {/** Questions div */}
+        {questionsVisibility ?
+        <div>    
+            <div key={currentQuestionIndex} className="mb-8">
+                <h3 className="text-lg font-semibold mb-2">Question {currentQuestionIndex + 1}</h3>
+                <div className="mb-2">
                     <input
                         type="text"
-                        placeholder={`Answer ${answerIndex + 1} ${answerIndex === 0 ? ' (true question)':''}`}
-                        value={answer.value}
-                        onChange={e => handleQuestionChange('value', e.target.value, answerIndex)}
+                        placeholder={`Question ${currentQuestionIndex + 1} content`}
+                        value={quiz.questions[currentQuestionIndex].question}
+                        onChange={e => handleQuestionContentChange(e.target.value)}
                         className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
                     />
                 </div>
-            ))}
-        </div>
-        <div className="flex justify-between mb-4">
-            {currentQuestionIndex > 0 && (
-                <button
-                    type="button"
-                    onClick={handlePrevQuestion}
-                    className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-                >
-                    {"<"} Previous
-                </button>
-            )}
-            {currentQuestionIndex < quiz.questions.length - 1 && (
-                <button
-                    type="button"
-                    onClick={handleNextQuestion}
-                    className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-                >
-                    Next {">"}
-                </button>
-            )}
-        </div>
-        {currentQuestionIndex === quiz.questions.length - 1 && (
-            <div>
-                <h2 className="text-lg font-semibold mb-2">Results</h2>
-                {quiz.results.map((result, index) => (
-                    <div key={index} className="mb-2">
+                {quiz.questions[currentQuestionIndex].answers.map((answer, answerIndex) => (
+                    <div key={answerIndex} className="mb-2">
                         <input
                             type="text"
-                            placeholder={`Result ${index + 1}`}
-                            value={result.result}
-                            onChange={e => handleResultChange(index, 'result', e.target.value)}
+                            placeholder={`Answer ${answerIndex + 1} ${answerIndex === 0 ? ' (true question)':''}`}
+                            value={answer.value}
+                            onChange={e => handleQuestionChange('value', e.target.value, answerIndex)}
                             className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
                         />
                     </div>
                 ))}
-                <button
-                    type="submit"
-                    className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-                >
-                    Submit
-                </button>
             </div>
-        )}
+            <div className="flex justify-between mb-4 gap-4">
+                {currentQuestionIndex == 0 && (
+                    <button
+                        type="button"
+                        onClick={handleChangeQuizMetadataVisibility}
+                        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                    >
+                        {"<"} Metadata
+                    </button>
+                )}
+                {currentQuestionIndex > 0 && (
+                    <button
+                        type="button"
+                        onClick={handlePrevQuestion}
+                        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                    >
+                        {"<"} Previous
+                    </button>
+                )}
+                {currentQuestionIndex < quiz.questions.length - 1 && (
+                    <button
+                        type="button"
+                        onClick={handleNextQuestion}
+                        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                    >
+                        Next {">"}
+                    </button>
+                )}
+                {currentQuestionIndex == 5 && (
+                    <button
+                        type="button"
+                        onClick={handleResultVisibility}
+                        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                    >
+                        {">"} Results
+                    </button>
+                )}
+            </div>
+        </div> : <div></div> }
+        {/** Results div */}
+         <div>      
+            {resultsVisibility ? 
+                <div>
+                    <h2 className="text-lg font-semibold mb-2">Results</h2>
+                    {quiz.results.map((result, index) => (
+                        <div key={index} className="mb-2">
+                            <input
+                                type="text"
+                                placeholder={`Result ${index + 1}`}
+                                value={result.result}
+                                onChange={e => handleResultChange(index, 'result', e.target.value)}
+                                className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
+                            />
+                        </div>
+                    ))}
+                <div className='flex gap-4 mt-5'>   
+                    <button
+                        type="button"
+                        onClick={handleResultVisibility}
+                        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                    >{"<"} Questions</button>
+                    <button
+                        type="submit"
+                        className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                    >
+                        Submit
+                    </button>
+                </div> 
+                </div>: <div></div>}
+            
+        </div> 
     </form>
 </div>
 
