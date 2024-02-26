@@ -5,11 +5,12 @@ import QuizMetadataModel, { IQuizMetadata } from "../models/quiz_metadata.model"
 import { connectToDB } from "../mongoose";
 
 
+
 // quiz-metadata collection
 
 // POST 
 export async function CreateQuizMetadata(quizMetadata: IQuizMetadata){
-
+    connectToDB();
     try {
         // Create a new quiz metadata document using the provided model
         const newQuizMetadata = await QuizMetadataModel.create(quizMetadata)
@@ -44,22 +45,24 @@ export default async function GetQuizMetadataListByUserId(dbUserId: string): Pro
 
 // POST quiz collection
 export async function CreateQuizCollection(quiz:IQuiz){
-
-    try {
+    await connectToDB();
+    
+    console.log(quiz)
+    const newQuiz = await QuizModel.create(quiz).catch().finally()
+    /*try {
         // Create a new quiz document using the provided model
         const newQuiz = await QuizModel.create(quiz)
-
+        
         // Return the newly created quiz
         return newQuiz
     } catch (error) {
         // Handle any errors that occur during the creation process
         console.error("Error creating quiz metadata:", error);
         throw error; // Rethrow the error for handling in the caller function
-    }
+    }*/
 
 
 }
-
 
 // GET quiz collection
 

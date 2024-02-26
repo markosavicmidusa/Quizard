@@ -5,11 +5,12 @@ import { IQuiz } from '@/lib/models/quiz.model'; // Import the interface for the
 import QuizMetadataModel, { IQuizMetadata } from '@/lib/models/quiz_metadata.model';
 import { getCategories } from '@/data/controller';
 import { ICategory } from '@/data/categories/categories';
-import { CreateQuizCollection, CreateQuizMetadata } from '@/lib/actions/quiz.actions';
+import { CreateQuizCollection, CreateQuizCollectionTest, CreateQuizMetadata } from '@/lib/actions/quiz.actions';
 import { exit } from 'process';
 import { useUser } from '@clerk/nextjs';
 import { GetUserByClerkID } from '@/lib/actions/user/user.actions';
 import { IUser } from '@/lib/models/user/user.model';
+
 
 export default function CreateQuiz() {
   
@@ -42,6 +43,7 @@ export default function CreateQuiz() {
     } as IQuizMetadata
 
 
+
     const [quiz, setQuiz] = useState(initialQuizState);
     const [quizMetadata, setQuizMetadata] = useState(initialQuizMetadataState);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -66,7 +68,7 @@ export default function CreateQuiz() {
             }
         }
         fetchUser()
-    },[user])
+    },[])
 
     const handleNextQuestion = () => {
         if (currentQuestionIndex < quiz.questions.length - 1) {
@@ -172,9 +174,11 @@ export default function CreateQuiz() {
         // create Quiz
 
         try {
-            const newQuiz = await CreateQuizCollection(quiz)
+        
+           const newQuiz = await CreateQuizCollection(quiz)
+           //const newQuiz = await CreateQuizCollectionTest(initialQuizStateTest)
 
-            if(!newQuiz){
+        /*    if(!newQuiz){
               console.log('Error creating quiz') 
             }else{
                 
@@ -193,7 +197,7 @@ export default function CreateQuiz() {
                     console.log('Quiz metadata:', quizMetadata);
                 }
 
-            }
+            }*/
 
         } catch (error) {
             console.log("Error: ",error)
