@@ -1,13 +1,19 @@
 "use client"
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IQuiz } from '@/lib/models/quiz.model'; // Import the interface for the quiz
 import QuizMetadataModel, { IQuizMetadata } from '@/lib/models/quiz_metadata.model';
 import { getCategories } from '@/data/controller';
 import { ICategory } from '@/data/categories/categories';
+import { CreateQuizCollection, CreateQuizMetadata } from '@/lib/actions/quiz.actions';
+import { exit } from 'process';
+import { useUser } from '@clerk/nextjs';
+import { GetUserByClerkID } from '@/lib/actions/user/user.actions';
+import { IUser } from '@/lib/models/user/user.model';
 
 export default function CreateQuiz() {
   
+
     const initialQuizState: IQuiz = {
         questions: Array.from({ length: 6 }, () => ({
             question: '',
@@ -44,8 +50,25 @@ export default function CreateQuiz() {
     const [questionsVisibility, setquestionsVisibility] = useState(false)
     const [resultsVisibility, setResultsVisibility] = useState(false)
 
+    const { isLoaded, isSignedIn, user } = useUser();
+    const [DbUser, setDbUser] = useState<IUser|null>(null)
 
     const categories: ICategory[] = getCategories()
+
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            
+            if (user && user.id) { // Check if user and user.id are defined
+                const dbUser = await GetUserByClerkID(user.id);
+                setDbUser(dbUser);   
+            }
+        }
+        fetchUser()
+    },[user])
+
+
+
 
     const handleNextQuestion = () => {
         if (currentQuestionIndex < quiz.questions.length - 1) {
@@ -144,14 +167,39 @@ export default function CreateQuiz() {
     }
 
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault(); // Prevent the default form submission
         quiz.active = 0;        // Setting quiz to not-active - pending status 0
 
-        // create QuizMetadata
+        // create Quiz
 
-        console.log('Quiz submitted:', quiz);
-        console.log('Quiz metadata:', quizMetadata);
+        try {
+            const newQuiz = await CreateQuizCollection(quiz)
+
+            if(!newQuiz){
+              console.log('Error creating quiz') 
+            }else{
+                
+                console.log('Quiz submitted:', quiz);
+
+                // Updating quizesMetadata object
+                quizMetadata.id = newQuiz._id
+                quizMetadata.createdBy = DbUser ? DbUser.id : "Unknown"
+
+                // creating the quizMetadata
+                const newQuizMetadata = CreateQuizMetadata(quizMetadata)
+
+                if(!newQuizMetadata){
+                    console.log('Error creating quizMetadata')
+                }else{
+                    console.log('Quiz metadata:', quizMetadata);
+                }
+
+            }
+
+        } catch (error) {
+            console.log("Error: ",error)
+        }
 
     };
 

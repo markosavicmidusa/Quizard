@@ -42,10 +42,8 @@ export default async function GetQuizMetadataListByUserId(dbUserId: string): Pro
 
 
 
-
-
 // POST quiz collection
-export async function CreateQuiz(quiz:IQuiz){
+export async function CreateQuizCollection(quiz:IQuiz){
 
     try {
         // Create a new quiz document using the provided model
