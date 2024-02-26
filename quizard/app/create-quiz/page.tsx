@@ -61,14 +61,12 @@ export default function CreateQuiz() {
             
             if (user && user.id) { // Check if user and user.id are defined
                 const dbUser = await GetUserByClerkID(user.id);
-                setDbUser(dbUser);   
+                setDbUser(dbUser);
+                console.log("DB-user: ", dbUser)
             }
         }
         fetchUser()
     },[user])
-
-
-
 
     const handleNextQuestion = () => {
         if (currentQuestionIndex < quiz.questions.length - 1) {
@@ -184,7 +182,7 @@ export default function CreateQuiz() {
 
                 // Updating quizesMetadata object
                 quizMetadata.id = newQuiz._id
-                quizMetadata.createdBy = DbUser ? DbUser.id : "Unknown"
+                quizMetadata.createdBy = DbUser ? DbUser._id : "Unknown"
 
                 // creating the quizMetadata
                 const newQuizMetadata = CreateQuizMetadata(quizMetadata)
