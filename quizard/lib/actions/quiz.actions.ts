@@ -5,6 +5,26 @@ import QuizMetadataModel, { IQuizMetadata } from "../models/quiz_metadata.model"
 import { connectToDB } from "../mongoose";
 
 
+// quiz-metadata collection
+
+// POST 
+export async function CreateQuizMetadata(quizMetadata: IQuizMetadata){
+
+    try {
+        // Create a new quiz metadata document using the provided model
+        const newQuizMetadata = await QuizMetadataModel.create(quizMetadata)
+        
+        // Return the newly created quiz metadata document
+        return newQuizMetadata;
+    } catch (error) {
+        // Handle any errors that occur during the creation process
+        console.error("Error creating quiz metadata:", error);
+        throw error; // Rethrow the error for handling in the caller function
+    }
+} 
+
+// GET 
+
 export default async function GetQuizMetadataListByUserId(dbUserId: string): Promise<IQuizMetadata[]> {
     connectToDB();
 
@@ -18,6 +38,32 @@ export default async function GetQuizMetadataListByUserId(dbUserId: string): Pro
         return []; // Return an empty array in case of error
     }
 }
+
+
+
+
+
+
+// POST quiz collection
+export async function CreateQuiz(quiz:IQuiz){
+
+    try {
+        // Create a new quiz document using the provided model
+        const newQuiz = await QuizModel.create(quiz)
+
+        // Return the newly created quiz
+        return newQuiz
+    } catch (error) {
+        // Handle any errors that occur during the creation process
+        console.error("Error creating quiz metadata:", error);
+        throw error; // Rethrow the error for handling in the caller function
+    }
+
+
+}
+
+
+// GET quiz collection
 
 export async function getQuizById(id: string): Promise<IQuiz | null> {
     try {
@@ -46,8 +92,6 @@ export async function getQuizById(id: string): Promise<IQuiz | null> {
         throw error; // Rethrow the error to be handled by the caller
     }
 }
-
-
 
 export async function getMostPopular50Quizzes(): Promise<IQuizMetadata[] | []>{
     try {
