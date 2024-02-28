@@ -40,7 +40,7 @@ export default function MainContent() {
       <p className="p-10">Current pathname: {pathname}</p>
 
        {/* Block 1: Most Popular Quizes */}
-       <div className="flex flex-col items-center justify-center w-full h-full border border-white">
+       <div className="flex flex-col flex-wrap items-center w-full border 1px white p-5">
           <h2 className="text-xl font-bold mb-4">Most Popular Quizzes</h2>
           <MostPopularQuizes />
        </div>
@@ -63,11 +63,7 @@ export default function MainContent() {
        {/* Block 2: Small Game */}
        <div className="flex flex-col p-10 items-center justify-center w-full border 1px white h-2/8">
          <h1>Small Game</h1>
-         <h1>Small Game</h1>
-         <h1>Small Game</h1>
-         <h1>Small Game</h1>
-         <h1>Small Game</h1>
-         <h1>Small Game</h1>
+         
        </div>
 
         {/* Block 3: Commercial */}
@@ -87,7 +83,6 @@ export default function MainContent() {
       
        {/* Block 4: Random Quizes */}
        <div className="flex flex-col flex-wrap items-center w-full border 1px white p-5">
-
         <h2 className="text-xl font-bold mb-4">Most Popular Quizzes</h2>
         <MostPopularQuizes/>
 
@@ -95,12 +90,7 @@ export default function MainContent() {
 
        {/* Block 5: Small Game */}
        <div className="flex flex-col p-10 items-center justify-center w-full border 1px white h-2/8">
-       <h1>Small Game</h1>
-         <h1>Small Game</h1>
-         <h1>Small Game</h1>
-         <h1>Small Game</h1>
-         <h1>Small Game</h1>
-         <h1>Small Game</h1>
+        <h1>Small Game</h1> 
        </div>
 
        {/* Block 6: Commercial */}
