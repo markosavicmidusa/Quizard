@@ -1,5 +1,4 @@
 "use server"
-import { error } from "console";
 import QuizModel, { IQuiz } from "../models/quiz.model";
 import QuizMetadataModel, { IQuizMetadata } from "../models/quiz_metadata.model";
 import { connectToDB } from "../mongoose";

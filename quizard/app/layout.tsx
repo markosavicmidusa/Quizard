@@ -15,16 +15,6 @@ const inter = Inter({ subsets: ["latin"] });
 import { getCategories, getCommercials } from "@/data/controller";
 
 
-
-
-/*const categories = [
-  { label: "SPORTS", link: "/sports", picturePath: "sports.svg" },
-  { label: "POPULAR", link: "/popular", picturePath: "popular.svg" },
-  { label: "JUST FOR FUN", link: "/fun", picturePath: "fun.svg" },
-  { label: "SCIENCE", link: "/science", picturePath: "science.svg" },
-  { label: "OTHER", link: "/other", picturePath: "other.svg" }
-];*/
-
 const categories = getCategories();
 
 
@@ -42,6 +32,7 @@ export default function RootLayout({
   const commercials = getCommercials()
 
   return (
+  
     <ClerkProvider appearance={{baseTheme:dark}}>
       <html lang="en" className="w-full h-screen bg-zinc-800 text-slate-300 h-full">
         

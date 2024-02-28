@@ -2,18 +2,18 @@
 
 import { useEffect, useState } from 'react';
 import { IQuiz } from '@/lib/models/quiz.model'; // Import the interface for the quiz
-import QuizMetadataModel, { IQuizMetadata } from '@/lib/models/quiz_metadata.model';
+import { IQuizMetadata } from '@/lib/models/quiz_metadata.model';
 import { getCategories } from '@/data/controller';
 import { ICategory } from '@/data/categories/categories';
 import { CreateQuizCollection, CreateQuizMetadata } from '@/lib/actions/quiz.actions';
-import { exit } from 'process';
 import { useUser } from '@clerk/nextjs';
 import { GetUserByClerkID } from '@/lib/actions/user/user.actions';
 import { IUser } from '@/lib/models/user/user.model';
+import Link from 'next/link';
+
 
 export default function CreateQuiz() {
-  
-
+ 
     const initialQuizState: IQuiz = {
         questions: Array.from({ length: 6 }, () => ({
             question: '',
@@ -42,6 +42,8 @@ export default function CreateQuiz() {
     } as IQuizMetadata
 
 
+    
+
     const [quiz, setQuiz] = useState(initialQuizState);
     const [quizMetadata, setQuizMetadata] = useState(initialQuizMetadataState);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -52,6 +54,8 @@ export default function CreateQuiz() {
 
     const { isLoaded, isSignedIn, user } = useUser();
     const [DbUser, setDbUser] = useState<IUser|null>(null)
+
+    const [submitted, setSubmitted] = useState(false);
 
     const categories: ICategory[] = getCategories()
 
@@ -143,12 +147,15 @@ export default function CreateQuiz() {
     };
 
     const handleCategoryChange = (value: string) => {
+        console.log(value)
+        console.log(quizMetadata)
         setQuizMetadata((prevState: IQuizMetadata) => {
             const currentQuizMetadataState = prevState;
             currentQuizMetadataState.category = value;
-            
+             
             return currentQuizMetadataState;
-    });
+        });
+        console.log(quizMetadata)
     };
 
 
@@ -176,7 +183,7 @@ export default function CreateQuiz() {
 
             if(!newQuiz){
               console.log('Error creating quiz') 
-            }else{
+            } else {
                 
                 console.log('Quiz submitted:', quiz);
 
@@ -189,28 +196,28 @@ export default function CreateQuiz() {
 
                 if(!newQuizMetadata){
                     console.log('Error creating quizMetadata')
-                }else{
+                } else {
                     console.log('Quiz metadata:', quizMetadata);
-                }
 
+                    // Set submitted to true to trigger the info popup
+                    setSubmitted(true);
+               }
             }
 
         } catch (error) {
             console.log("Error: ",error)
         }
-
     };
 
-
-    
 
     return (
         <div className="max-w-md mx-auto mt-8">
     <h1 className="text-3xl font-bold mb-4">Create Quiz</h1>
-    <form onSubmit={handleSubmit}>
+    {!submitted && (
+        <form onSubmit={handleSubmit}>
     
         {/** Metadata div */}
-        {quizMetadataVisibility ? <div>
+        {quizMetadataVisibility && ( <div>
             <div className="mb-8">
                 <h3 className="text-lg font-semibold mb-2">Question metadata</h3>
                 <div className="mb-2">
@@ -250,9 +257,9 @@ export default function CreateQuiz() {
                     Next Section 
                 </button>
             </div>
-        </div>: <div></div>}
+        </div>)}
         {/** Questions div */}
-        {questionsVisibility ?
+        {questionsVisibility && (
         <div>    
             <div key={currentQuestionIndex} className="mb-8">
                 <h3 className="text-lg font-semibold mb-2">Question {currentQuestionIndex + 1}</h3>
@@ -315,10 +322,9 @@ export default function CreateQuiz() {
                     </button>
                 )}
             </div>
-        </div> : <div></div> }
+        </div>)}
         {/** Results div */}
-         <div>      
-            {resultsVisibility ? 
+        {resultsVisibility && ( 
                 <div>
                     <h2 className="text-lg font-semibold mb-2">Results</h2>
                     {quiz.results.map((result, index) => (
@@ -345,11 +351,18 @@ export default function CreateQuiz() {
                         Submit
                     </button>
                 </div> 
-                </div>: <div></div>}
-            
-        </div> 
+                </div>)}
     </form>
-</div>
+    )}
+    {submitted && (
+        <div className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-gray-700 bg-opacity-50">
+            <div className="bg-zinc-800 p-8 rounded-md shadow-md flex flex-col inline-center justify-center">
+                <p className="text-lg font-semibold mb-2">Quiz submitted successfully!</p>
+                <Link href={'/user'} className="text-red-500 hover:text-blue-600">Close</Link>
+            </div>
+        </div>
+    )}
+    </div>
 
     );
 }
