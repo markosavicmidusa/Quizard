@@ -56,6 +56,8 @@ export default function CreateQuiz() {
     const [DbUser, setDbUser] = useState<IUser|null>(null)
 
     const [submitted, setSubmitted] = useState(false);
+    
+    const [errorSubmiting, setErrorSubmiting] = useState(false);
 
     const categories: ICategory[] = getCategories()
 
@@ -182,7 +184,8 @@ export default function CreateQuiz() {
             const newQuiz = await CreateQuizCollection(quiz)
 
             if(!newQuiz){
-              console.log('Error creating quiz') 
+              console.log('Error creating quiz')
+              setErrorSubmiting(true)
             } else {
                 
                 console.log('Quiz submitted:', quiz);
@@ -196,6 +199,7 @@ export default function CreateQuiz() {
 
                 if(!newQuizMetadata){
                     console.log('Error creating quizMetadata')
+                    setErrorSubmiting(true)
                 } else {
                     console.log('Quiz metadata:', quizMetadata);
 
@@ -206,6 +210,7 @@ export default function CreateQuiz() {
 
         } catch (error) {
             console.log("Error: ",error)
+            setErrorSubmiting(true)
         }
     };
 
@@ -362,6 +367,18 @@ export default function CreateQuiz() {
             </div>
         </div>
     )}
+
+    {errorSubmiting && (
+        <div className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-gray-700 bg-opacity-50">
+            <div className="bg-zinc-800 p-8 rounded-md shadow-md flex flex-col inline-center justify-center">
+                <p className="text-lg font-semibold mb-2 text-red-500">Quiz not submited.Error ocured</p>
+                <Link href={'/user'} className="text-red-500 hover:text-blue-600">Close</Link>
+            </div>
+        </div>
+    )}
+
+
+
     </div>
 
     );
