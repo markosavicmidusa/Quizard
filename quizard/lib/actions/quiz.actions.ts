@@ -21,7 +21,7 @@ export async function CreateQuizMetadata(quizMetadata: IQuizMetadata){
         console.error("Error creating quiz metadata:", error);
         throw error; // Rethrow the error for handling in the caller function
     }
-} 
+}
 
 // GET 
 
@@ -39,9 +39,6 @@ export default async function GetQuizMetadataListByUserId(dbUserId: string): Pro
     }
 }
 
-
-
-
 // POST quiz collection
 export async function CreateQuizCollection(quiz:IQuiz){
     await connectToDB();
@@ -56,12 +53,9 @@ export async function CreateQuizCollection(quiz:IQuiz){
         console.error("Error creating quiz metadata:", error);
         throw error; // Rethrow the error for handling in the caller function
     }
-
-
 }
 
 // GET quiz collection
-
 export async function getQuizById(id: string): Promise<IQuiz | null> {
     try {
         connectToDB();
@@ -89,13 +83,14 @@ export async function getQuizById(id: string): Promise<IQuiz | null> {
         throw error; // Rethrow the error to be handled by the caller
     }
 }
-
+// Get Popular Quizes
 export async function getMostPopular50Quizzes(): Promise<IQuizMetadata[] | []>{
     try {
         
         connectToDB();
         // Fetch the first 50 quizzes as plain JavaScript objects
-        const quizzes = await QuizMetadataModel.find()
+        
+        let quizzes = await QuizMetadataModel.find({active:1})
             .lean()
             .sort({ timesClicked: -1, timesFinished: -1 })
             .limit(50);
@@ -109,7 +104,41 @@ export async function getMostPopular50Quizzes(): Promise<IQuizMetadata[] | []>{
             category: quiz.category,
             createdBy: quiz.createdBy,
             timesClicked: quiz.timesClicked,
-            timesFinished: quiz.timesFinished
+            timesFinished: quiz.timesFinished,
+            active: quiz.active
+        })) as IQuizMetadata[]; // Explicit cast to IQuizMetadata[];
+
+
+        return plainObjects;
+    } catch (error) {
+        console.error("Error fetching quizzes:", error);
+         //throw error; // Rethrow the error to be handled by the caller
+        return []
+    }
+}
+// Get Current Page Quizes
+export async function getRequestedQuizes(pathname:string): Promise<IQuizMetadata[] | []>{
+    try {
+        
+        connectToDB();
+        // Fetch the first 50 quizzes as plain JavaScript objects
+        
+        let quizzes = await QuizMetadataModel.find({category:pathname,active:1})
+            .lean()
+            .sort({ timesClicked: -1, timesFinished: -1 })
+            .limit(50);
+
+
+        // Manually convert each document to a plain object
+        const plainObjects: IQuizMetadata[] = quizzes.map(quiz => ({
+            id: quiz.id,
+            name: quiz.name,
+            title: quiz.title,
+            category: quiz.category,
+            createdBy: quiz.createdBy,
+            timesClicked: quiz.timesClicked,
+            timesFinished: quiz.timesFinished,
+            active: quiz.active
         })) as IQuizMetadata[]; // Explicit cast to IQuizMetadata[];
 
 

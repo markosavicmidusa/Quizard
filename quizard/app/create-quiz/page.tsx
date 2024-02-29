@@ -378,9 +378,6 @@ export default function CreateQuiz() {
             </div>
         </div>
     )}
-
-
-
     </div>
 
     );

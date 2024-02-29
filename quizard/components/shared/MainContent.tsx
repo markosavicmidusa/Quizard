@@ -8,8 +8,10 @@ import Link from "next/link";
 import { usePathname } from 'next/navigation'
 import { Model, Document } from "mongoose";
 
-import QuizMetadataModel from "@/lib/models/quiz_metadata.model";
+import QuizMetadataModel, { IQuizMetadata } from "@/lib/models/quiz_metadata.model";
 import MostPopularQuizes from "../forms/MostPopularQuizes";
+import { getMostPopular50Quizzes, getRequestedQuizes } from "@/lib/actions/quiz.actions";
+import Quiz from "../cards/Quiz";
 
 export default function MainContent() {
  
@@ -17,7 +19,7 @@ export default function MainContent() {
   const pathname = usePathname()
 
   const [currentCommercialIndex, setCurrentCommercialIndex] = useState(0);
- 
+  const [quizzes, setQuizzes] = useState<IQuizMetadata[]>([]);
 
   useEffect(() => {
     console.log("Component Mounted"); // Log when the component is mounted
@@ -32,13 +34,41 @@ export default function MainContent() {
       clearInterval(interval);
     };
   }, [commercials.length]);
+
+  useEffect(() => {
+
+    const fetchQuizzes = async () => {
+        try {
+          let fetchedQuizzes: IQuizMetadata[] | []  
+          
+          fetchedQuizzes= await getRequestedQuizes(pathname);
+          setQuizzes(fetchedQuizzes);
+           
+        } catch (error) {
+            console.error('Error fetching quizzes:', error);
+        }
+    };
+
+    fetchQuizzes();
+}, [pathname]);
  
  
   return (
     <div className="h-100 flex flex-col flex-grow w-full">
       
       <p className="p-10">Current pathname: {pathname}</p>
-
+      {/* Block 0: RequestedQuizes */}
+      {pathname != '/' && (<div className="flex flex-col flex-wrap items-center w-full border 1px white p-5">
+          <h2 className="text-xl font-bold mb-4">{pathname.substring(1).toUpperCase()}</h2>
+          <div className="overflow-y-scroll max-h-64 w-full">
+            <ul className="flex flex-wrap gap-4 items-center justify-center">
+                {quizzes.map((quiz) => (
+                    <Quiz key={quiz.id} quiz={quiz}/>
+                ))}
+            </ul>
+        </div>
+       </div>)}
+      
        {/* Block 1: Most Popular Quizes */}
        <div className="flex flex-col flex-wrap items-center w-full border 1px white p-5">
           <h2 className="text-xl font-bold mb-4">Most Popular Quizzes</h2>
