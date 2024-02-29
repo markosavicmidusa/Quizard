@@ -69,15 +69,24 @@ export default function ActiveQuiz({ params }: { params: { id: string }}) {
     const handleGoToHome = () => {
         router.push('/');
     };
+    const shuffleArray = (array: any[]) => {
+        const shuffledArray = [...array];
+        for (let i = shuffledArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+        }
+        return shuffledArray;
+    };
 
     const renderQuestions = () => {
         if (!quiz) return null;
         const question = quiz.questions[currentQuestionIndex];
+        const shuffledAnswers = shuffleArray(question.answers); // Shuffle the answers
         return (
             <div className="bg-zinc-800 text-white rounded-lg shadow-md p-6 w-full ">
                 <h2 className="xl:text-2xl lg:text-2xl md:text-lg sm:text-sm font-semibold mb-4">{question.question}</h2>
                 <ul>
-                    {question.answers.map((answer, index) => (
+                    {shuffledAnswers.map((answer, index) => (
                         <li key={index} className="mb-2">
                             <button 
                                 className="bg-zinc-700 hover:bg-zinc-600 text-white font-bold py-2 px-4 rounded xl:text-lg lg:text-lg md:text-sm "

@@ -159,21 +159,16 @@ export default function CreateQuiz() {
         });
         console.log(quizMetadata)
     };
-
-
     const handleChangeQuizMetadataVisibility = () => {
         
         setQuizMetadataVisibility(prevState => !prevState )
         setquestionsVisibility(prevState => !prevState)
     
     }
-
     const handleResultVisibility = () => {
         setResultsVisibility(prevState => !prevState)
         setquestionsVisibility(prevState => !prevState)
     }
-
-
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault(); // Prevent the default form submission
         quiz.active = 0;        // Setting quiz to not-active - pending status 0
