@@ -149,3 +149,121 @@ export async function getRequestedQuizes(pathname:string): Promise<IQuizMetadata
         return []
     }
 }
+
+//Get Random 50 Quizes
+export async function getRandom50Quizes(): Promise<IQuizMetadata[] | []>{
+
+    try {
+        
+        connectToDB();
+        // Fetch the first 50 quizzes as plain JavaScript objects
+        
+        let quizzes = await QuizMetadataModel.find({active:1})
+            .lean()
+            .sort({ timesClicked: -1, timesFinished: -1 })
+            .limit(50);
+
+
+        // Manually convert each document to a plain object
+        const plainObjects: IQuizMetadata[] = quizzes.map(quiz => ({
+            id: quiz.id,
+            name: quiz.name,
+            title: quiz.title,
+            category: quiz.category,
+            createdBy: quiz.createdBy,
+            timesClicked: quiz.timesClicked,
+            timesFinished: quiz.timesFinished,
+            active: quiz.active
+        })) as IQuizMetadata[]; // Explicit cast to IQuizMetadata[];
+
+
+        return plainObjects;
+    } catch (error) {
+        console.error("Error fetching quizzes:", error);
+         //throw error; // Rethrow the error to be handled by the caller
+        return []
+    }
+}
+
+
+// Get most clicked
+
+export async function getMostClicked50Quizes(): Promise<IQuizMetadata[] | []> {
+    try {
+        console.log("getMostClicked50Quizes")
+        // Fetch the first 50 quizzes sorted by timesClicked in descending order
+        const quizzes = await QuizMetadataModel.find({ active: 1 }) // Filter for active quizzes
+            .sort({ timesClicked: -1 }) // Sort by timesClicked in descending order
+            .limit(50); // Limit to 50 quizzes
+
+        console.log(quizzes)
+        // Map the quizzes to plain objects
+        const plainObjects: IQuizMetadata[] = quizzes.map(quiz => ({
+            id: quiz._id.toString(), // Convert ObjectId to string
+            name: quiz.name,
+            title: quiz.title,
+            category: quiz.category,
+            createdBy: quiz.createdBy,
+            timesClicked: quiz.timesClicked,
+            timesFinished: quiz.timesFinished,
+            active: quiz.active
+        }))as IQuizMetadata[];
+
+        return plainObjects;
+    } catch (error) {
+        console.error("Error fetching quizzes:", error);
+        return []; // Return an empty array if there's an error
+    }
+}
+
+export async function getMostFinished50Quizes(): Promise<IQuizMetadata[] | []> {
+    try {
+        // Fetch the first 50 quizzes sorted by timesClicked in descending order
+        const quizzes = await QuizMetadataModel.find({ active: 1 }) // Filter for active quizzes
+            .sort({ timesFinished: -1 }) // Sort by timesClicked in descending order
+            .limit(50); // Limit to 50 quizzes
+
+        // Map the quizzes to plain objects
+        const plainObjects: IQuizMetadata[] = quizzes.map(quiz => ({
+            id: quiz._id.toString(), // Convert ObjectId to string
+            name: quiz.name,
+            title: quiz.title,
+            category: quiz.category,
+            createdBy: quiz.createdBy,
+            timesClicked: quiz.timesClicked,
+            timesFinished: quiz.timesFinished,
+            active: quiz.active
+        }))as IQuizMetadata[];
+
+        return plainObjects;
+    } catch (error) {
+        console.error("Error fetching quizzes:", error);
+        return []; // Return an empty array if there's an error
+    }
+}
+
+export async function getRecentlyAdded50Quizes(): Promise<IQuizMetadata[] | []> {
+    try {
+        // Fetch the first 50 quizzes sorted by _id in descending order
+        const quizzes = await QuizMetadataModel.find({ active: 1 }) // Filter for active quizzes
+            .sort({ _id: -1 }) // Sort by _id in descending order
+            .limit(50); // Limit to 50 quizzes
+
+        // Map the quizzes to plain objects
+        const plainObjects: IQuizMetadata[] = quizzes.map(quiz => ({
+            id: quiz._id.toString(), // Convert ObjectId to string
+            name: quiz.name,
+            title: quiz.title,
+            category: quiz.category,
+            createdBy: quiz.createdBy,
+            timesClicked: quiz.timesClicked,
+            timesFinished: quiz.timesFinished,
+            active: quiz.active
+        }))as IQuizMetadata[];
+
+        return plainObjects;
+    } catch (error) {
+        console.error("Error fetching quizzes:", error);
+        return []; // Return an empty array if there's an error
+    }
+}

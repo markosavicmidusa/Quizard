@@ -12,6 +12,9 @@ import QuizMetadataModel, { IQuizMetadata } from "@/lib/models/quiz_metadata.mod
 import MostPopularQuizes from "../forms/MostPopularQuizes";
 import { getMostPopular50Quizzes, getRequestedQuizes } from "@/lib/actions/quiz.actions";
 import Quiz from "../cards/Quiz";
+import RecentlyAdded from "../forms/RecentlyAdded";
+import MostClicked from "../forms/MostClicked";
+import MostFinished from "../forms/MostFinished";
 
 export default function MainContent() {
  
@@ -111,11 +114,10 @@ export default function MainContent() {
              </Link>
           </div>
       
-       {/* Block 4: Random Quizes */}
+       {/* Block 4: RecentlyAdded Quizes */}
        <div className="flex flex-col flex-wrap items-center w-full border 1px white p-5">
-        <h2 className="text-xl font-bold mb-4">Most Popular Quizzes</h2>
-        <MostPopularQuizes/>
-
+        <h2 className="text-xl font-bold mb-4">Recently Added Quizzes</h2>
+          <RecentlyAdded/>
         </div>
 
        {/* Block 5: Small Game */}
@@ -138,13 +140,10 @@ export default function MainContent() {
             </Link>     
       </div>
 
-
-      {/* Block 7: Random Quizes */}
+      {/* Block 7: Most Clicked Quizes */}
       <div className="flex flex-col flex-wrap items-center w-full border 1px white p-5">
-
-         <h2 className="text-xl font-bold mb-4">Most Popular Quizzes</h2>
-         <MostPopularQuizes/>
-          
+         <h2 className="text-xl font-bold mb-4">Trending Quizes</h2>
+         <MostClicked/>
        </div>
 
        {/* Block 8: Small Game */}
@@ -167,12 +166,10 @@ export default function MainContent() {
         </Link>
       </div>
 
-      {/* Block 7: Random Quizes */}
+      {/* Block 7: Most Finished Quizes */}
       <div className="flex flex-col flex-wrap items-center w-full border 1px white p-5">
-
-         <h2 className="text-xl font-bold mb-4">Most Popular Quizzes</h2>
-         <MostPopularQuizes/>
-          
+         <h2 className="text-xl font-bold mb-4">Most Interesting</h2>
+         <MostFinished/>
        </div>
 
        {/* Block 8: Small Game */}
@@ -203,11 +200,6 @@ export default function MainContent() {
           
        </div>
 
-       {/* Block 8: Small Game */}
-       <div className="flex justify-center p-10 w-full border 1px white h-2/8">
-         <h2>Small Game</h2>
-       </div>
-
        {/* Block 9: Commercial */}
        <div className="flex flex-grid p-10 items-center justify-center w-full p-2 border 1px white lg:hidden xl:hidden">
        <Link href={`${commercials[(currentCommercialIndex+2)%commercials.length].link}`}>
@@ -222,14 +214,6 @@ export default function MainContent() {
           />
         </Link>
       </div>
-
-
     </div>
-    
-
-    
-
-
-    
   );
 }
