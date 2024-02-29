@@ -10,6 +10,7 @@ import { useUser } from '@clerk/nextjs';
 import { GetUserByClerkID } from '@/lib/actions/user/user.actions';
 import { IUser } from '@/lib/models/user/user.model';
 import Link from 'next/link';
+import MainContent from '@/components/shared/MainContent';
 
 
 export default function CreateQuiz() {
@@ -213,167 +214,174 @@ export default function CreateQuiz() {
 
 
     return (
-        <div className="max-w-md mx-auto mt-8">
-    <h1 className="text-3xl font-bold mb-4">Create Quiz</h1>
-    {!submitted && (
-        <form onSubmit={handleSubmit}>
-    
-        {/** Metadata div */}
-        {quizMetadataVisibility && ( <div>
-            <div className="mb-8">
-                <h3 className="text-lg font-semibold mb-2">Question metadata</h3>
-                <div className="mb-2">
-                     <input
-                        type="text"
-                        placeholder="Quiz name"
-                        onChange={e => handleNameContentChange(e.target.value)}
-                        className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
-                     />
+
+    <div>    
+        <div className="max-w-md mx-auto mt-8 p-10">
+             <h1 className="text-3xl font-bold mb-4">Create Quiz</h1>
+             {!submitted && (
+                 <form onSubmit={handleSubmit}>
+
+                 {/** Metadata div */}
+                 {quizMetadataVisibility && ( <div>
+                     <div className="mb-8">
+                         <h3 className="text-lg font-semibold mb-2">Question metadata</h3>
+                    <div className="mb-2">
+                         <input
+                            type="text"
+                            placeholder="Quiz name"
+                            onChange={e => handleNameContentChange(e.target.value)}
+                            className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
+                         />
+                    </div>
+                    <div className="mb-2">
+                         <input
+                            type="text"
+                            placeholder="Quiz short-description"
+                            onChange={e => handleTitleContentChange(e.target.value)}
+                            className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
+                         />
+                    </div>
+                    <div className="mb-2">
+                                <select
+                                    value={quizMetadata.category}
+                                    onChange={(e) => handleCategoryChange(e.target.value)}
+                                    className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
+                                >
+                                    <option value="">Select category</option>
+                                    {categories.map((category) => (
+                                        <option key={category.link} value={category.link}>
+                                            {category.label}
+                                        </option>
+                                    ))}
+                                </select>
+                    </div>
+                    <button
+                        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                        onClick={handleChangeQuizMetadataVisibility}
+                    >
+                        Next Section 
+                    </button>
                 </div>
-                <div className="mb-2">
-                     <input
-                        type="text"
-                        placeholder="Quiz short-description"
-                        onChange={e => handleTitleContentChange(e.target.value)}
-                        className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
-                     />
-                </div>
-                <div className="mb-2">
-                            <select
-                                value={quizMetadata.category}
-                                onChange={(e) => handleCategoryChange(e.target.value)}
-                                className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
-                            >
-                                <option value="">Select category</option>
-                                {categories.map((category) => (
-                                    <option key={category.link} value={category.link}>
-                                        {category.label}
-                                    </option>
-                                ))}
-                            </select>
-                </div>
-                <button
-                    className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-                    onClick={handleChangeQuizMetadataVisibility}
-                >
-                    Next Section 
-                </button>
-            </div>
-        </div>)}
-        {/** Questions div */}
-        {questionsVisibility && (
-        <div>    
-            <div key={currentQuestionIndex} className="mb-8">
-                <h3 className="text-lg font-semibold mb-2">Question {currentQuestionIndex + 1}</h3>
-                <div className="mb-2">
-                    <input
-                        type="text"
-                        placeholder={`Question ${currentQuestionIndex + 1} content`}
-                        value={quiz.questions[currentQuestionIndex].question}
-                        onChange={e => handleQuestionContentChange(e.target.value)}
-                        className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
-                    />
-                </div>
-                {quiz.questions[currentQuestionIndex].answers.map((answer, answerIndex) => (
-                    <div key={answerIndex} className="mb-2">
+            </div>)}
+            {/** Questions div */}
+            {questionsVisibility && (
+            <div>    
+                <div key={currentQuestionIndex} className="mb-8">
+                    <h3 className="text-lg font-semibold mb-2">Question {currentQuestionIndex + 1}</h3>
+                    <div className="mb-2">
                         <input
                             type="text"
-                            placeholder={`Answer ${answerIndex + 1} ${answerIndex === 0 ? ' (true question)':''}`}
-                            value={answer.value}
-                            onChange={e => handleQuestionChange('value', e.target.value, answerIndex)}
+                            placeholder={`Question ${currentQuestionIndex + 1} content`}
+                            value={quiz.questions[currentQuestionIndex].question}
+                            onChange={e => handleQuestionContentChange(e.target.value)}
                             className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
                         />
                     </div>
-                ))}
-            </div>
-            <div className="flex justify-between mb-4 gap-4">
-                {currentQuestionIndex == 0 && (
-                    <button
-                        type="button"
-                        onClick={handleChangeQuizMetadataVisibility}
-                        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-                    >
-                        {"<"} Metadata
-                    </button>
-                )}
-                {currentQuestionIndex > 0 && (
-                    <button
-                        type="button"
-                        onClick={handlePrevQuestion}
-                        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-                    >
-                        {"<"} Previous
-                    </button>
-                )}
-                {currentQuestionIndex < quiz.questions.length - 1 && (
-                    <button
-                        type="button"
-                        onClick={handleNextQuestion}
-                        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-                    >
-                        Next {">"}
-                    </button>
-                )}
-                {currentQuestionIndex == 5 && (
-                    <button
-                        type="button"
-                        onClick={handleResultVisibility}
-                        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-                    >
-                        {">"} Results
-                    </button>
-                )}
-            </div>
-        </div>)}
-        {/** Results div */}
-        {resultsVisibility && ( 
-                <div>
-                    <h2 className="text-lg font-semibold mb-2">Results</h2>
-                    {quiz.results.map((result, index) => (
-                        <div key={index} className="mb-2">
+                    {quiz.questions[currentQuestionIndex].answers.map((answer, answerIndex) => (
+                        <div key={answerIndex} className="mb-2">
                             <input
                                 type="text"
-                                placeholder={`Result ${index + 1}`}
-                                value={result.result}
-                                onChange={e => handleResultChange(index, 'result', e.target.value)}
+                                placeholder={`Answer ${answerIndex + 1} ${answerIndex === 0 ? ' (true question)':''}`}
+                                value={answer.value}
+                                onChange={e => handleQuestionChange('value', e.target.value, answerIndex)}
                                 className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
                             />
                         </div>
                     ))}
-                <div className='flex gap-4 mt-5'>   
-                    <button
-                        type="button"
-                        onClick={handleResultVisibility}
-                        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-                    >{"<"} Questions</button>
-                    <button
-                        type="submit"
-                        className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-                    >
-                        Submit
-                    </button>
-                </div> 
+                </div>
+                <div className="flex flex-row justify-between mb-4 pr-10 pl-10">
+                    {currentQuestionIndex == 0 && (
+                        <button
+                            type="button"
+                            onClick={handleChangeQuizMetadataVisibility}
+                            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                        >
+                            {"<"} Metadata
+                        </button>
+                    )}
+                    {currentQuestionIndex > 0 && (
+                        <button
+                            type="button"
+                            onClick={handlePrevQuestion}
+                            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                        >
+                            {"<"} Previous
+                        </button>
+                    )}
+                    {currentQuestionIndex < quiz.questions.length - 1 && (
+                        <button
+                            type="button"
+                            onClick={handleNextQuestion}
+                            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                        >
+                            Next {">"}
+                        </button>
+                    )}
+                    {currentQuestionIndex == 5 && (
+                        <button
+                            type="button"
+                            onClick={handleResultVisibility}
+                            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                        >
+                            Results {">"} 
+                        </button>
+                    )}
+                </div>
+            </div>)}
+            {/** Results div */}
+            {resultsVisibility && ( 
+                    <div>
+                        <h2 className="text-lg font-semibold mb-2">Results</h2>
+                        {quiz.results.map((result, index) => (
+                            <div key={index} className="mb-2">
+                                <input
+                                    type="text"
+                                    placeholder={`Result ${index + 1}`}
+                                    value={result.result}
+                                    onChange={e => handleResultChange(index, 'result', e.target.value)}
+                                    className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
+                                />
+                            </div>
+                        ))}
+                    <div className='flex gap-4 mt-5'>   
+                        <button
+                            type="button"
+                            onClick={handleResultVisibility}
+                            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                        >{"<"} Questions</button>
+                        <button
+                            type="submit"
+                            className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                        >
+                            Submit
+                        </button>
+                    </div> 
                 </div>)}
-    </form>
-    )}
-    {submitted && (
-        <div className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-gray-700 bg-opacity-50">
-            <div className="bg-zinc-800 p-8 rounded-md shadow-md flex flex-col inline-center justify-center">
-                <p className="text-lg font-semibold mb-2">Quiz submitted successfully!</p>
-                <Link href={'/user'} className="text-red-500 hover:text-blue-600">Close</Link>
-            </div>
-        </div>
-    )}
+            </form>
 
-    {errorSubmiting && (
-        <div className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-gray-700 bg-opacity-50">
-            <div className="bg-zinc-800 p-8 rounded-md shadow-md flex flex-col inline-center justify-center">
-                <p className="text-lg font-semibold mb-2 text-red-500">Quiz not submited.Error ocured</p>
-                <Link href={'/user'} className="text-red-500 hover:text-blue-600">Close</Link>
+        )}
+        {submitted && (
+            <div className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-gray-700 bg-opacity-50">
+                <div className="bg-zinc-800 p-8 rounded-md shadow-md flex flex-col inline-center justify-center">
+                    <p className="text-lg font-semibold mb-2">Quiz submitted successfully!</p>
+                    <Link href={'/user'} className="text-red-500 hover:text-blue-600">Close</Link>
+                </div>
+                <MainContent/>
             </div>
+        )}
+
+        {errorSubmiting && (
+            <div className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-gray-700 bg-opacity-50">
+                <div className="bg-zinc-800 p-8 rounded-md shadow-md flex flex-col inline-center justify-center">
+                    <p className="text-lg font-semibold mb-2 text-red-500">Quiz not submited.Error ocured</p>
+                    <Link href={'/user'} className="text-red-500 hover:text-blue-600">Close</Link>
+                </div>
+                <MainContent/>
+            </div>
+        )}
+
         </div>
-    )}
+        <MainContent/>
     </div>
-
     );
 }
