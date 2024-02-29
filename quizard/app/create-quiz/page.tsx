@@ -72,7 +72,7 @@ export default function CreateQuiz() {
             }
         }
         fetchUser()
-    },[user])
+    },[])
 
     const handleNextQuestion = () => {
         if (currentQuestionIndex < quiz.questions.length - 1) {
@@ -181,7 +181,9 @@ export default function CreateQuiz() {
         // create Quiz
 
         try {
-            const newQuiz = await CreateQuizCollection(quiz)
+        
+           const newQuiz = await CreateQuizCollection(quiz)
+           //const newQuiz = await CreateQuizCollectionTest(initialQuizStateTest)
 
             if(!newQuiz){
               console.log('Error creating quiz')
