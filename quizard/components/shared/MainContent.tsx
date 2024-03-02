@@ -15,6 +15,7 @@ import Quiz from "../cards/Quiz";
 import RecentlyAdded from "../forms/RecentlyAdded";
 import MostClicked from "../forms/MostClicked";
 import MostFinished from "../forms/MostFinished";
+import WordGuesser from "../games/WordGuesser";
 
 export default function MainContent() {
  
@@ -95,7 +96,7 @@ export default function MainContent() {
 
        {/* Block 2: Small Game */}
        <div className="flex flex-col p-10 items-center justify-center w-full border 1px white h-2/8">
-         <h1>Small Game</h1>
+         <WordGuesser/>
          
        </div>
 
