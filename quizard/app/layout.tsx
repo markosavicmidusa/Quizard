@@ -34,8 +34,8 @@ export default function RootLayout({
   return (
   
     <ClerkProvider appearance={{baseTheme:dark}}>
-      <html lang="en" className="w-full h-screen bg-zinc-800 text-slate-300 h-full">
-        
+      <html lang="en" className="w-full h-screen bg-zinc-800 text-slate-300 h-full overflow-y-scroll" style={{ scrollbarWidth: 'thin', scrollbarColor: '#CBD5E0 #27272A'}}>
+        {/**className="overflow-y-scroll max-h-64 w-full" style={{ scrollbarWidth: 'thin', scrollbarColor: '#CBD5E0 #27272A'}} */}
         <body className={`border 1px white ${inter.className} flex flex-col`}>
           <Topbar categories={categories} />  
             <main className="flex mb-10 h-full">

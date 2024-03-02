@@ -23,7 +23,7 @@ export default function MostPopularQuizes() {
     }, []);
 
     return (
-        <div className="overflow-y-scroll max-h-64 w-full">
+        <div className="overflow-y-scroll max-h-64 w-full" style={{ scrollbarWidth: 'thin', scrollbarColor: '#CBD5E0 #27272A'}}>
             <ul className="flex flex-wrap gap-4 items-center justify-center">
                 {quizzes.map((quiz) => (
                     <Quiz key={quiz.id} quiz={quiz}/>

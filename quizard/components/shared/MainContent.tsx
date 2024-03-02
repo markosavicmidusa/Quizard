@@ -61,7 +61,7 @@ export default function MainContent() {
       
       <p className="p-10">Current pathname: {pathname}</p>
       {/* Block 0: RequestedQuizes */}
-      {pathname != '/' && (<div className="flex flex-col flex-wrap items-center w-full border 1px white p-5">
+      {pathname != '/' && (<div className="flex flex-col flex-wrap items-center w-full border 1px white p-5 mb-10">
           <h2 className="text-xl font-bold mb-4">{pathname.substring(1).toUpperCase()}</h2>
           <div className="overflow-y-scroll max-h-64 w-full">
             <ul className="flex flex-wrap gap-4 items-center justify-center">
