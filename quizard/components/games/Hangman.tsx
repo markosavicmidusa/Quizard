@@ -123,7 +123,7 @@ export default function Hangman() {
         <p className="text-lg font-bold text-center mb-4">{`Word: ${displayWord}`}</p>
         <div className='flex flex-row flex-wrap'>
            {letterCollection.map(letter => (
-               <div key={letter} className="flex">
+               <div key={letter} className="flex text-xs">
                    {lettersPicked.has(letter) ? (
                        <button 
                            key={letter} 

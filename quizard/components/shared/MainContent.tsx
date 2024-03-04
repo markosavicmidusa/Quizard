@@ -26,6 +26,8 @@ export default function MainContent() {
   const [currentCommercialIndex, setCurrentCommercialIndex] = useState(0);
   const [quizzes, setQuizzes] = useState<IQuizMetadata[]>([]);
 
+  const [welcome, setWelcome] = useState("Quizard")
+
   useEffect(() => {
     console.log("Component Mounted"); // Log when the component is mounted
   
@@ -56,15 +58,40 @@ export default function MainContent() {
 
     fetchQuizzes();
 }, [pathname]);
+
+  useEffect(() => {
+    
+    setWelcome(() => {
+      switch(pathname){
+        case '/sports':
+          return 'Quizard Sports'
+        case '/popular':
+          return 'Quizard Popular'
+        case '/fun':
+          return 'Quizard Fun'
+        case '/science':
+          return 'Quizard Science'
+        case '/science':
+          return 'Quizard Other'
+        default:
+          return 'Quizard'
+      }
+    })
+  },[])
  
  
   return (
     <div className="h-100 flex flex-col flex-grow w-full">
       
-      <p className="p-10">Current pathname: {pathname}</p>
+      <div className="flex flex-col flex-wrap items-center w-full border 1px white p-5">
+      <h1 className="text-lg font-bold text-blue-500 mb-4 sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">
+          Welcome to <span className="text-purple-600">{welcome}</span>
+      </h1>
+
+       </div>
       {/* Block 0: RequestedQuizes */}
       {pathname != '/' && (<div className="flex flex-col flex-wrap items-center w-full border 1px white p-5 mb-10">
-          <h2 className="text-xl font-bold mb-4">{pathname.substring(1).toUpperCase()}</h2>
+          <h3 className="text-xl font-bold mb-4">{pathname.substring(1).toUpperCase()}</h3>
           <div className="overflow-y-scroll max-h-64 w-full">
             <ul className="flex flex-wrap gap-4 items-center justify-center">
                 {quizzes.map((quiz) => (
@@ -76,14 +103,14 @@ export default function MainContent() {
       
        {/* Block 1: Most Popular Quizes */}
        <div className="flex flex-col flex-wrap items-center w-full border 1px white p-5">
-          <h2 className="text-xl font-bold mb-4">Most Popular Quizzes</h2>
+          <h3 className="text-xl font-bold mb-4">Most Popular Quizzes</h3>
           <MostPopularQuizes />
        </div>
 
        {/* Block 3: Commercial */}
        <div className="flex flex-grid p-10 items-center justify-center w-full p-2 border 1px white lg:hidden xl:hidden">
           <Link href={`${commercials[(currentCommercialIndex+0)%commercials.length].link}`}>
-              <h1>{`${commercials[(currentCommercialIndex+0)%commercials.length].label}`}</h1>
+              <h3>{`${commercials[(currentCommercialIndex+0)%commercials.length].label}`}</h3>
               <Image
                 src={`/commercial/${commercials[(currentCommercialIndex+0)%commercials.length].picturePath}`}
                 alt="Commercial Image"
@@ -104,7 +131,7 @@ export default function MainContent() {
         {/* Block 3: Commercial */}
         <div className="flex flex-grid p-10 items-center justify-center w-full border 1px white lg:hidden xl:hidden">
             <Link href={`${commercials[(currentCommercialIndex+2)%commercials.length].link}`}>
-                <h1>{`${commercials[(currentCommercialIndex+2)%commercials.length].label}`}</h1>
+                <h3>{`${commercials[(currentCommercialIndex+2)%commercials.length].label}`}</h3>
                 <Image
                   src={`/commercial/${commercials[(currentCommercialIndex+2)%commercials.length].picturePath}`}
                   alt="Commercial Image"
@@ -118,20 +145,19 @@ export default function MainContent() {
       
        {/* Block 4: RecentlyAdded Quizes */}
        <div className="flex flex-col flex-wrap items-center w-full border 1px white p-5">
-        <h2 className="text-xl font-bold mb-4">Recently Added Quizzes</h2>
+        <h3 className="text-xl font-bold mb-4">Recently Added Quizzes</h3>
           <RecentlyAdded/>
         </div>
 
        {/* Block 5: Small Game */}
        <div className="flex flex-col p-10 items-center justify-center w-full border 1px white h-2/8">
          <TicTacToe/>
-         
        </div>
 
        {/* Block 6: Commercial */}
        <div className="flex flex-grid p-10 items-center justify-center w-full p-2 border 1px white lg:hidden xl:hidden">
           <Link href={`${commercials[(currentCommercialIndex+4)%commercials.length].link}`}>
-               <h1>{`${commercials[(currentCommercialIndex+4)%commercials.length].label}`}</h1>
+               <h3>{`${commercials[(currentCommercialIndex+4)%commercials.length].label}`}</h3>
                <Image
                  src={`/commercial/${commercials[(currentCommercialIndex+4)%commercials.length].picturePath}`}
                  alt="Commercial Image"
@@ -145,19 +171,19 @@ export default function MainContent() {
 
       {/* Block 7: Most Clicked Quizes */}
       <div className="flex flex-col flex-wrap items-center w-full border 1px white p-5">
-         <h2 className="text-xl font-bold mb-4">Trending Quizes</h2>
+         <h3 className="text-xl font-bold mb-4">Trending Quizes</h3>
          <MostClicked/>
        </div>
 
        {/* Block 8: Small Game */}
-       <div className="flex justify-center p-10 w-full  border 1px white h-2/8">
-         <h2>Small Game</h2>
+       <div className="flex flex-col p-10 items-center justify-center w-full border 1px white h-2/8">
+         <Hangman/>
        </div>
 
        {/* Block 9: Commercial */}
        <div className="flex flex-grid items-center p-10 justify-center w-full p-2 border 1px white lg:hidden xl:hidden">
        <Link href={`${commercials[(currentCommercialIndex+5)%commercials.length].link}`}>
-          <h1>{`${commercials[(currentCommercialIndex+5)%commercials.length].label}`}</h1>
+          <h3>{`${commercials[(currentCommercialIndex+5)%commercials.length].label}`}</h3>
           <Image
             src={`/commercial/${commercials[(currentCommercialIndex+5)%commercials.length].picturePath}`}
             alt="Commercial Image"
@@ -171,19 +197,19 @@ export default function MainContent() {
 
       {/* Block 7: Most Finished Quizes */}
       <div className="flex flex-col flex-wrap items-center w-full border 1px white p-5">
-         <h2 className="text-xl font-bold mb-4">Most Interesting</h2>
+         <h3 className="text-xl font-bold mb-4">Most Interesting</h3>
          <MostFinished/>
        </div>
 
        {/* Block 8: Small Game */}
-       <div className="flex justify-center p-10 w-full border 1px white h-2/8">
-         <h2>Small Game</h2>
+       <div className="flex flex-col p-10 items-center justify-center w-full border 1px white h-2/8">
+         <TicTacToe/>
        </div>
 
        {/* Block 9: Commercial */}
        <div className="flex flex-grid p-10 items-center justify-center w-full border 1px white lg:hidden xl:hidden">
        <Link href={`${commercials[(currentCommercialIndex+6)%commercials.length].link}`}>
-            <h1>{`${commercials[(currentCommercialIndex+6)%commercials.length].label}`}</h1>
+            <h3>{`${commercials[(currentCommercialIndex+6)%commercials.length].label}`}</h3>
             <Image
               src={`/commercial/${commercials[(currentCommercialIndex+6)%commercials.length].picturePath}`}
               alt="Commercial Image"
@@ -198,7 +224,7 @@ export default function MainContent() {
       {/* Block 7: Random Quizes */}
       <div className="flex flex-col flex-wrap items-center w-full border 1px white p-5">
 
-         <h2 className="text-xl font-bold mb-4">Most Popular Quizzes</h2>
+         <h3 className="text-xl font-bold mb-4">Most Popular Quizzes</h3>
          <MostPopularQuizes/>
           
        </div>
@@ -206,7 +232,7 @@ export default function MainContent() {
        {/* Block 9: Commercial */}
        <div className="flex flex-grid p-10 items-center justify-center w-full p-2 border 1px white lg:hidden xl:hidden">
        <Link href={`${commercials[(currentCommercialIndex+2)%commercials.length].link}`}>
-          <h1>{`${commercials[(currentCommercialIndex+2)%commercials.length].label}`}</h1>
+          <h3>{`${commercials[(currentCommercialIndex+2)%commercials.length].label}`}</h3>
           <Image
             src={`/commercial/${commercials[(currentCommercialIndex+2)%commercials.length].picturePath}`}
             alt="Commercial Image"
