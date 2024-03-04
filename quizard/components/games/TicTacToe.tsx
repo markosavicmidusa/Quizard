@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 
 export default function TicTacToe() {
+    
+    
     // Define the state for the Tic-Tac-Toe board and the current player
     const [board, setBoard] = useState<string[]>(Array(9).fill(null));
     const [currentPlayer, setCurrentPlayer] = useState<'X' | 'O'>('X');
     const [winner, setWinner] = useState("")
     const [finished, setFinished] = useState(false)
 
-    // Handle a click on a square
     // Handle a click on a square
     const handleClick = (index: number) => {
         if (!board[index] && currentPlayer === 'X') {
@@ -21,11 +22,17 @@ export default function TicTacToe() {
 
     // Function to make a CPU move
     const makeCPUMove = (currentBoard: string[]) => {
+        console.log(currentBoard)
         const availableMoves = currentBoard.reduce<number[]>((acc, value, index) => {
+            console.log("Acc:",acc)
+            console.log("Value:",value)
+            console.log("Index:",index)
             if (!value) acc.push(index);
             return acc;
         }, []);
 
+        console.log(currentBoard)
+        console.log(availableMoves)
         const randomIndex = Math.floor(Math.random() * availableMoves.length);
         const newBoard = [...currentBoard];
         newBoard[availableMoves[randomIndex]] = 'O';
