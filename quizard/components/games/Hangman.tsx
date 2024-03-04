@@ -36,7 +36,7 @@ const wordCollection = [
 
 
 
-export default function WordGuesser() {
+export default function Hangman() {
   const [selectedWord, setSelectedWord] = useState('');
   const [displayWord, setDisplayWord] = useState('');
   const [attemptsRemaining, setAttemptsRemaining] = useState(3);

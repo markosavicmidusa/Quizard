@@ -15,7 +15,8 @@ import Quiz from "../cards/Quiz";
 import RecentlyAdded from "../forms/RecentlyAdded";
 import MostClicked from "../forms/MostClicked";
 import MostFinished from "../forms/MostFinished";
-import WordGuesser from "../games/WordGuesser";
+import Hangman  from "../games/Hangman";
+import TicTacToe from "../games/TicTacToe";
 
 export default function MainContent() {
  
@@ -96,7 +97,7 @@ export default function MainContent() {
 
        {/* Block 2: Small Game */}
        <div className="flex flex-col p-10 items-center justify-center w-full border 1px white h-2/8">
-         <WordGuesser/>
+         <Hangman/>
          
        </div>
 
@@ -123,7 +124,8 @@ export default function MainContent() {
 
        {/* Block 5: Small Game */}
        <div className="flex flex-col p-10 items-center justify-center w-full border 1px white h-2/8">
-        <h1>Small Game</h1> 
+         <TicTacToe/>
+         
        </div>
 
        {/* Block 6: Commercial */}
