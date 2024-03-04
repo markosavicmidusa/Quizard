@@ -27,6 +27,7 @@ export default function MainContent() {
   const [quizzes, setQuizzes] = useState<IQuizMetadata[]>([]);
 
   const [welcome, setWelcome] = useState("Quizard")
+  const [showWelcome, setShowWelcome] = useState(true)
 
   useEffect(() => {
     console.log("Component Mounted"); // Log when the component is mounted
@@ -63,6 +64,8 @@ export default function MainContent() {
     
     setWelcome(() => {
       switch(pathname){
+        case '/':
+          return 'Quizard'
         case '/sports':
           return 'Quizard Sports'
         case '/popular':
@@ -74,7 +77,8 @@ export default function MainContent() {
         case '/science':
           return 'Quizard Other'
         default:
-          return 'Quizard'
+          setShowWelcome(false)
+          return ''
       }
     })
   },[])
@@ -82,15 +86,14 @@ export default function MainContent() {
  
   return (
     <div className="h-100 flex flex-col flex-grow w-full">
-      
-      <div className="flex flex-col flex-wrap items-center w-full border 1px white p-5">
-      <h1 className="text-lg font-bold text-blue-500 mb-4 sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">
-          Welcome to <span className="text-purple-600">{welcome}</span>
-      </h1>
-
-       </div>
+    {showWelcome &&
+      (<div className="flex flex-col flex-wrap items-center w-full border 1px white p-5">
+        <h1 className="text-lg font-bold text-blue-500 mb-4 sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">
+            Welcome to <span className="text-purple-600">{welcome}</span>
+        </h1>
+      </div>)}
       {/* Block 0: RequestedQuizes */}
-      {pathname != '/' && (<div className="flex flex-col flex-wrap items-center w-full border 1px white p-5 mb-10">
+      {showWelcome && pathname != '/' && (<div className="flex flex-col flex-wrap items-center w-full border 1px white p-5 mb-10">
           <h3 className="text-xl font-bold mb-4">{pathname.substring(1).toUpperCase()}</h3>
           <div className="overflow-y-scroll max-h-64 w-full">
             <ul className="flex flex-wrap gap-4 items-center justify-center">
@@ -102,7 +105,7 @@ export default function MainContent() {
        </div>)}
       
        {/* Block 1: Most Popular Quizes */}
-       <div className="flex flex-col flex-wrap items-center w-full border 1px white p-5">
+       <div className="flex flex-col flex-wrap items-center w-full border 1px white p-5 mt-10">
           <h3 className="text-xl font-bold mb-4">Most Popular Quizzes</h3>
           <MostPopularQuizes />
        </div>
