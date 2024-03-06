@@ -93,7 +93,7 @@ export default function MainContent() {
         </h1>
       </div>)}
       {/* Block 0: RequestedQuizes */}
-      {showWelcome && pathname != '/' && (<div className="flex flex-col flex-wrap items-center w-full p-5 mb-10 shadow-md hover:shadow-lg rounded-lg">
+      {showWelcome && pathname != '/' && (<div className="flex flex-col flex-wrap items-center w-full p-5 mb-10 bg-zinc-900 shadow-md hover:shadow-lg rounded-lg">
           <h3 className="text-xl font-bold mb-4">{pathname.substring(1).toUpperCase()}</h3>
           <div className="overflow-y-scroll max-h-64 w-full">
             <ul className="flex flex-wrap gap-4 items-center justify-center">
