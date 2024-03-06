@@ -87,7 +87,7 @@ export default function MainContent() {
   return (
     <div className="h-100 flex flex-col flex-grow w-full">
     {showWelcome &&
-      (<div className="flex flex-col flex-wrap items-center w-full border 1px white p-5">
+      (<div className="flex flex-col flex-wrap items-center w-full border 1px white p-5 ">
         <h1 className="text-lg font-bold text-blue-500 mb-4 sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">
             Welcome to <span className="text-purple-600">{welcome}</span>
         </h1>

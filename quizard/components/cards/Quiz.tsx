@@ -18,7 +18,7 @@ export default function Quiz({quiz}:{quiz:IQuizMetadata}){
                  </div>
                  <div className="p-2">
                    <h2 className="text-lg font-bold">{quiz.name.substring(0,15)}</h2>
-                   <p className="text-sm text-gray-700">{quiz.title.substring(0,19)}...</p>
+                   <p className="text-sm text-gray-400">{quiz.title.substring(0,19)}...</p>
                  </div>
                </div>
         </Link>
