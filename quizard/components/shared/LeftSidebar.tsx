@@ -30,6 +30,7 @@ export default function LeftSidebar({commercials}:{commercials: Commercial[]}){
                       alt="Commercial Image"
                       width={250}  // Set your desired fixed width
                       height={150} // Set your desired fixed height
+                      
                     />
                  </Link>     
             </div>

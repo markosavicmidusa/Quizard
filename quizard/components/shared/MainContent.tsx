@@ -74,14 +74,14 @@ export default function MainContent() {
           return 'Quizard Fun'
         case '/science':
           return 'Quizard Science'
-        case '/science':
+        case '/other':
           return 'Quizard Other'
         default:
           setShowWelcome(false)
           return ''
       }
     })
-  },[])
+  },[pathname])
  
  
   return (
