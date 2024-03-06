@@ -91,7 +91,7 @@ export default function TicTacToe() {
     return (
         <>
             {!finished ? 
-            <div className="flex flex-col p-10 items-center justify-center w-full border-2 border-white">
+            <div className="flex flex-col p-10 items-center justify-center w-full">
                 <p className="text-xl font-bold text-center mb-4">Tic-Tac-Toe</p>
                 <div className="board grid grid-cols-3 gap-2">
                     {Array.from({ length: 9 }, (_, index) => renderSquare(index))}

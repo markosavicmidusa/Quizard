@@ -85,15 +85,15 @@ export default function MainContent() {
  
  
   return (
-    <div className="h-100 flex flex-col flex-grow w-full">
+    <div className="h-100 flex flex-col flex-grow w-full ">
     {showWelcome &&
-      (<div className="flex flex-col flex-wrap items-center w-full border 1px white p-5 ">
+      (<div className="flex flex-col flex-wrap items-center w-full  p-5 shadow-md hover:shadow-lg rounded-lg bg-zinc-700">
         <h1 className="text-lg font-bold text-blue-500 mb-4 sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">
             Welcome to <span className="text-purple-600">{welcome}</span>
         </h1>
       </div>)}
       {/* Block 0: RequestedQuizes */}
-      {showWelcome && pathname != '/' && (<div className="flex flex-col flex-wrap items-center w-full border 1px white p-5 mb-10">
+      {showWelcome && pathname != '/' && (<div className="flex flex-col flex-wrap items-center w-full p-5 mb-10 shadow-md hover:shadow-lg rounded-lg">
           <h3 className="text-xl font-bold mb-4">{pathname.substring(1).toUpperCase()}</h3>
           <div className="overflow-y-scroll max-h-64 w-full">
             <ul className="flex flex-wrap gap-4 items-center justify-center">
@@ -105,14 +105,14 @@ export default function MainContent() {
        </div>)}
       
        {/* Block 1: Most Popular Quizes */}
-       <div className="flex flex-col flex-wrap items-center w-full border 1px white p-5 mt-10">
+       <div className="flex flex-col flex-wrap items-center w-full p-5 mt-10 shadow-md hover:shadow-lg rounded-lg">
           <h3 className="text-xl font-bold mb-4">Most Popular Quizzes</h3>
           <MostPopularQuizes />
        </div>
 
        {/* Block 3: Commercial */}
-       <div className="flex flex-grid p-10 items-center justify-center w-full p-2 border 1px white lg:hidden xl:hidden">
-          <Link href={`${commercials[(currentCommercialIndex+0)%commercials.length].link}`}>
+       <div className="flex flex-grid p-10 justify-center w-full lg:hidden xl:hidden shadow-md hover:shadow-lg rounded-lg bg-zinc-900">
+          <Link href={`${commercials[(currentCommercialIndex+0)%commercials.length].link}`} className="flex flex-col items-center">
               <h3>{`${commercials[(currentCommercialIndex+0)%commercials.length].label}`}</h3>
               <Image
                 src={`/commercial/${commercials[(currentCommercialIndex+0)%commercials.length].picturePath}`}
@@ -126,13 +126,13 @@ export default function MainContent() {
        </div>
 
        {/* Block 2: Small Game */}
-       <div className="flex flex-col p-10 items-center justify-center w-full border 1px white h-2/8">
+       <div className="flex flex-col p-10 items-center justify-center w-full h-2/8 shadow-md hover:shadow-lg rounded-lg bg-zinc-700">
          <Hangman/>
          
        </div>
 
         {/* Block 3: Commercial */}
-        <div className="flex flex-grid p-10 items-center justify-center w-full border 1px white lg:hidden xl:hidden">
+        <div className="flex flex-grid p-10 items-center justify-center w-full lg:hidden xl:hidden shadow-md hover:shadow-lg rounded-lg">
             <Link href={`${commercials[(currentCommercialIndex+2)%commercials.length].link}`}>
                 <h3>{`${commercials[(currentCommercialIndex+2)%commercials.length].label}`}</h3>
                 <Image
@@ -147,105 +147,104 @@ export default function MainContent() {
           </div>
       
        {/* Block 4: RecentlyAdded Quizes */}
-       <div className="flex flex-col flex-wrap items-center w-full border 1px white p-5">
+       <div className="flex flex-col flex-wrap items-center w-full p-10 shadow-md hover:shadow-lg rounded-lg bg-zinc-900">
         <h3 className="text-xl font-bold mb-4">Recently Added Quizzes</h3>
           <RecentlyAdded/>
         </div>
 
        {/* Block 5: Small Game */}
-       <div className="flex flex-col p-10 items-center justify-center w-full border 1px white h-2/8">
+       <div className="flex flex-col p-10 items-center justify-center w-full h-2/8 shadow-md hover:shadow-lg rounded-lg bg-zinc-700">
          <TicTacToe/>
        </div>
 
        {/* Block 6: Commercial */}
-       <div className="flex flex-grid p-10 items-center justify-center w-full p-2 border 1px white lg:hidden xl:hidden">
-          <Link href={`${commercials[(currentCommercialIndex+4)%commercials.length].link}`}>
-               <h3>{`${commercials[(currentCommercialIndex+4)%commercials.length].label}`}</h3>
-               <Image
-                 src={`/commercial/${commercials[(currentCommercialIndex+4)%commercials.length].picturePath}`}
-                 alt="Commercial Image"
-                
-                 width={200}  // Set your desired fixed width
-                 height={120} // Set your desired fixed height
-                
-               />
-            </Link>     
-      </div>
+       <div className="flex flex-grid p-10 justify-center w-full lg:hidden xl:hidden shadow-md hover:shadow-lg rounded-lg">
+          <Link href={`${commercials[(currentCommercialIndex+4)%commercials.length].link}`} className="flex flex-col items-center">
+              <h3>{`${commercials[(currentCommercialIndex+4)%commercials.length].label}`}</h3>
+              <Image
+                src={`/commercial/${commercials[(currentCommercialIndex+4)%commercials.length].picturePath}`}
+                alt="Commercial Image"
+                width={200}  // Set your desired fixed width
+                height={120} // Set your desired fixed height
+              
+              />
+          </Link>     
+         
+       </div>
 
       {/* Block 7: Most Clicked Quizes */}
-      <div className="flex flex-col flex-wrap items-center w-full border 1px white p-5">
+      <div className="flex flex-col flex-wrap p-10 items-center w-full shadow-md hover:shadow-lg rounded-lg bg-zinc-900">
          <h3 className="text-xl font-bold mb-4">Trending Quizes</h3>
          <MostClicked/>
        </div>
 
        {/* Block 8: Small Game */}
-       <div className="flex flex-col p-10 items-center justify-center w-full border 1px white h-2/8">
+       <div className="flex flex-col p-10 items-center justify-center w-full h-2/8 shadow-md hover:shadow-lg rounded-lg bg-zinc-700">
          <Hangman/>
+         
        </div>
 
        {/* Block 9: Commercial */}
-       <div className="flex flex-grid items-center p-10 justify-center w-full p-2 border 1px white lg:hidden xl:hidden">
-       <Link href={`${commercials[(currentCommercialIndex+5)%commercials.length].link}`}>
-          <h3>{`${commercials[(currentCommercialIndex+5)%commercials.length].label}`}</h3>
-          <Image
-            src={`/commercial/${commercials[(currentCommercialIndex+5)%commercials.length].picturePath}`}
-            alt="Commercial Image"
-           
-            width={200}  // Set your desired fixed width
-            height={120} // Set your desired fixed height
-            
-          />
-        </Link>
-      </div>
+       <div className="flex flex-grid p-10 justify-center w-full lg:hidden xl:hidden shadow-md hover:shadow-lg rounded-lg">
+          <Link href={`${commercials[(currentCommercialIndex+5)%commercials.length].link}`} className="flex flex-col items-center">
+              <h3>{`${commercials[(currentCommercialIndex+5)%commercials.length].label}`}</h3>
+              <Image
+                src={`/commercial/${commercials[(currentCommercialIndex+5)%commercials.length].picturePath}`}
+                alt="Commercial Image"
+                width={200}  // Set your desired fixed width
+                height={120} // Set your desired fixed height
+              
+              />
+          </Link>     
+         
+       </div>
 
       {/* Block 7: Most Finished Quizes */}
-      <div className="flex flex-col flex-wrap items-center w-full border 1px white p-5">
+      <div className="flex flex-col flex-wrap p-10 items-center w-full shadow-md hover:shadow-lg rounded-lg">
          <h3 className="text-xl font-bold mb-4">Most Interesting</h3>
          <MostFinished/>
        </div>
 
        {/* Block 8: Small Game */}
-       <div className="flex flex-col p-10 items-center justify-center w-full border 1px white h-2/8">
+       <div className="flex flex-col p-10 items-center justify-center w-full h-2/8 shadow-md hover:shadow-lg rounded-lg bg-zinc-700">
          <TicTacToe/>
        </div>
 
        {/* Block 9: Commercial */}
-       <div className="flex flex-grid p-10 items-center justify-center w-full border 1px white lg:hidden xl:hidden">
-       <Link href={`${commercials[(currentCommercialIndex+6)%commercials.length].link}`}>
-            <h3>{`${commercials[(currentCommercialIndex+6)%commercials.length].label}`}</h3>
-            <Image
-              src={`/commercial/${commercials[(currentCommercialIndex+6)%commercials.length].picturePath}`}
-              alt="Commercial Image"
-            
-              width={200}  // Set your desired fixed width
-              height={120} // Set your desired fixed height
+       <div className="flex flex-grid p-10 justify-center w-full lg:hidden xl:hidden rounded-lg">
+          <Link href={`${commercials[(currentCommercialIndex+6)%commercials.length].link}`} className="flex flex-col items-center">
+              <h3>{`${commercials[(currentCommercialIndex+6)%commercials.length].label}`}</h3>
+              <Image
+                src={`/commercial/${commercials[(currentCommercialIndex+6)%commercials.length].picturePath}`}
+                alt="Commercial Image"
+                width={200}  // Set your desired fixed width
+                height={120} // Set your desired fixed height
               
-            />
-        </Link>     
-      </div>
+              />
+          </Link>     
+         
+       </div>
 
       {/* Block 7: Random Quizes */}
-      <div className="flex flex-col flex-wrap items-center w-full border 1px white p-5">
-
-         <h3 className="text-xl font-bold mb-4">Most Popular Quizzes</h3>
-         <MostPopularQuizes/>
-          
+      <div className="flex flex-col flex-wrap items-center w-full p-5 shadow-md hover:shadow-lg rounded-lg bg-zinc-900">
+          <h3 className="text-xl font-bold mb-4">Most Popular Quizzes</h3>
+          <MostPopularQuizes />
        </div>
 
        {/* Block 9: Commercial */}
-       <div className="flex flex-grid p-10 items-center justify-center w-full p-2 border 1px white lg:hidden xl:hidden">
-       <Link href={`${commercials[(currentCommercialIndex+2)%commercials.length].link}`}>
-          <h3>{`${commercials[(currentCommercialIndex+2)%commercials.length].label}`}</h3>
-          <Image
-            src={`/commercial/${commercials[(currentCommercialIndex+2)%commercials.length].picturePath}`}
-            alt="Commercial Image"
-          
-            width={200}  // Set your desired fixed width
-            height={120} // Set your desired fixed height
-          
-          />
-        </Link>
-      </div>
+       <div className="flex flex-grid p-10 justify-center w-full lg:hidden xl:hidden shadow-md hover:shadow-lg rounded-lg ">
+          <Link href={`${commercials[(currentCommercialIndex+2)%commercials.length].link}`} className="flex flex-col items-center">
+              <h3>{`${commercials[(currentCommercialIndex+2)%commercials.length].label}`}</h3>
+              <Image
+                src={`/commercial/${commercials[(currentCommercialIndex+2)%commercials.length].picturePath}`}
+                alt="Commercial Image"
+                width={200}  // Set your desired fixed width
+                height={120} // Set your desired fixed height
+              
+              />
+          </Link>     
+         
+       </div>
     </div>
   );
 }

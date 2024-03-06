@@ -115,11 +115,11 @@ export default function Hangman() {
 
 
   return (
-    <div className="flex flex-col p-10 items-center justify-center w-full border 1px white h-2/8">
-      <p className="text-xl font-bold text-center mb-4">Guess The Word</p>
+    <div className="flex flex-col p-10 items-center justify-center w-full h-2/8">
+      <p className="text-xl font-bold text-center mb-4">Hangman</p>
       {!finished ?
-      <div>
-        <p>{`Attempts remaining: ${attemptsRemaining}`}</p>
+      <div className='flex flex-col gap-4 items-center'>
+        
         <p className="text-lg font-bold text-center mb-4">{`Word: ${displayWord}`}</p>
         <div className='flex flex-row flex-wrap'>
            {letterCollection.map(letter => (
@@ -146,6 +146,7 @@ export default function Hangman() {
                   </div>
               ))}
         </div>
+        <p className='text-green-500'>{`Attempts remaining: ${attemptsRemaining}`}</p>
         
       </div>
       :<div className="mt-8">
