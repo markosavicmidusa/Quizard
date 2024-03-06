@@ -23,11 +23,11 @@ export default function Topbar({categories}:TopbarProps){
     return (
         
             <nav className="topbar-container z-10 bg-zinc-900">
-                <Link href="/" className="border 1px white flex items-center flex-row gap-4">
+                <Link href="/" className="flex items-center flex-row gap-4">
                     <Image src="/assets/logoTree.svg" alt="logo" width={40} height={30}/>
                     <h2 className="text-heading3-bold ">Kvizard</h2>
                 </Link>
-                <div className="border 1px white flex items-center flex-wrap hidden lg:flex">
+                <div className="flex items-center flex-wrap hidden lg:flex">
                     {categories.map((category, index) => (
                         <Link className="text-white px-4 py-2 cursor-pointer transition-transform transform hover:scale-110" key={index} href={category.link}>
                           {category.label}
@@ -40,7 +40,7 @@ export default function Topbar({categories}:TopbarProps){
                 <div className="flex items-center gap-1">
                     <div className="block flex items-center">
                         <SignedIn>
-                            <div className="border 1px white flex gap-2 justify-center items-center p-2 pl-4 gap-5 text-sm">
+                            <div className="flex gap-2 justify-center items-center p-2 pl-4 gap-5 text-sm">
                                 <Link href="/user" className="text-blue-500 underline hover:text-gray-200 transition-colors">
                                   Dashboard
                                 </Link>
@@ -52,7 +52,7 @@ export default function Topbar({categories}:TopbarProps){
                         </SignedIn>
                         <SignedOut>   
                             <SignInButton>
-                                    <div className="border 1px white flex gap-2 justify-center items-center p-2 cursor-pointer transition-transform transform hover:scale-110">
+                                    <div className="flex gap-2 justify-center items-center p-2 cursor-pointer transition-transform transform hover:scale-110">
                                         <p>Sign in</p>
                                         <Image
                                           src='/assets/login.png'

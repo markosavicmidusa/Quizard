@@ -20,9 +20,9 @@ export default function LeftSidebar({commercials}:{commercials: Commercial[]}){
       }, [commercials]);
 
     return(
-        <div className="flex flex-col inline-center justify-center w-full h-100 gap-5">
+        <div className="flex flex-col inline-center justify-center w-full h-100 gap-8">
             
-            <div className="flex flex-col inline-center justify-center h-1/3 w-full p-2 border 1px white">
+            <div className="flex flex-col inline-center justify-center h-1/3 w-full p-2">
                  <Link href={`${commercials[(currentCommercialIndex+4)%commercials.length].link}`} className="flex flex-col items-center">
                     <h3>{`${commercials[(currentCommercialIndex+4)%commercials.length].label}`}</h3>
                     <Image
@@ -34,7 +34,7 @@ export default function LeftSidebar({commercials}:{commercials: Commercial[]}){
                     />
                  </Link>     
             </div>
-            <div className="flex flex-col inline-center justify-center h-1/3 w-full p-2 border 1px white">
+            <div className="flex flex-col inline-center justify-center h-1/3 w-full p-2">
                  <Link href={`${commercials[(currentCommercialIndex+3)%commercials.length].link}`} className="flex flex-col items-center">
                     <h1>{`${commercials[(currentCommercialIndex+3)%commercials.length].label}`}</h1>
                     <Image
@@ -46,7 +46,7 @@ export default function LeftSidebar({commercials}:{commercials: Commercial[]}){
                     />
                  </Link>     
             </div>
-            <div className="flex flex-col inline-center justify-center h-1/3 w-full p-2 border 1px white">
+            <div className="flex flex-col inline-center justify-center h-1/3 w-full p-2">
                  <Link href={`${commercials[(currentCommercialIndex+2)%commercials.length].link}`} className="flex flex-col items-center">
                     <h1>{`${commercials[(currentCommercialIndex+2)%commercials.length].label}`}</h1>
                     <Image

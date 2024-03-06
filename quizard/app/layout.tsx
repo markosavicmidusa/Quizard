@@ -36,20 +36,20 @@ export default function RootLayout({
     <ClerkProvider appearance={{baseTheme:dark}}>
       <html lang="en" className="w-full h-screen bg-zinc-800 text-slate-300 h-full overflow-y-scroll" style={{ scrollbarWidth: 'thin', scrollbarColor: '#CBD5E0 #27272A'}}>
         {/**className="overflow-y-scroll max-h-64 w-full" style={{ scrollbarWidth: 'thin', scrollbarColor: '#CBD5E0 #27272A'}} */}
-        <body className={`border 1px white ${inter.className} flex flex-col`}>
+        <body className={`${inter.className} flex flex-col`}>
           <Topbar categories={categories} />  
             <main className="flex mb-10 h-full">
-                <div className="border 1px white fixed w-1/5 left-0 mt-16 hidden xl:flex lg:flex">
+                <div className="fixed w-1/5 left-0 mt-16 hidden xl:flex lg:flex">
                    <LeftSidebar commercials={commercials}/>
                 </div>       
-                <div className="border-1 border-white bg-zinc-800 mx-auto mt-16 w-full sm:w-full md:w-full lg:w-3/5 xl:w-3/5 flex flex-col">
+                <div className="bg-zinc-800 mx-auto mt-16 w-full sm:w-full md:w-full lg:w-3/5 xl:w-3/5 flex flex-col">
                     {children}    
                 </div>
-                <div className="border 1px white fixed w-1/5 right-0 mt-16 f-full hidden xl:flex lg:flex">
+                <div className="fixed w-1/5 right-0 mt-16 f-full hidden xl:flex lg:flex">
                   <RightSidebar commercials={commercials} />
                 </div>    
             </main>
-            <div className="border 1px white flex justify-center items-center fixed lg:hidden xl:hidden w-full h-10 bottom-0 bg-zinc-900">
+            <div className="flex justify-center items-center fixed lg:hidden xl:hidden w-full h-11 bottom-0 bg-zinc-900">
               <Bottombar categories={categories} />
             </div>
         </body>  

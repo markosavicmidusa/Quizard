@@ -19,9 +19,9 @@ export default function RightSidebar({commercials}: {commercials:Commercial[]}){
       }, [commercials]);
 
     return(
-      <div className="flex flex-col inline-center justify-center w-full gap-6">
+      <div className="flex flex-col inline-center justify-center w-full gap-8">
             
-            <div className="flex flex-col inline-center justify-center h-1/3 w-full p-2 border 1px white">
+            <div className="flex flex-col inline-center justify-center h-1/3 w-full p-2">
                  <Link href={`${commercials[(currentCommercialIndex+0)%commercials.length].link}`} className="flex flex-col items-center">
                     <h3>{`${commercials[(currentCommercialIndex+0)%commercials.length].label}`}</h3>
                     <Image
@@ -32,7 +32,7 @@ export default function RightSidebar({commercials}: {commercials:Commercial[]}){
                     />
                  </Link>     
             </div>
-            <div className="flex flex-col inline-center justify-center h-1/3 w-full p-2 border 1px white">
+            <div className="flex flex-col inline-center justify-center h-1/3 w-full p-2">
                  <Link href={`${commercials[(currentCommercialIndex+1)%commercials.length].link}`} className="flex flex-col items-center">
                     <h1>{`${commercials[(currentCommercialIndex+1)%commercials.length].label}`}</h1>
                     <Image
@@ -43,7 +43,7 @@ export default function RightSidebar({commercials}: {commercials:Commercial[]}){
                     />
                  </Link>     
             </div>
-            <div className="flex flex-col inline-center justify-center h-1/3 w-full p-2 border 1px white">
+            <div className="flex flex-col inline-center justify-center h-1/3 w-full p-2">
                  <Link href={`${commercials[(currentCommercialIndex+2)%commercials.length].link}`} className="flex flex-col items-center">
                     <h1>{`${commercials[(currentCommercialIndex+2)%commercials.length].label}`}</h1>
                     <Image

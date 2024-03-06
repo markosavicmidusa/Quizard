@@ -15,7 +15,7 @@ interface BottombarProps{
 export default function Bottombar({categories}:BottombarProps){
     return (
     
-    <main className="border 1px solid flex flex-row gap-4" >
+    <main className="flex flex-row gap-4" >
         {categories.map((category, index)=> (
             <Link className="text-white px-4 py-2 cursor-pointer transition-transform transform hover:scale-110" key={index} href={category.link}>
                     <Image
