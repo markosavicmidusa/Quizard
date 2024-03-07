@@ -9,7 +9,7 @@ import { UserResource } from "@clerk/types";
 
 export default function Registration() {
   
-    const { user, isSignedIn } = useUser();
+    /*const { user, isSignedIn } = useUser();
 
     useEffect(() => {
         console.log("Use effect-Registration:", user);
@@ -44,8 +44,11 @@ export default function Registration() {
       console.error('Error registering user:', error);
     }
   };
-
+*/
+  /*console.log("IS signed IN:", isSignedIn)
+  console.log("User", user)*/
   return (
+    
     <div className="p-10 flex flex-col justify-center items-center">
       <SignUp/>
     </div>

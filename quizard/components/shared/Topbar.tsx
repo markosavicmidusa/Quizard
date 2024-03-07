@@ -25,7 +25,7 @@ export default function Topbar({categories}:TopbarProps){
             <nav className="topbar-container z-10 bg-zinc-900">
                 <Link href="/" className="flex items-center flex-row gap-4">
                     <Image src="/assets/logoTree.svg" alt="logo" width={40} height={30}/>
-                    <h2 className="text-heading3-bold ">Kvizard</h2>
+                    <h2 className="text-heading3-bold ">Quizmania</h2>
                 </Link>
                 <div className="flex items-center flex-wrap hidden lg:flex">
                     {categories.map((category, index) => (
