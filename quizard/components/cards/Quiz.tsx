@@ -7,8 +7,8 @@ export default function Quiz({quiz}:{quiz:IQuizMetadata}){
 
     return (
         <Link href={`/quizes/${quiz.id}`}>
-            <div className="z-5 w-48 border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300 cursor-pointer">
-                 <div className="relative h-36">
+            <div className="z-5 w-36 border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300 cursor-pointer">
+                 <div className="relative h-20">
                    <Image
                      src="/quizes/quiz-pic.png"
                      alt={quiz.name}
@@ -17,8 +17,8 @@ export default function Quiz({quiz}:{quiz:IQuizMetadata}){
                    />
                  </div>
                  <div className="p-2">
-                   <h2 className="text-lg font-bold">{quiz.name.substring(0,15)}</h2>
-                   <p className="text-sm text-gray-400">{quiz.title.substring(0,19)}...</p>
+                   <h2 className="text-md font-bold">{quiz.name.substring(0,15)}</h2>
+                   <p className="text-xs text-gray-400">{quiz.title.substring(0,15)}...</p>
                  </div>
                </div>
         </Link>
