@@ -379,7 +379,7 @@ export default function CreateQuiz() {
                 <MainContent/>
             )}
         {submitted && (
-            <div className="z-11 fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-gray-700 bg-opacity-80">
+            <div className="z-10 fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-gray-700 bg-opacity-80">
                 <div className="flex flex-col items-center bg-zinc-800 p-8 gap-10 rounded-md shadow-md">
                     <p className="text-lg text-green-500 font-semibold mb-2">Quiz submitted successfully!</p>
                     <Link href={'/user'} className="text-red-500 hover:text-blue-500 underline">Close</Link>
@@ -391,7 +391,7 @@ export default function CreateQuiz() {
             )}
 
         {errorSubmiting && (
-            <div className="z-11 fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-gray-700 bg-opacity-80">
+            <div className="z-10 fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-gray-700 bg-opacity-80">
                 <div className="bg-zinc-800 text-red-500 p-8 rounded-md shadow-md flex flex-col inline-center justify-center">
                     <p className="text-lg font-semibold mb-2 text-red-500">Quiz not submited.Error ocured</p>
                     <div className='flex flex-row gap-16 justify-center p-5'>
