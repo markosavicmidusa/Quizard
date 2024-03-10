@@ -82,18 +82,19 @@ export default function RegistrationSuccess() {
     return(
         <div className="flex flex-col gap-10">
         {loading ? 
-        <div className="flex justify-center p-20 bg-zinc-700">
-            <h1 className="text-green-500 text-xl">Loading...</h1>
+        <div className="flex flex-col items-center p-20 text-blue-500 bg-zinc-700 gap-5">
+            <h1 className="text-xl">Loading...</h1>
+            <p>Please wait...</p>
         </div> : successfullRegistration ? 
         <div className="flex flex-col gap-10 items-center p-20 bg-zinc-700">
             <h1 className="text-green-500 text-xl">Successfull registration</h1>
-            <Link href="/user" className="text-white bg-blue-500 px-4 py-2 cursor-pointer transition-transform transform hover:scale-110">
+            <Link href="/user" className="text-white bg-blue-500 px-4 py-2 cursor-pointer transition-transform transform hover:scale-110 rounded">
                 DASHBOARD
             </Link>
         </div> : 
         <div className="flex flex-col gap-10 items-center p-20 bg-zinc-700">
             <h1 className="text-red-500 text-xl">Error registration</h1>
-            <Link href="/registration" className="text-white bg-blue-500 px-4 py-2 cursor-pointer transition-transform transform hover:scale-110">
+            <Link href="/registration" className="text-white bg-blue-500 px-4 py-2 cursor-pointer transition-transform transform hover:scale-110 rounded">
                 REGISTER
             </Link>
         </div>        

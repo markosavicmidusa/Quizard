@@ -73,7 +73,7 @@ export default function CreateQuiz() {
             }
         }
         fetchUser()
-    },[])
+    },[user])
 
     const handleNextQuestion = () => {
         if (currentQuestionIndex < quiz.questions.length - 1) {
@@ -211,6 +211,21 @@ export default function CreateQuiz() {
             setErrorSubmiting(true)
         }
     };
+
+
+    const resetConditions = () => {
+        setQuiz(initialQuizState);
+        setQuizMetadata(initialQuizMetadataState);
+        setCurrentQuestionIndex(0);
+
+        setQuizMetadataVisibility(true)
+        setquestionsVisibility(false)
+        setResultsVisibility(false)
+
+        setSubmitted(false);
+        
+        setErrorSubmiting(false);
+    }
 
 
     return (
@@ -358,30 +373,39 @@ export default function CreateQuiz() {
                     </div> 
                 </div>)}
             </form>
-
+            
+        )}
+        {!submitted && (
+                <MainContent/>
+            )}
+        {submitted && (
+            <div className="z-11 fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-gray-700 bg-opacity-80">
+                <div className="flex flex-col items-center bg-zinc-800 p-8 gap-10 rounded-md shadow-md">
+                    <p className="text-lg text-green-500 font-semibold mb-2">Quiz submitted successfully!</p>
+                    <Link href={'/user'} className="text-red-500 hover:text-blue-500 underline">Close</Link>
+                </div>
+            </div>
         )}
         {submitted && (
-            <div className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-gray-700 bg-opacity-50">
-                <div className="bg-zinc-800 p-8 rounded-md shadow-md flex flex-col inline-center justify-center">
-                    <p className="text-lg font-semibold mb-2">Quiz submitted successfully!</p>
-                    <Link href={'/user'} className="text-red-500 hover:text-blue-600">Close</Link>
-                </div>
                 <MainContent/>
-            </div>
-        )}
+            )}
 
         {errorSubmiting && (
-            <div className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-gray-700 bg-opacity-50">
-                <div className="bg-zinc-800 p-8 rounded-md shadow-md flex flex-col inline-center justify-center">
+            <div className="z-11 fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-gray-700 bg-opacity-80">
+                <div className="bg-zinc-800 text-red-500 p-8 rounded-md shadow-md flex flex-col inline-center justify-center">
                     <p className="text-lg font-semibold mb-2 text-red-500">Quiz not submited.Error ocured</p>
-                    <Link href={'/user'} className="text-red-500 hover:text-blue-600">Close</Link>
+                    <div className='flex flex-row gap-16 justify-center p-5'>
+                        <button onClick={resetConditions} className="text-green-500 hover:text-blue-500 underline">Try again</button>
+                        <Link href={'/user'} className="text-red-500 hover:text-blue-500">Close</Link>
+                    </div>
+                    
                 </div>
-                <MainContent/>
             </div>
         )}
-
+        {errorSubmiting && (
+            <MainContent/>
+        )}
         </div>
-        <MainContent/>
     </div>
     );
 }

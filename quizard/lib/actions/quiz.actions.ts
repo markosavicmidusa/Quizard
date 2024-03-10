@@ -89,13 +89,13 @@ export async function getMostPopular50Quizzes(): Promise<IQuizMetadata[] | []>{
         
         connectToDB();
         // Fetch the first 50 quizzes as plain JavaScript objects
-        
+        console.log("getMostPopular50Quizzes")
         let quizzes = await QuizMetadataModel.find({active:1})
             .lean()
             .sort({ timesClicked: -1, timesFinished: -1 })
             .limit(50);
 
-
+        console.log(quizzes)
         // Manually convert each document to a plain object
         const plainObjects: IQuizMetadata[] = quizzes.map(quiz => ({
             id: quiz.id,
