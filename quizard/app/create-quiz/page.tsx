@@ -33,9 +33,9 @@ export default function CreateQuiz() {
 
     const initialQuizMetadataState:IQuizMetadata = {
         id: '',
-        name: 'Quiz name',
-        title: 'Quiz title',
-        category: 'Quiz category',
+        name: '',
+        title: '',
+        category: '/other',
         createdBy: 'CreatedBy Id',
         timesClicked: 0,
         timesFinished: 0,
@@ -63,6 +63,11 @@ export default function CreateQuiz() {
     const categories: ICategory[] = getCategories()
 
 
+    const [errorMessageName, setErrorMessageName] = useState('');
+    const [hasErrorName, setHasErrorName] = useState(true);
+    const [errorMessageDescription, setErrorMessageDescription] = useState('');
+    const [hasErrorDescription, setHasErrorDescription] = useState(true);
+
     useEffect(() => {
         const fetchUser = async () => {
             
@@ -74,6 +79,13 @@ export default function CreateQuiz() {
         }
         fetchUser()
     },[user])
+    useEffect(() => {
+        const changesInMetadata = () => {
+
+        }
+        changesInMetadata()
+
+    }, [quizMetadata])
 
     const handleNextQuestion = () => {
         if (currentQuestionIndex < quiz.questions.length - 1) {
@@ -132,6 +144,17 @@ export default function CreateQuiz() {
 
     const handleNameContentChange = (value:string) => {
        
+        if(value.length <= 0){
+            setErrorMessageName("Please enter the value: Quiz name")
+            setHasErrorName(true)
+        }else if(value.length >=15){
+            setErrorMessageName('Quiz name must be 15 chars long')
+            setHasErrorName(true)
+        }else{
+            setErrorMessageName("")
+            setHasErrorName(false)
+        }
+
         setQuizMetadata((prevState: IQuizMetadata) => {
             const currentQuizMetadataState = prevState;
             currentQuizMetadataState.name = value;
@@ -141,6 +164,19 @@ export default function CreateQuiz() {
     };
 
     const handleTitleContentChange = (value:string) => {
+        
+        if(value.length <= 0){
+            setErrorMessageDescription("Please enter the value: Short description")
+            setHasErrorDescription(true)
+        }else if(value.length >=15){
+            setErrorMessageDescription('Short description name must be under 30 chars long')
+            setHasErrorDescription(true)
+        }else{
+            setErrorMessageDescription("")
+            setHasErrorDescription(false)
+        }
+        
+        
         setQuizMetadata((prevState: IQuizMetadata) => {
             const currentQuizMetadataState = prevState;
             currentQuizMetadataState.title = value;
@@ -152,6 +188,7 @@ export default function CreateQuiz() {
     const handleCategoryChange = (value: string) => {
         console.log(value)
         console.log(quizMetadata)
+        
         setQuizMetadata((prevState: IQuizMetadata) => {
             const currentQuizMetadataState = prevState;
             currentQuizMetadataState.category = value;
@@ -247,11 +284,12 @@ export default function CreateQuiz() {
                             onChange={e => handleNameContentChange(e.target.value)}
                             className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
                          />
+                         
                     </div>
                     <div className="mb-2">
                          <input
                             type="text"
-                            placeholder="Quiz short-description"
+                            placeholder="Short description"
                             onChange={e => handleTitleContentChange(e.target.value)}
                             className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
                          />
@@ -262,7 +300,7 @@ export default function CreateQuiz() {
                                     onChange={(e) => handleCategoryChange(e.target.value)}
                                     className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
                                 >
-                                    <option value="">Select category</option>
+                                    <option selected value="">{quizMetadata.category.substring(1).toUpperCase()}</option>
                                     {categories.map((category) => (
                                         <option key={category.link} value={category.link}>
                                             {category.label}
@@ -270,12 +308,21 @@ export default function CreateQuiz() {
                                     ))}
                                 </select>
                     </div>
-                    <button
-                        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-                        onClick={handleChangeQuizMetadataVisibility}
-                    >
-                        Next Section 
-                    </button>
+                    <div className='mb-2'>
+                    { (hasErrorDescription || hasErrorName) ? 
+                            <div className="text-red-500">
+                                <p>{errorMessageName}</p>
+                                <p>{errorMessageDescription}</p>
+                            </div> :
+                            <button
+                                className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                                onClick={handleChangeQuizMetadataVisibility}>
+                                    Next Section 
+                            </button>
+                    }
+                    </div>
+                    
+                   
                 </div>
             </div>)}
             {/** Questions div */}

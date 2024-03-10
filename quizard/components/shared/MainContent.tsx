@@ -147,7 +147,8 @@ export default function MainContent() {
           </div>
       
        {/* Block 4: RecentlyAdded Quizes */}
-       <div className="flex flex-col flex-wrap items-center w-full p-10 shadow-md hover:shadow-lg rounded-lg bg-zinc-900">
+                 
+       <div className="flex flex-col flex-wrap items-center w-full p-5 mt-10 shadow-md hover:shadow-lg rounded-lg bg-zinc-900">
         <h3 className="text-xl font-bold mb-4">Recently Added Quizzes</h3>
           <RecentlyAdded/>
         </div>
@@ -173,7 +174,7 @@ export default function MainContent() {
        </div>
 
       {/* Block 7: Most Clicked Quizes */}
-      <div className="flex flex-col flex-wrap p-10 items-center w-full shadow-md hover:shadow-lg rounded-lg bg-zinc-900">
+      <div className="flex flex-col flex-wrap items-center w-full p-5 mt-10 shadow-md hover:shadow-lg rounded-lg bg-zinc-900">
          <h3 className="text-xl font-bold mb-4">Trending Quizes</h3>
          <MostClicked/>
        </div>
@@ -200,7 +201,7 @@ export default function MainContent() {
        </div>
 
       {/* Block 7: Most Finished Quizes */}
-      <div className="flex flex-col flex-wrap p-10 items-center w-full shadow-md hover:shadow-lg rounded-lg">
+      <div className="flex flex-col flex-wrap items-center w-full p-5 mt-10 shadow-md hover:shadow-lg rounded-lg">
          <h3 className="text-xl font-bold mb-4">Most Interesting</h3>
          <MostFinished/>
        </div>
