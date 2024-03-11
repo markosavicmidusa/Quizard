@@ -48,7 +48,11 @@ export default function ActiveQuiz({ params }: { params: { id: string }}) {
         setUserAnswers(prevAnswers => [...prevAnswers, selectedAnswer]);
         if (currentQuestionIndex < (quiz?.questions.length ?? 0) - 1) {
             setCurrentQuestionIndex(prevIndex => prevIndex + 1);
-        } else {
+        }
+    };
+    
+    useEffect(() => {
+        if (userAnswers.length === quiz?.questions.length) {
             let score = 0;
             userAnswers.forEach((answer, index) => {
                 const correctAnswer = quiz?.questions[index].answers.find(a => a.isCorrect);
@@ -58,9 +62,9 @@ export default function ActiveQuiz({ params }: { params: { id: string }}) {
             });
             const percentage = (score / (quiz?.questions.length ?? 1)) * 100;
             setResult(`Your score: ${score}/${quiz?.questions.length} (${percentage.toFixed(2)}%)`);
-            setResultName(`${score <=2 ? quiz?.results[0].result : score < 6 ? quiz?.results[1].result : quiz?.results[2].result}`)
+            setResultName(`${score < 3 ? quiz?.results[0].result : score < 6 ? quiz?.results[1].result : quiz?.results[2].result}`);
         }
-    };
+    }, [userAnswers, quiz]);
 
     const handleRetry = () => {
         setUserAnswers([]);
