@@ -68,6 +68,16 @@ export default function CreateQuiz() {
     const [errorMessageDescription, setErrorMessageDescription] = useState('');
     const [hasErrorDescription, setHasErrorDescription] = useState(true);
 
+
+    const [errorMessageQuestion, setErrorMessageQuestion] = useState('');
+    const [hasErrorQuestion, setHasErrorQuestion] = useState(true);
+    const [errorMessageAnswer, setErrorMessageAnswer] = useState('');
+    const [hasErrorAnswer, setHasErrorAnswer] = useState(true);
+
+    const [errorMessageResult, setErrorMessageResult] = useState('');
+    const [hasErrorResult, setHasErrorResult] = useState(true);
+
+
     useEffect(() => {
         const fetchUser = async () => {
             
@@ -79,27 +89,57 @@ export default function CreateQuiz() {
         }
         fetchUser()
     },[user])
-    useEffect(() => {
-        const changesInMetadata = () => {
-
-        }
-        changesInMetadata()
-
-    }, [quizMetadata])
-
+   
     const handleNextQuestion = () => {
+
+        console.log("NEXT")
         if (currentQuestionIndex < quiz.questions.length - 1) {
+            
+            console.log("NEXT 2")
+            const question = quiz.questions[currentQuestionIndex+1]
+
+            console.log("Question: ", question.question)
+
+            if(question.question == '' || question.question.length >= 50){
+                setHasErrorQuestion(true)
+                setErrorMessageQuestion("Check/fill Question content")
+            }else{
+                setHasErrorAnswer(false)
+                setErrorMessageAnswer("")
+            }
+
+            console.log("Answers: ", question.answers)
+
+            if((question.answers[0].value == '' || question.answers[0].value.length >=50 ) ||
+            (question.answers[1].value == '' || question.answers[1].value.length >=50 ) || 
+            (question.answers[2].value == '' || question.answers[2].value.length >=50 )){
+                setHasErrorAnswer(true)
+                setErrorMessageAnswer("Check/fill Answers content")
+            }else{
+                setHasErrorAnswer(false)
+                setErrorMessageAnswer("")
+            }
+
+
+            
             setCurrentQuestionIndex(currentQuestionIndex + 1);
         }
     };
 
     const handlePrevQuestion = () => {
         if (currentQuestionIndex > 0) {
+            
+                setHasErrorQuestion(false)
+                setHasErrorAnswer(false)
+                setErrorMessageQuestion("")
+                setErrorMessageAnswer("")
+            
             setCurrentQuestionIndex(currentQuestionIndex - 1);
         }
     };
 
     const handleQuestionChange = (field: string, value: any, answerIndex: number) => {
+        
         setQuiz((prevState: IQuiz) => {
             const newQuestions = [...prevState.questions];
             newQuestions[currentQuestionIndex].answers[answerIndex] = {
@@ -113,9 +153,49 @@ export default function CreateQuiz() {
 
             return question
         });
+
+
+        if(value.length <= 0){
+            setErrorMessageAnswer(`Please enter the value for: Answer ${answerIndex + 1}`)
+            setHasErrorAnswer(true)
+        }else if(value.length >=50){
+            setErrorMessageAnswer(`Answer ${answerIndex + 1} content too long`)
+            setHasErrorAnswer(true)
+        }else{
+
+            const question = quiz.questions[currentQuestionIndex]
+
+
+            if((question.answers[0].value == '' || question.answers[0].value.length >=50 ) ||
+            (question.answers[1].value == '' || question.answers[1].value.length >=50 ) || 
+            (question.answers[2].value == '' || question.answers[2].value.length >=50 )){
+                
+                setErrorMessageAnswer('Check/fill Answers content')
+                setHasErrorAnswer(true)
+            }else{
+                setErrorMessageAnswer("")
+                setHasErrorAnswer(false)
+            }
+            
+        }
+
+        
     };
 
     const handleQuestionContentChange = (value: any) => {
+        
+        if(value.length <= 0){
+            setErrorMessageQuestion(`Please enter the value for: Question ${currentQuestionIndex + 1}`)
+            setHasErrorQuestion(true)
+        }else if(value.length >=50){
+            setErrorMessageQuestion(`Question ${currentQuestionIndex + 1} content too long`)
+            setHasErrorQuestion(true)
+        }else{
+            setErrorMessageQuestion("")
+            setHasErrorQuestion(false)
+        }
+        
+        
         setQuiz((prevState: IQuiz) => {
             const newQuestions = [...prevState.questions];
             newQuestions[currentQuestionIndex].question = value;
@@ -129,6 +209,33 @@ export default function CreateQuiz() {
     };
     
     const handleResultChange = (index: number, field: string, value: any) => {
+        
+        if(value.length <= 0){
+            setErrorMessageResult(`Please enter the value for: Result ${index + 1}`)
+            setHasErrorResult(true)
+        }else if(value.length >=50){
+            setErrorMessageResult(`Result ${index + 1} content too long`)
+            setHasErrorResult(true)
+        }else{
+
+            const result0 = quiz.results[0].result
+            const result1 = quiz.results[1].result
+            const result2 = quiz.results[2].result
+
+            if((result0 == '' || result0.length >=50 ) ||
+            (result1 == '' || result1.length >=50 ) || 
+            (result2 == '' || result2.length >=50 )){
+                
+                setErrorMessageResult(`Check/fill Results`)
+                setHasErrorResult(true)
+            }else{
+                setErrorMessageResult("")
+                setHasErrorResult(false)
+            }
+            
+        }
+        
+        
         setQuiz((prevState: IQuiz) => {
             const newResults = [...prevState.results];
             newResults[index] = { ...newResults[index], [field]: value };
@@ -154,7 +261,23 @@ export default function CreateQuiz() {
             setErrorMessageName("")
             setHasErrorName(false)
         }
-
+        /*console.log("Name change", value)
+        console.log(quizMetadata.name)*/
+        setQuizMetadata((prevState: IQuizMetadata) => {
+            
+            const currentQuizMetadataState = {
+                id: prevState.id,
+                name: value,
+                title: prevState.title,
+                category: prevState.category,
+                createdBy: prevState.createdBy,
+                timesClicked: prevState.timesClicked,
+                timesFinished: prevState.timesFinished,
+                active: prevState.active
+            } as IQuizMetadata;
+            return currentQuizMetadataState;
+        });
+        
         setQuizMetadata((prevState: IQuizMetadata) => {
             const currentQuizMetadataState = prevState;
             currentQuizMetadataState.name = value;
@@ -176,6 +299,20 @@ export default function CreateQuiz() {
             setHasErrorDescription(false)
         }
         
+        setQuizMetadata((prevState: IQuizMetadata) => {
+            
+            const currentQuizMetadataState = {
+                id: prevState.id,
+                name: prevState.name,
+                title: value,
+                category: prevState.category,
+                createdBy: prevState.createdBy,
+                timesClicked: prevState.timesClicked,
+                timesFinished: prevState.timesFinished,
+                active: prevState.active
+            } as IQuizMetadata;
+            return currentQuizMetadataState;
+        });
         
         setQuizMetadata((prevState: IQuizMetadata) => {
             const currentQuizMetadataState = prevState;
@@ -199,6 +336,7 @@ export default function CreateQuiz() {
     };
     const handleChangeQuizMetadataVisibility = () => {
         
+
         setQuizMetadataVisibility(prevState => !prevState )
         setquestionsVisibility(prevState => !prevState)
     
@@ -281,6 +419,7 @@ export default function CreateQuiz() {
                          <input
                             type="text"
                             placeholder="Quiz name"
+                            value={quizMetadata.name}
                             onChange={e => handleNameContentChange(e.target.value)}
                             className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
                          />
@@ -290,17 +429,17 @@ export default function CreateQuiz() {
                          <input
                             type="text"
                             placeholder="Short description"
+                            value={quizMetadata.title}
                             onChange={e => handleTitleContentChange(e.target.value)}
                             className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
                          />
                     </div>
                     <div className="mb-2">
                                 <select
-                                    value={quizMetadata.category}
                                     onChange={(e) => handleCategoryChange(e.target.value)}
                                     className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
                                 >
-                                    <option selected value="">{quizMetadata.category.substring(1).toUpperCase()}</option>
+                                    <option selected >{quizMetadata.category.substring(1).toUpperCase()}</option>
                                     {categories.map((category) => (
                                         <option key={category.link} value={category.link}>
                                             {category.label}
@@ -350,6 +489,10 @@ export default function CreateQuiz() {
                             />
                         </div>
                     ))}
+                     <div className='text-red-500'>
+                        <p className=''>{errorMessageQuestion}</p>
+                        <p>{errorMessageAnswer}</p>
+                    </div>
                 </div>
                 <div className="flex flex-row justify-between mb-4 pr-10 pl-10">
                     {currentQuestionIndex == 0 && (
@@ -370,16 +513,21 @@ export default function CreateQuiz() {
                             {"<"} Previous
                         </button>
                     )}
-                    {currentQuestionIndex < quiz.questions.length - 1 && (
+                    {(currentQuestionIndex < quiz.questions.length - 1) ? 
+                        (!hasErrorQuestion && !hasErrorAnswer) ? 
                         <button
                             type="button"
                             onClick={handleNextQuestion}
                             className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
                         >
                             Next {">"}
-                        </button>
-                    )}
-                    {currentQuestionIndex == 5 && (
+                        </button> :
+                        <div>
+                        </div>
+                        :<div></div>}
+                        
+                       
+                    {currentQuestionIndex == 5 && !hasErrorQuestion && !hasErrorAnswer && (
                         <button
                             type="button"
                             onClick={handleResultVisibility}
@@ -398,26 +546,31 @@ export default function CreateQuiz() {
                             <div key={index} className="mb-2">
                                 <input
                                     type="text"
-                                    placeholder={`Result ${index + 1}`}
+                                    placeholder={`ex. ${index == 0 ? '"Looser" (0-50%' : index == 1 ? '"Not bad at all !" (50%-90%': '"The REAL DEAL :) !" (90%-100%'} score)`}
                                     value={result.result}
                                     onChange={e => handleResultChange(index, 'result', e.target.value)}
                                     className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
                                 />
                             </div>
                         ))}
+                        <p className='text-red-500'>{errorMessageResult}</p> 
                     <div className='flex gap-4 mt-5'>   
                         <button
                             type="button"
                             onClick={handleResultVisibility}
                             className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
                         >{"<"} Questions</button>
-                        <button
-                            type="submit"
-                            className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-                        >
-                            Submit
-                        </button>
-                    </div> 
+                        {!hasErrorResult && (
+                             <button
+                             type="submit"
+                             className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                         >
+                             Submit
+                         </button>
+                        )}
+                       
+                    </div>
+                    
                 </div>)}
             </form>
             
