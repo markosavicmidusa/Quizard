@@ -13,6 +13,7 @@ export default function ActiveQuiz({ params }: { params: { id: string }}) {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [userAnswers, setUserAnswers] = useState<string[]>([]);
     const [result, setResult] = useState<string | null>(null);
+    const [resultName, setResultName] = useState<string | null>(null)
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [active, setActive] = useState<number>(0);
@@ -57,6 +58,7 @@ export default function ActiveQuiz({ params }: { params: { id: string }}) {
             });
             const percentage = (score / (quiz?.questions.length ?? 1)) * 100;
             setResult(`Your score: ${score}/${quiz?.questions.length} (${percentage.toFixed(2)}%)`);
+            setResultName(`${score <=2 ? quiz?.results[0].result : score < 6 ? quiz?.results[1].result : quiz?.results[2].result}`)
         }
     };
 
@@ -120,6 +122,7 @@ export default function ActiveQuiz({ params }: { params: { id: string }}) {
                 <div className='flex flex-col items-center '>
                     <div className="bg-zinc-800 rounded-lg shadow-md p-6 text-center w-full">
                         <p className="xl:text-2xl lg:text-2xl md:text-lg sm:text-sm font-semibold mb-4">{result}</p>
+                        <p className="text-blue-500 text-lg xl:text-2xl lg:text-2xl md:text-lg sm:text-sm font-semibold mb-4">{resultName}</p>
                         <button 
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 text-sm rounded mr-2 mb-2 sm:mb-0"
                             onClick={handleRetry}
