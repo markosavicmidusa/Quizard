@@ -37,7 +37,7 @@ export default function Page() {
                 setQuizMetadata(quizMetadataByUserId)
             }
         } catch (error) {
-            console.log("GetQuizMetadataListByUserId/useEffect/user-page error:", error)
+           // console.log("GetQuizMetadataListByUserId/useEffect/user-page error:", error)
         }
     }
 

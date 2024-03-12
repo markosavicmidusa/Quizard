@@ -84,7 +84,7 @@ export default function CreateQuiz() {
             if (user && user.id) { // Check if user and user.id are defined
                 const dbUser = await GetUserByClerkID(user.id);
                 setDbUser(dbUser);
-                console.log("DB-user: ", dbUser)
+                //console.log("DB-user: ", dbUser)
             }
         }
         fetchUser()
@@ -92,13 +92,13 @@ export default function CreateQuiz() {
    
     const handleNextQuestion = () => {
 
-        console.log("NEXT")
+        //console.log("NEXT")
         if (currentQuestionIndex < quiz.questions.length - 1) {
             
-            console.log("NEXT 2")
+            //console.log("NEXT 2")
             const question = quiz.questions[currentQuestionIndex+1]
 
-            console.log("Question: ", question.question)
+            //console.log("Question: ", question.question)
 
             if(question.question == '' || question.question.length >= 50){
                 setHasErrorQuestion(true)
@@ -108,7 +108,7 @@ export default function CreateQuiz() {
                 setErrorMessageAnswer("")
             }
 
-            console.log("Answers: ", question.answers)
+            //console.log("Answers: ", question.answers)
 
             if((question.answers[0].value == '' || question.answers[0].value.length >=50 ) ||
             (question.answers[1].value == '' || question.answers[1].value.length >=50 ) || 
@@ -323,8 +323,8 @@ export default function CreateQuiz() {
     };
 
     const handleCategoryChange = (value: string) => {
-        console.log(value)
-        console.log(quizMetadata)
+        //console.log(value)
+        //console.log(quizMetadata)
         
         setQuizMetadata((prevState: IQuizMetadata) => {
             const currentQuizMetadataState = prevState;
@@ -332,7 +332,7 @@ export default function CreateQuiz() {
              
             return currentQuizMetadataState;
         });
-        console.log(quizMetadata)
+        //console.log(quizMetadata)
     };
     const handleChangeQuizMetadataVisibility = () => {
         
@@ -357,11 +357,11 @@ export default function CreateQuiz() {
            //const newQuiz = await CreateQuizCollectionTest(initialQuizStateTest)
 
             if(!newQuiz){
-              console.log('Error creating quiz')
+              //console.log('Error creating quiz')
               setErrorSubmiting(true)
             } else {
                 
-                console.log('Quiz submitted:', quiz);
+                //console.log('Quiz submitted:', quiz);
 
                 // Updating quizesMetadata object
                 quizMetadata.id = newQuiz._id
@@ -371,10 +371,10 @@ export default function CreateQuiz() {
                 const newQuizMetadata = CreateQuizMetadata(quizMetadata)
 
                 if(!newQuizMetadata){
-                    console.log('Error creating quizMetadata')
+                    //console.log('Error creating quizMetadata')
                     setErrorSubmiting(true)
                 } else {
-                    console.log('Quiz metadata:', quizMetadata);
+                    //console.log('Quiz metadata:', quizMetadata);
 
                     // Set submitted to true to trigger the info popup
                     setSubmitted(true);
@@ -382,7 +382,7 @@ export default function CreateQuiz() {
             }
 
         } catch (error) {
-            console.log("Error: ",error)
+            //console.log("Error: ",error)
             setErrorSubmiting(true)
         }
     };

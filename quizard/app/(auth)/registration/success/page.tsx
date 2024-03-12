@@ -19,30 +19,30 @@ export default function RegistrationSuccess() {
 
     useEffect(() => {
         if (user && user.id && isSignedIn) {
-            console.log("Use effect-Registration:", user);
+            //console.log("Use effect-Registration:", user);
             const fetchUser = async () => {
                 try {
                     const dbUser = await GetUserByClerkID(user.id);
                     if (dbUser) {
-                        console.log("User is already SIGNED UP:", dbUser.id);
+                        //console.log("User is already SIGNED UP:", dbUser.id);
                         setSuccessfullRegistration(true);
                         setLoading(false)
                     } else {
-                        console.log("User is NOT SIGNED UP 1-step:");
+                        //console.log("User is NOT SIGNED UP 1-step:");
                         await handleSignUp(user);
                         const dbUserAfterRegistration = await GetUserByClerkID(user.id);
                         if (dbUserAfterRegistration) {
                             setSuccessfullRegistration(true);
                             setLoading(false)
-                            console.log("User is SIGNED UP 2-step: setSuccessfullRegistration(true)");
+                            //console.log("User is SIGNED UP 2-step: setSuccessfullRegistration(true)");
                         } else {
                             setSuccessfullRegistration(false);
                             setLoading(false)
-                            console.log("User is NOT SIGNED UP 3-step: setSuccessfullRegistration(false)");
+                            //console.log("User is NOT SIGNED UP 3-step: setSuccessfullRegistration(false)");
                         }
                     }
                 } catch (error) {
-                    console.error('Error fetching user:', error);
+                    //console.error('Error fetching user:', error);
                     setSuccessfullRegistration(false); // Set registration to false in case of error
                     setLoading(false)
                 }
@@ -67,13 +67,13 @@ export default function RegistrationSuccess() {
 
         const response = await RegisterUser(newUser)
 
-      if (response.id) {
-        console.log('User registered in database successfully');
-      } else {
-        console.error('Failed to register user in database');
-      }
+      //if (response.id) {
+      //  console.log('User registered in database successfully');
+      //} else {
+      //  console.error('Failed to register user in database');
+      //}
     } catch (error) {
-      console.error('Error registering user:', error);
+      //console.error('Error registering user:', error);
     }
   };
 

@@ -19,8 +19,7 @@ export default function ActiveQuiz({ params }: { params: { id: string }}) {
     const [active, setActive] = useState<number>(0);
 
     useEffect(() => {
-        console.log()
-
+        
         const fetchQuiz = async () => {
             try {
                 const fetchedQuiz = await getQuizById(params.id);
@@ -28,7 +27,7 @@ export default function ActiveQuiz({ params }: { params: { id: string }}) {
                     setQuiz(fetchedQuiz);
                     setLoading(false);
                     setActive(fetchedQuiz.active)
-                    console.log("FETCHEDQUIZ: ",fetchedQuiz)
+                    //console.log("FETCHEDQUIZ: ",fetchedQuiz)
                 } else {
                     setError('Quiz not found.');
                     setLoading(false);
@@ -109,7 +108,7 @@ export default function ActiveQuiz({ params }: { params: { id: string }}) {
 
     const getQuizActiveStructure = () => {
        
-        console.log('ACTIVE:', active)
+        //console.log('ACTIVE:', active)
         
         return(
             <div className="flex flex-col items-center justify-center mt-10 mb-10">
@@ -160,7 +159,7 @@ export default function ActiveQuiz({ params }: { params: { id: string }}) {
 
     const getQuizPendingStructure = () => {
         
-        console.log('ACTIVE:', active)
+        //console.log('ACTIVE:', active)
         return (
             <div className='flex flex-col items-center'>
                 <h2 className='m-10'>
@@ -175,7 +174,7 @@ export default function ActiveQuiz({ params }: { params: { id: string }}) {
     }
 
     const getQuizRejectStructure = () => {
-        console.log('ACTIVE:', active)
+        //console.log('ACTIVE:', active)
         return (
             <div className='flex flex-col items-center '>
                 <h2 className='text-red-500 m-10'>
