@@ -8,11 +8,13 @@ export async function GetUserByClerkID(id: string): Promise<IUser | null> {
         const user: IUser | null = await UserModel.findOne({ clerkId: id });
 
         // Map the quizzes to plain objects
-        let plainObject: IUser;
-        if(user){
-            plainObject = {
-                id: user._id.toString(), // Convert ObjectId to string
+        if (user) {
+            // Convert ObjectId to string and return the mapped user object
+            //console.log(user)
+            return {
+                id: user._id.toString(),
                 clerkId: user.clerkId,
+                email:user.email,
                 name: user.name,
                 surname: user.surname,
                 sportsClicked: user.sportsClicked,
@@ -20,9 +22,12 @@ export async function GetUserByClerkID(id: string): Promise<IUser | null> {
                 funClicked: user.funClicked,
                 scienceClicked: user.scienceClicked,
                 otherClicked: user.otherClicked
-            } as IUser
+            } as IUser;
+        } else {
+            return null;
         }
-        return user;
+
+        
 
     } catch (error) {
         console.error("Error retrieving user by Clerk ID:", error);
@@ -33,13 +38,14 @@ export async function GetUserByClerkID(id: string): Promise<IUser | null> {
 export async function RegisterUser(user:IUser): Promise<IUser>{
     
     connectToDB();
-    
+    console.log("User:", user)
     try {
+        
         const newUser = await UserModel.create(user)
-        //console.log("User registered successfully:", newUser);
+        console.log("User registered successfully:", newUser);
         return user
     } catch (error) {
-        //console.error("Error registering user:", error);
+        console.error("Error registering user:", error);
         throw error; // Propagate the error to the caller
     }
     

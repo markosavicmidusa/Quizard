@@ -30,8 +30,11 @@ export default function Page() {
     useEffect(()=>{
         
     const fetchQuizesMetadata= async ()=>{
+      //console.log("fetchQuizesMetadata-DbUser", DbUser)
+      
         try {
-            const quizMetadataByUserId = await GetQuizMetadataListByUserId(DbUser?._id)
+            const quizMetadataByUserId = await GetQuizMetadataListByUserId(DbUser?.id)
+            //console.log("quizMetadataByUserId", quizMetadataByUserId)
             if(quizMetadataByUserId){
                 setQuizMetadataLoaded(true)
                 setQuizMetadata(quizMetadataByUserId)
@@ -42,7 +45,7 @@ export default function Page() {
     }
 
         fetchQuizesMetadata()
-    },[user,DbUser])
+    },[DbUser])
 
 
     if (!isLoaded || !isSignedIn) {

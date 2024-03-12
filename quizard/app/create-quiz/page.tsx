@@ -365,7 +365,7 @@ export default function CreateQuiz() {
 
                 // Updating quizesMetadata object
                 quizMetadata.id = newQuiz._id
-                quizMetadata.createdBy = DbUser ? DbUser._id : "Unknown"
+                quizMetadata.createdBy = DbUser ? DbUser.id : "Unknown"
 
                 // creating the quizMetadata
                 const newQuizMetadata = CreateQuizMetadata(quizMetadata)

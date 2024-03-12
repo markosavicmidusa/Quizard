@@ -31,8 +31,22 @@ export default async function GetQuizMetadataListByUserId(dbUserId: string): Pro
     try {
         const quizMetadataList = await QuizMetadataModel.find({createdBy: dbUserId});
         //console.log("dbUserId:",dbUserId)
-        //console.log("Quizmetadata list successfully retrieved",quizMetadataList);
-        return quizMetadataList || []; // Return quizMetadataList if truthy, otherwise return an empty array
+       // console.log("Quizmetadata list successfully retrieved",quizMetadataList);
+        // Manually convert each document to a plain object
+        const plainObjects: IQuizMetadata[] = quizMetadataList.map(quiz => ({
+            id: quiz.id,
+            name: quiz.name,
+            title: quiz.title,
+            category: quiz.category,
+            createdBy: quiz.createdBy,
+            timesClicked: quiz.timesClicked,
+            timesFinished: quiz.timesFinished,
+            active: quiz.active
+        })) as IQuizMetadata[]; // Explicit cast to IQuizMetadata[];
+
+
+        return plainObjects;
+        //return quizMetadataList || []; // Return quizMetadataList if truthy, otherwise return an empty array
     } catch (error) {
         console.error("Quizmetadata retrieve error: ", error);
         return []; // Return an empty array in case of error
