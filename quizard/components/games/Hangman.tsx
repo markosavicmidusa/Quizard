@@ -56,12 +56,12 @@ export default function Hangman() {
   }, [selectedWord]);
 
   const handleLetterPick = (letter: string) => {
-    console.log(letter);
+    /*console.log(letter);
     console.log(selectedWord);
     console.log(displayWord);
     console.log(lettersPicked);
     console.log(attemptsRemaining);
-
+*/
     // First, update the attempts remaining
     let newAttemptsRemaining = attemptsRemaining;
     if (attemptsRemaining > 0 && !finished) {
@@ -76,20 +76,20 @@ export default function Hangman() {
                 .join('');
             setDisplayWord(newDisplayWord);
         } else {
-            console.log("Attempts");
+            //console.log("Attempts");
             newAttemptsRemaining -= 1;
-            console.log("newAttemptsRemaining", newAttemptsRemaining);
+            //console.log("newAttemptsRemaining", newAttemptsRemaining);
             setAttemptsRemaining(newAttemptsRemaining);
         }
     }
 
     // Now, check for end of game
     if (newAttemptsRemaining === 0) {
-        console.log("attemptsRemaining === 0", newAttemptsRemaining);
+        //console.log("attemptsRemaining === 0", newAttemptsRemaining);
         setResult(displayWord.includes('_') ? "You Lose!" : "You Won!");
         setFinished(true);
     } else if (newAttemptsRemaining > 0 && !displayWord.includes('_')) {
-        console.log("attemptsRemaining > 0 && !displayWord.includes('_')", newAttemptsRemaining);
+        //console.log("attemptsRemaining > 0 && !displayWord.includes('_')", newAttemptsRemaining);
         setResult("You Won!");
         setFinished(true);
     }

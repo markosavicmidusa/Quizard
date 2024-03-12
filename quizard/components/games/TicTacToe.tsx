@@ -22,17 +22,17 @@ export default function TicTacToe() {
 
     // Function to make a CPU move
     const makeCPUMove = (currentBoard: string[]) => {
-        console.log(currentBoard)
+        //console.log(currentBoard)
         const availableMoves = currentBoard.reduce<number[]>((acc, value, index) => {
-            console.log("Acc:",acc)
+            /*console.log("Acc:",acc)
             console.log("Value:",value)
-            console.log("Index:",index)
+            console.log("Index:",index)*/
             if (!value) acc.push(index);
             return acc;
         }, []);
 
-        console.log(currentBoard)
-        console.log(availableMoves)
+        //console.log(currentBoard)
+        //console.log(availableMoves)
         const randomIndex = Math.floor(Math.random() * availableMoves.length);
         const newBoard = [...currentBoard];
         newBoard[availableMoves[randomIndex]] = 'O';

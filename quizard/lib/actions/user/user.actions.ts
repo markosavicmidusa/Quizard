@@ -36,10 +36,10 @@ export async function RegisterUser(user:IUser): Promise<IUser>{
     
     try {
         const newUser = await UserModel.create(user)
-        console.log("User registered successfully:", newUser);
+        //console.log("User registered successfully:", newUser);
         return user
     } catch (error) {
-        console.error("Error registering user:", error);
+        //console.error("Error registering user:", error);
         throw error; // Propagate the error to the caller
     }
     

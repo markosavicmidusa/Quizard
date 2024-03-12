@@ -20,15 +20,15 @@ export default function Home() {
   const [currentCommercialIndex, setCurrentCommercialIndex] = useState(0);
  
   useEffect(() => {
-    console.log("Component Mounted"); // Log when the component is mounted
+    //console.log("Component Mounted"); // Log when the component is mounted
   
     const interval = setInterval(() => {
       setCurrentCommercialIndex((prevIndex) => (prevIndex + 1) % commercials.length);
-      console.log("Log inside setInterval"); // Log each time the interval function is executed
+      //console.log("Log inside setInterval"); // Log each time the interval function is executed
     }, 10000);
   
     return () => {
-      console.log("Component Unmounted"); // Log when the component is unmounted
+      //console.log("Component Unmounted"); // Log when the component is unmounted
       clearInterval(interval);
     };
   }, [commercials.length]);
