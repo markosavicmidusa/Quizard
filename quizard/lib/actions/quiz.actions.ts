@@ -199,7 +199,6 @@ export async function getRandom50Quizes(): Promise<IQuizMetadata[] | []>{
     }
 }
 
-
 // Get most clicked
 
 export async function getMostClicked50Quizes(): Promise<IQuizMetadata[] | []> {
@@ -213,7 +212,7 @@ export async function getMostClicked50Quizes(): Promise<IQuizMetadata[] | []> {
         //console.log(quizzes)
         // Map the quizzes to plain objects
         const plainObjects: IQuizMetadata[] = quizzes.map(quiz => ({
-            id: quiz._id.toString(), // Convert ObjectId to string
+            id: quiz.id.toString(), // Convert ObjectId to string
             name: quiz.name,
             title: quiz.title,
             category: quiz.category,
@@ -239,7 +238,7 @@ export async function getMostFinished50Quizes(): Promise<IQuizMetadata[] | []> {
 
         // Map the quizzes to plain objects
         const plainObjects: IQuizMetadata[] = quizzes.map(quiz => ({
-            id: quiz._id.toString(), // Convert ObjectId to string
+            id: quiz.id.toString(), // Convert ObjectId to string
             name: quiz.name,
             title: quiz.title,
             category: quiz.category,
@@ -265,7 +264,7 @@ export async function getRecentlyAdded50Quizes(): Promise<IQuizMetadata[] | []> 
 
         // Map the quizzes to plain objects
         const plainObjects: IQuizMetadata[] = quizzes.map(quiz => ({
-            id: quiz._id.toString(), // Convert ObjectId to string
+            id: quiz.id.toString(), // Convert ObjectId to string
             name: quiz.name,
             title: quiz.title,
             category: quiz.category,
