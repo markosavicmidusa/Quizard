@@ -7,7 +7,7 @@ export default function Quiz({quiz}:{quiz:IQuizMetadata}){
 
     return (
         <Link href={`/quizes/${quiz.id}`}>
-            <div className="z-0 w-36 border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300 cursor-pointer">
+            <div className="z-0 w-36 h-36 border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300 cursor-pointer">
                  <div className="relative h-20">
                    <Image
                      src="/quizes/quiz-pic.png"

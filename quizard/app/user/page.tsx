@@ -18,7 +18,7 @@ export default function Page() {
 
     useEffect(() => {
         const fetchUser = async () => {
-            
+            console.log("USER: ", user)
             if (user && user.id) { // Check if user and user.id are defined
                 const dbUser = await GetUserByClerkID(user.id);
                 setDbUser(dbUser);   
