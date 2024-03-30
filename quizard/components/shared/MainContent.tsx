@@ -65,17 +65,17 @@ export default function MainContent() {
     setWelcome(() => {
       switch(pathname){
         case '/':
-          return 'Quizard'
+          return 'QuizHUB'
         case '/sports':
-          return 'Quizard Sports'
+          return 'QuizHUB Sports'
         case '/popular':
-          return 'Quizard Popular'
+          return 'QuizHUB Popular'
         case '/fun':
-          return 'Quizard Fun'
+          return 'QuizHUB Fun'
         case '/science':
-          return 'Quizard Science'
+          return 'QuizHUB Science'
         case '/other':
-          return 'Quizard Other'
+          return 'QuizHUB Other'
         default:
           setShowWelcome(false)
           return ''

@@ -19,8 +19,8 @@ const categories = getCategories();
 
 
 export const metadata: Metadata = {
-  title: "Quizmania",
-  description: "Quizmania",
+  title: "QuizHUB",
+  description: "QuizHUB is your ultimate destination for fun and challenging quizzes! Test your knowledge on a wide range of topics, from trivia and history to science and pop culture. With a user-friendly interface and a vast collection of questions, QuizHUB offers an engaging and educational experience for users of all ages. Whether you're a quiz enthusiast looking for a new challenge or simply want to learn something new, QuizHUB has something for everyone. Start quizzing now and see how much you really know!",
 };
 
 export default function RootLayout({
