@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata as NextMetadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
@@ -13,7 +13,12 @@ import {dark} from "@clerk/themes"
 const inter = Inter({ subsets: ["latin"] });
 
 import { getCategories, getCommercials } from "@/data/controller";
-
+// Define a custom interface that extends NextMetadata and includes the 'image' property
+interface Metadata extends NextMetadata {
+  image: {
+    url: string;
+  };
+}
 
 const categories = getCategories();
 
@@ -21,6 +26,9 @@ const categories = getCategories();
 export const metadata: Metadata = {
   title: "QuizHUB",
   description: "QuizHUB is your ultimate destination for fun and challenging quizzes! Test your knowledge on a wide range of topics, from trivia and history to science and pop culture. With a user-friendly interface and a vast collection of questions, QuizHUB offers an engaging and educational experience for users of all ages. Whether you're a quiz enthusiast looking for a new challenge or simply want to learn something new, QuizHUB has something for everyone. Start quizzing now and see how much you really know!",
+  image: {
+    url: "/quizes/quiz-pic.png",
+  },
 };
 
 export default function RootLayout({
