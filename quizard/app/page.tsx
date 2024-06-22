@@ -15,7 +15,7 @@ export default function Home() {
  
   const commercials = getCommercials()
   const pathname = usePathname()
-  
+  // adding comment
 
   const [currentCommercialIndex, setCurrentCommercialIndex] = useState(0);
  
